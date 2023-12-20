@@ -14,7 +14,7 @@ const MobileNav = ({ isMobileMenuOpen, toggleMobileMenu }) => {
           <div className="w-3/4 bg-white p-4 overflow-y-auto">
             <button
               onClick={toggleMobileMenu}
-              className="text-xl focus:outline-none absolute top-3.5 right-4"
+              className="focus:outline-none absolute top-3.5 right-4"
             >
               <LuX className="text-2xl" />
             </button>
