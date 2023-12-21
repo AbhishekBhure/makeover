@@ -63,7 +63,9 @@ const Navbar = () => {
             </div>
           </div>
           <div>
-            <span>SignIn</span>
+            <Link to="/sign-in">
+              <span>SignIn</span>
+            </Link>
           </div>
         </div>
         {/* Mobile navigation */}
@@ -80,6 +82,9 @@ const Navbar = () => {
               </Link>
             </div>
           </div>
+          <Link to="/sign-in" className="md:hidden">
+            <span>SignIn</span>
+          </Link>
           <button
             onClick={toggleMobileMenu}
             className="text-xl focus:outline-none"
