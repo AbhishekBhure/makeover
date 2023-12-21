@@ -12,7 +12,7 @@ const Navbar = () => {
 
   return (
     <header className="shadow font-primary">
-      <div className="flex justify-between items-center max-w-6xl mx-auto p-3">
+      <div className="flex justify-between items-center max-w-7xl mx-auto p-3">
         <Link to="/">
           <h1 className="font-primary text-xl flex flex-wrap md:text-4xl ">
             <span>Make</span>
