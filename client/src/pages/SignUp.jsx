@@ -27,16 +27,34 @@ const SignUp = () => {
     setVisible(!visible);
   };
 
+  const hashPassword = async (password) => {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(password);
+    const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    const hashedPassword = hashArray
+      .map((byte) => byte.toString(16).padStart(2, "0"))
+      .join("");
+    return hashedPassword;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       setLoading(true);
+
+      // Hash the password before sending it to the server
+      const hashedPassword = await hashPassword(formData.password);
+
       const res = await fetch("/api/v1/auth/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          password: hashedPassword, // Replace the plain text password with the hashed one
+        }),
       });
 
       const data = await res.json();

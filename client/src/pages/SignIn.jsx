@@ -3,11 +3,16 @@ import { Link, useNavigate } from "react-router-dom";
 import { LuEye, LuEyeOff } from "../icons";
 import Loader from "../components/Loader";
 import { useSnackbar } from "notistack";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  signInFail,
+  signInStart,
+  signInSuccess,
+} from "../redux/user/userSlice";
 
 const SignIn = () => {
   const [formData, setFormData] = useState({});
-  const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const { loading } = useSelector((state) => state.user);
   const [visible, setVisible] = useState(false);
 
   console.log(formData);
@@ -15,6 +20,7 @@ const SignIn = () => {
   const { enqueueSnackbar } = useSnackbar();
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     setFormData({
@@ -27,33 +33,50 @@ const SignIn = () => {
     setVisible(!visible);
   };
 
+  const hashPassword = async (password) => {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(password);
+    const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    const hashedPassword = hashArray
+      .map((byte) => byte.toString(16).padStart(2, "0"))
+      .join("");
+    return hashedPassword;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // const { password: pass, ...rest } = formData;
     try {
-      setLoading(true);
-      const res = await fetch("/api/v1/auth/signup", {
+      dispatch(signInStart());
+
+      // Hash the password before sending it to the server
+      const hashedPassword = await hashPassword(formData.password);
+
+      const res = await fetch("/api/v1/auth/signin", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          password: hashedPassword, // Replace the plain text password with the hashed one
+        }),
       });
 
       const data = await res.json();
       if (data.success === false) {
-        setLoading(false);
-        setError(error.message);
+        dispatch(signInFail(data.message));
         enqueueSnackbar(data.message, { variant: "error" });
         return;
       }
-      setLoading(false);
-      enqueueSnackbar("User Created Successfully ", { variant: "success" });
-      setError(null);
+      dispatch(signInSuccess());
+      enqueueSnackbar("Logged In Successfully ", { variant: "success" });
       setFormData("");
       navigate("/");
     } catch (error) {
-      setLoading(false);
-      setError(false);
+      dispatch(signInFail());
       enqueueSnackbar("Enter the fields", { variant: "error" });
     }
   };
@@ -97,10 +120,10 @@ const SignIn = () => {
               {loading ? <Loader /> : "Sign In"}
             </button>
             <div className="flex gap-3 mt-5 items-center justify-center">
-              <p className="font-secondary">Have an Account?</p>
-              <Link to="/sign-in">
+              <p className="font-secondary">Dont have an Account?</p>
+              <Link to="/sign-up">
                 <span className="font-secondary text-blue-500 hover:text-blue-700 ">
-                  Sign In
+                  Sign Up
                 </span>
               </Link>
             </div>
