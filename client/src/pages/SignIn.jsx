@@ -33,16 +33,16 @@ const SignIn = () => {
     setVisible(!visible);
   };
 
-  const hashPassword = async (password) => {
-    const encoder = new TextEncoder();
-    const data = encoder.encode(password);
-    const hashBuffer = await crypto.subtle.digest("SHA-256", data);
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
-    const hashedPassword = hashArray
-      .map((byte) => byte.toString(16).padStart(2, "0"))
-      .join("");
-    return hashedPassword;
-  };
+  // const hashPassword = async (password) => {
+  //   const encoder = new TextEncoder();
+  //   const data = encoder.encode(password);
+  //   const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+  //   const hashArray = Array.from(new Uint8Array(hashBuffer));
+  //   const hashedPassword = hashArray
+  //     .map((byte) => byte.toString(16).padStart(2, "0"))
+  //     .join("");
+  //   return hashedPassword;
+  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -52,17 +52,14 @@ const SignIn = () => {
       dispatch(signInStart());
 
       // Hash the password before sending it to the server
-      const hashedPassword = await hashPassword(formData.password);
+      // const hashedPassword = await hashPassword(formData.password);
 
       const res = await fetch("/api/v1/auth/signin", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          ...formData,
-          password: hashedPassword, // Replace the plain text password with the hashed one
-        }),
+        body: JSON.stringify(formData),
       });
 
       const data = await res.json();
@@ -77,7 +74,7 @@ const SignIn = () => {
       navigate("/");
     } catch (error) {
       dispatch(signInFail());
-      enqueueSnackbar("Enter the fields", { variant: "error" });
+      enqueueSnackbar("Enter the fields now", { variant: "error" });
     }
   };
 
