@@ -7,9 +7,9 @@ import { errorHandler } from "../utils/errorHandler.js";
 export const signup = async (req, res, next) => {
   const { username, email, password, role } = req.body;
 
-  if (password.length < 5) {
-    return next(errorHandler(400, "Password should be more than 5 charaters"));
-  }
+  // if (password.length < 5) {
+  //   return next(errorHandler(400, "Password should be more than 5 charaters"));
+  // }
   const hashedPassword = bcrypt.hashSync(password, 10);
   const newUser = new User({
     username,
