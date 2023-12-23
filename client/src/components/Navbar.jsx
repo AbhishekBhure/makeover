@@ -2,10 +2,13 @@ import { Link, NavLink } from "react-router-dom";
 import { LuHeart, LuShoppingBag, LuSearch, LuText } from "../icons";
 import { useState } from "react";
 import MobileNav from "./MobileNav";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  const { currentUser } = useSelector((state) => state.user);
+  console.log(currentUser.user.username);
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
   };
@@ -93,9 +96,15 @@ const Navbar = () => {
             </div>
           </div>
           <div>
-            <Link to="/sign-in">
-              <span>SignIn</span>
-            </Link>
+            {currentUser ? (
+              <Link to="/profile">
+                <span>{currentUser.user.username}</span>
+              </Link>
+            ) : (
+              <Link to="/sign-in">
+                <span>SignIn</span>
+              </Link>
+            )}
           </div>
         </div>
         {/* Mobile navigation */}
