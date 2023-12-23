@@ -15,4 +15,9 @@ router.get("/signout", signout);
 
 router.get("/test", requireSignIn, isAdmin, test);
 
+//Admin route
+router.get("/admin-auth", requireSignIn, isAdmin, (req, res) => {
+  res.status(200).send({ ok: true });
+});
+
 export default router;

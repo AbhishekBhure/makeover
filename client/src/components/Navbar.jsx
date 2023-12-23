@@ -96,7 +96,11 @@ const Navbar = () => {
           </div>
           <div>
             {currentUser ? (
-              <Link to="/profile">
+              <Link
+                to={`/profile/${
+                  currentUser.user.role === "admin" ? "admin" : "user"
+                }`}
+              >
                 <span>{currentUser.user.username}</span>
               </Link>
             ) : (

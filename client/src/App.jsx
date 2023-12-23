@@ -10,6 +10,8 @@ import Footer from "./components/Footer";
 import Layout from "./components/Layout";
 import PageNotFound from "./components/PageNotFound";
 import ProtectedRoute from "./components/Routes/ProtectedRoute";
+import AdminRoute from "./components/Routes/AdminRoute";
+import Dashboard from "./pages/Admin/dashboard";
 
 function App() {
   return (
@@ -18,14 +20,17 @@ function App() {
 
       <Layout>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/sign-in" element={<SignIn />} />
-          <Route path="/sign-up" element={<SignUp />} />
-          <Route path="/face" element={<Face />} />
-          <Route element={<ProtectedRoute />}>
-            <Route path="/profile" element={<Profile />} />
+          <Route exact path="/" element={<Home />} />
+          <Route path="/profile" element={<ProtectedRoute />}>
+            <Route exact path="user" element={<Profile />} />
           </Route>
+          <Route path="/profile" element={<AdminRoute />}>
+            <Route exact path="admin" element={<Dashboard />} />
+          </Route>
+          <Route exact path="/about" element={<About />} />
+          <Route exact path="/sign-in" element={<SignIn />} />
+          <Route exact path="/sign-up" element={<SignUp />} />
+          <Route exact path="/face" element={<Face />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </Layout>
