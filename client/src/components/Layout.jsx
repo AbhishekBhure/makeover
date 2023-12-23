@@ -1,16 +1,25 @@
-import React from "react";
-import Home from "../pages/Home";
-import Navbar from "./Navbar";
-import Footer from "./Footer";
+import { Helmet } from "react-helmet";
 
-const Layout = ({ children }) => {
+const Layout = ({ children, title, description, keywords, author }) => {
   return (
     <div className="">
-      <Navbar />
-      <div className="max-w-7xl mx-auto px-5 md:px-0">{children}</div>
-      <Footer />
+      <Helmet>
+        <meta charSet="utf-8" />
+        <meta name="description" content={description} />
+        <meta name="keywords" content={keywords} />
+        <meta name="author" content={author} />
+        <title>{title}</title>
+      </Helmet>
+      <div className="max-w-7xl mx-auto md:px-0 min-h-96">{children}</div>
     </div>
   );
+};
+
+Layout.defaultProps = {
+  title: "MakeOver",
+  description: "mern full-stack project",
+  keywords: "mern, reactjs ,nodejs, mongoDB, expressjs",
+  author: "Abhishek",
 };
 
 export default Layout;

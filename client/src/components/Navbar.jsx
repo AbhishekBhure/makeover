@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { LuHeart, LuShoppingBag, LuSearch, LuText } from "../icons";
 import { useState } from "react";
 import MobileNav from "./MobileNav";
@@ -22,24 +22,54 @@ const Navbar = () => {
         <div className="hidden md:flex gap-5 items-center">
           <div className="categories flex items-center">
             <ul className="flex gap-4">
-              <Link to="/">
+              <NavLink
+                to="/face"
+                className={({ isActive }) =>
+                  isActive ? " font-bold text-pink-500" : ""
+                }
+              >
                 <li>Face</li>
-              </Link>
-              <Link to="/">
+              </NavLink>
+              <NavLink
+                to="/eyes"
+                className={({ isActive }) =>
+                  isActive ? " font-bold text-pink-500" : ""
+                }
+              >
                 <li>Eyes</li>
-              </Link>
-              <Link to="/">
+              </NavLink>
+              <NavLink
+                to="/lips"
+                className={({ isActive }) =>
+                  isActive ? " font-bold text-pink-500" : ""
+                }
+              >
                 <li>Lips</li>
-              </Link>
-              <Link to="/">
+              </NavLink>
+              <NavLink
+                to="/nails"
+                className={({ isActive }) =>
+                  isActive ? " font-bold text-pink-500" : ""
+                }
+              >
                 <li>Nails</li>
-              </Link>
-              <Link to="/">
+              </NavLink>
+              <NavLink
+                to="/tools-brushes"
+                className={({ isActive }) =>
+                  isActive ? " font-bold text-pink-500" : ""
+                }
+              >
                 <li>Tools & Brushes</li>
-              </Link>
-              <Link to="/">
+              </NavLink>
+              <NavLink
+                to="/makeup-palettes"
+                className={({ isActive }) =>
+                  isActive ? " font-bold text-pink-500" : ""
+                }
+              >
                 <li> Makeup Palettes </li>
-              </Link>
+              </NavLink>
             </ul>
           </div>
           <form className=" p-2 md:p-3 rounded-full flex items-center border  focus-within:border-slate-500 transition-border duration-300">

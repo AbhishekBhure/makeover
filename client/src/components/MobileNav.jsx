@@ -1,6 +1,6 @@
 import React from "react";
 import { LuX, LuSearch } from "../icons";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const MobileNav = ({ isMobileMenuOpen, toggleMobileMenu }) => {
   return (
@@ -28,24 +28,54 @@ const MobileNav = ({ isMobileMenuOpen, toggleMobileMenu }) => {
                 <LuSearch className="text-xl" />
               </form>
               <ul className="flex flex-col gap-4">
-                <Link to="/face">
+                <NavLink
+                  to="/face"
+                  className={({ isActive }) =>
+                    isActive ? " font-bold text-pink-500" : ""
+                  }
+                >
                   <li>Face</li>
-                </Link>
-                <Link to="/">
+                </NavLink>
+                <NavLink
+                  to="/eyes"
+                  className={({ isActive }) =>
+                    isActive ? " font-bold text-pink-500" : ""
+                  }
+                >
                   <li>Eyes</li>
-                </Link>
-                <Link to="/">
+                </NavLink>
+                <NavLink
+                  to="/lips"
+                  className={({ isActive }) =>
+                    isActive ? " font-bold text-pink-500" : ""
+                  }
+                >
                   <li>Lips</li>
-                </Link>
-                <Link to="/">
+                </NavLink>
+                <NavLink
+                  to="/nails"
+                  className={({ isActive }) =>
+                    isActive ? " font-bold text-pink-500" : ""
+                  }
+                >
                   <li>Nails</li>
-                </Link>
-                <Link to="/">
+                </NavLink>
+                <NavLink
+                  to="/tools-brushes"
+                  className={({ isActive }) =>
+                    isActive ? " font-bold text-pink-500" : ""
+                  }
+                >
                   <li>Tools & Brushes</li>
-                </Link>
-                <Link to="/">
+                </NavLink>
+                <NavLink
+                  to="/makeup-palettes"
+                  className={({ isActive }) =>
+                    isActive ? " font-bold text-pink-500" : ""
+                  }
+                >
                   <li> Makeup Palettes </li>
-                </Link>
+                </NavLink>
               </ul>
             </div>
           </div>

@@ -1,7 +1,7 @@
-import React from "react";
+import Layout from "../components/Layout";
 
 const Face = () => {
-  return <div>Face</div>;
+  return <Layout title={"MakeOver- Face"}>Face</Layout>;
 };
 
 export default Face;
