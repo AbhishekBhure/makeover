@@ -3,24 +3,18 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import userRoute from "./routes/userRoute.js";
 import authRoute from "./routes/authRoute.js";
+import connectDB from "./config/db.js";
 
 dotenv.config();
+
+//database config
+connectDB();
 const app = express();
 app.use(express.json());
 
 const PORT = 3000;
 
-const mongoUri = process.env.MONGO_ATLAS_URL;
-
-mongoose
-  .connect(mongoUri)
-  .then(() => {
-    console.log("Connected to DB");
-  })
-  .catch((err) => {
-    console.log(err);
-  });
-
+//routes
 app.use("/api/v1/users", userRoute);
 app.use("/api/v1/auth", authRoute);
 
