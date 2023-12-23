@@ -9,6 +9,7 @@ import Face from "./pages/Face";
 import Footer from "./components/Footer";
 import Layout from "./components/Layout";
 import PageNotFound from "./components/PageNotFound";
+import ProtectedRoute from "./components/Routes/ProtectedRoute";
 
 function App() {
   return (
@@ -21,8 +22,10 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/sign-up" element={<SignUp />} />
-          <Route path="/profile" element={<Profile />} />
           <Route path="/face" element={<Face />} />
+          <Route element={<ProtectedRoute />}>
+            <Route path="/profile" element={<Profile />} />
+          </Route>
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </Layout>

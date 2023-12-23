@@ -71,11 +71,22 @@ export const signin = async (req, res, next) => {
     const { password: pass, ...user } = validUser._doc;
 
     res
-      .cookie("acess_token", token, { httpOnly: true })
+      .cookie("access_token", token, { httpOnly: true })
       .status(200)
       .json({ user, token });
   } catch (error) {
     next(error);
+  }
+};
+
+//Sign Out User
+export const signout = async (req, res, next) => {
+  try {
+    const token = req.headers.authorization;
+    res.clearCookie("access_token");
+    res.status(200).json({ token });
+  } catch (error) {
+    return next(error);
   }
 };
 

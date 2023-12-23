@@ -8,7 +8,6 @@ const Navbar = () => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const { currentUser } = useSelector((state) => state.user);
-  console.log(currentUser.user.username);
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
   };
