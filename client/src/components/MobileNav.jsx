@@ -23,7 +23,7 @@ const MobileNav = ({ isMobileMenuOpen, toggleMobileMenu }) => {
                 <input
                   type="text"
                   placeholder="Search products..."
-                  className="bg-transparent focus:outline-none w-32 sm:w-64"
+                  className="bg-transparent focus:outline-none w-40 sm:w-64 "
                 />
                 <LuSearch className="text-xl" />
               </form>

@@ -1,4 +1,5 @@
 import Layout from "../components/Layout";
+import ProductList from "../redux/product-list/ProductList";
 
 const Home = () => {
   return (
@@ -10,6 +11,7 @@ const Home = () => {
         esse, ullam recusandae fugit quis non. Corrupti sapiente ipsa distinctio
         unde?.
       </p>
+      <ProductList />
     </Layout>
   );
 };
