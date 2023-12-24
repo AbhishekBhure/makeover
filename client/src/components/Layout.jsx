@@ -10,7 +10,7 @@ const Layout = ({ children, title, description, keywords, author }) => {
         <meta name="author" content={author} />
         <title>{title}</title>
       </Helmet>
-      <div className="max-w-7xl mx-auto md:px-0 min-h-96">{children}</div>
+      <div className="max-w-7xl mx-auto md:px-0 px-3 min-h-96">{children}</div>
     </div>
   );
 };

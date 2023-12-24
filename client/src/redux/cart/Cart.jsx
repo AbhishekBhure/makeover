@@ -26,6 +26,18 @@ const products = [
     imageAlt:
       "Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch.",
   },
+  {
+    id: 3,
+    name: "Medium Stuff Satchel",
+    href: "#",
+    color: "Blue",
+    price: "$32.00",
+    quantity: 1,
+    imageSrc:
+      "https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-02.jpg",
+    imageAlt:
+      "Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch.",
+  },
   // More products...
 ];
 
@@ -93,8 +105,8 @@ export default function Cart() {
         </p>
         <div className="mt-6">
           <Link
-            to="/"
-            className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+            to="/checkout"
+            className="flex items-center justify-center rounded-md border border-transparent bg-pink-500 px-6 py-3 text-base  text-white shadow-sm hover:bg-pink-700"
           >
             Checkout
           </Link>
@@ -106,7 +118,7 @@ export default function Cart() {
             <Link to="/">
               <button
                 type="button"
-                className="font-medium flex gap-1 items-center justify-center text-pink-500 hover:text-pink-700"
+                className="font-medium flex gap-1 items-center justify-center text-gray-500 hover:text-gray-700"
                 onClick={() => setOpen(false)}
               >
                 Continue Shopping

@@ -13,6 +13,7 @@ import ProtectedRoute from "./components/Routes/ProtectedRoute";
 import AdminRoute from "./components/Routes/AdminRoute";
 import Dashboard from "./pages/Admin/dashboard";
 import CartPage from "./pages/CartPage";
+import CheckOut from "./pages/CheckOut";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
           <Route exact path="/sign-up" element={<SignUp />} />
           <Route exact path="/face" element={<Face />} />
           <Route exact path="/cart" element={<CartPage />} />
+          <Route exact path="/checkout" element={<CheckOut />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </Layout>
