@@ -1,3 +1,4 @@
+import { ArrowRightIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
 
 const products = [
@@ -99,17 +100,19 @@ export default function Cart() {
           </Link>
         </div>
         <div className="mt-6 flex  justify-center text-center text-sm text-gray-500">
-          <div className="flex gap-2">
+          <div className="flex items-center gap-2">
             <span className="font-bold">OR</span>
 
             <Link to="/">
               <button
                 type="button"
-                className="font-medium text-pink-500 hover:text-pink-700"
+                className="font-medium flex gap-1 items-center justify-center text-pink-500 hover:text-pink-700"
                 onClick={() => setOpen(false)}
               >
                 Continue Shopping
-                <span aria-hidden="true"> &rarr;</span>
+                <span>
+                  <ArrowRightIcon className="w-4" />
+                </span>
               </button>
             </Link>
           </div>
