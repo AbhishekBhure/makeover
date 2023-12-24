@@ -84,7 +84,7 @@ const Navbar = () => {
           </form>
           <div className="flex gap-5 items-center">
             <div className="relative">
-              <Link to="/" className="flex relative">
+              <Link to="/cart" className="flex relative">
                 <LuShoppingBag className="text-xl" />
                 <span className=" hidden md:inline-flex absolute -top-2 left-3   items-center rounded-full bg-gray-50 px-1  text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">
                   3
@@ -117,7 +117,7 @@ const Navbar = () => {
         <div className="md:hidden flex gap-3 items-center">
           <div className="flex gap-5 items-center">
             <div>
-              <Link to="/" className="flex relative">
+              <Link to="/cart" className="flex relative">
                 <LuShoppingBag className="text-xl" />
                 <span className="absolute md:hidden  -top-2 left-3 items-center rounded-full bg-gray-50 px-1 text-xs  text-gray-600 ring-1 ring-inset ring-gray-500/10">
                   3
