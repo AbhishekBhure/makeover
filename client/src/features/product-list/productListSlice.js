@@ -1,10 +1,18 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fetchAllProducts, fetchProductsByFilters } from "./productListApi";
+import {
+  fetchAllProducts,
+  fetchProductsByFilters,
+  fetchBrands,
+  fetchCategories,
+} from "./productListApi";
 
 const initialState = {
   value: 0,
   products: [],
+  categories: [],
+  brands: [],
   loading: false,
+  totalItems: 0,
 };
 
 export const fetchAllProductsAsync = createAsyncThunk(
@@ -17,8 +25,24 @@ export const fetchAllProductsAsync = createAsyncThunk(
 
 export const fetchProductsByFiltersAsync = createAsyncThunk(
   "product/fetchProductsByFilters",
-  async (filter) => {
-    const response = await fetchProductsByFilters(filter);
+  async ({ filter, sort, pagination }) => {
+    const response = await fetchProductsByFilters(filter, sort, pagination);
+    return response.data;
+  }
+);
+
+export const fetchCategoriesAsync = createAsyncThunk(
+  "product/fetchCategories",
+  async () => {
+    const response = await fetchCategories();
+    return response.data;
+  }
+);
+
+export const fetchBrandsAsync = createAsyncThunk(
+  "product/fetchBrands",
+  async () => {
+    const response = await fetchBrands();
     return response.data;
   }
 );
@@ -45,7 +69,22 @@ export const productSlice = createSlice({
       })
       .addCase(fetchProductsByFiltersAsync.fulfilled, (state, action) => {
         state.loading = false;
-        state.products = action.payload;
+        state.products = action.payload.products;
+        state.totalItems = action.payload.totalItems;
+      })
+      .addCase(fetchCategoriesAsync.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchCategoriesAsync.fulfilled, (state, action) => {
+        state.loading = false;
+        state.categories = action.payload;
+      })
+      .addCase(fetchBrandsAsync.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchBrandsAsync.fulfilled, (state, action) => {
+        state.loading = false;
+        state.brands = action.payload;
       });
   },
 });
@@ -53,5 +92,8 @@ export const productSlice = createSlice({
 export const { increment } = productSlice.actions;
 
 export const selectAllProduct = (state) => state.product.products;
+export const selectCategories = (state) => state.product.categories;
+export const selectBrands = (state) => state.product.brands;
+export const selectTotalItems = (state) => state.product.totalItems;
 
 export default productSlice.reducer;

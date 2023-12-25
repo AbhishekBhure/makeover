@@ -550,5 +550,73 @@
         "https://i.dummyjson.com/data/products/30/thumbnail.jpg"
       ]
     }
+  ],
+  "categories":[
+    
+      {
+        "value": "face",
+        "label": "Face",
+        "checked": false
+      },
+      {
+        "value": "eyes",
+        "label": "Eyes",
+        "checked": false
+      },
+      {
+        "value": "lips",
+        "label": "Lips",
+        "checked": true
+      },
+      {
+        "value": "nails",
+        "label": "Nails",
+        "checked": false
+      },
+      {
+        "value": "tools",
+        "label": "Tools & Brushes",
+        "checked": false
+      },
+      {
+        "value": "palettes",
+        "label": "Makeup Palettes",
+        "checked": false
+      }
+    
+  ],
+  "brands":[
+    
+      {
+        "value": "sugar",
+        "label": "Sugar",
+        "checked": false
+      },
+      {
+        "value": "lakme",
+        "label": "Lakme",
+        "checked": false
+      },
+      {
+        "value": "mac",
+        "label": "M.A.C",
+        "checked": true
+      },
+      {
+        "value": "recode",
+        "label": "Recode",
+        "checked": false
+      },
+      {
+        "value": "milani",
+        "label": "Milani",
+        "checked": false
+      },
+      {
+        "value": "swiss",
+        "label": "Swiss Beauty",
+        "checked": false
+      }
+    
   ]
 }
