@@ -1,5 +1,5 @@
 import Layout from "../components/Layout";
-import ProductList from "../redux/product-list/ProductList";
+import ProductList from "../features/product-list/components/ProductList";
 
 const Home = () => {
   return (

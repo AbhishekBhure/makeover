@@ -8,7 +8,7 @@ import {
   signInFail,
   signInStart,
   signInSuccess,
-} from "../../redux/user/userSlice";
+} from "../../features/user/userSlice";
 import Layout from "../../components/Layout";
 
 const SignIn = () => {

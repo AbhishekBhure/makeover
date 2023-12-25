@@ -7,6 +7,9 @@ export default {
         primary: ["DM Serif Display", "serif"],
         secondary: ["Poppins", "sans-serif"],
       },
+      gridTemplateRows: {
+        "[auto,auto,1fr]": "auto auto 1fr",
+      },
     },
   },
   plugins: [

@@ -6,7 +6,7 @@ import {
   signOutUserStart,
   signOutUserSuccess,
   signOutUserFail,
-} from "../redux/user/userSlice";
+} from "../features/user/userSlice";
 
 const Profile = () => {
   const { enqueueSnackbar } = useSnackbar();

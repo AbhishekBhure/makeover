@@ -1,5 +1,5 @@
 import Layout from "../components/Layout";
-import Cart from "../redux/cart/Cart";
+import Cart from "../features/cart/Cart";
 
 function CartPage() {
   return (
