@@ -21,11 +21,10 @@ import {
 } from "../productListSlice";
 
 const sortOptions = [
-  { name: "Most Popular", href: "#", current: true },
-  { name: "Best Rating", href: "#", current: false },
-  { name: "Newest", href: "#", current: false },
-  { name: "Price: Low to High", href: "#", current: false },
-  { name: "Price: High to Low", href: "#", current: false },
+  { name: "Best Seller", sort: "seller", current: true },
+  { name: "Best Rating", sort: "rating", order: "desc", current: false },
+  { name: "Price: Low to High", sort: "price", order: "asc", current: false },
+  { name: "Price: High to Low", sort: "price", order: "desc", current: false },
 ];
 
 const filters = [
@@ -655,6 +654,12 @@ export default function ProductList() {
     console.log(section.id, option.value);
   };
 
+  const handleSort = (e, option) => {
+    const newFilter = { ...filter, _sort: option.sort, _order: option.order };
+    setFilter(newFilter);
+    dispatch(fetchProductsByFiltersAsync(newFilter));
+  };
+
   return (
     <>
       <div className="bg-white">
@@ -806,8 +811,9 @@ export default function ProductList() {
                         {sortOptions.map((option) => (
                           <Menu.Item key={option.name}>
                             {({ active }) => (
-                              <Link
+                              <NavLink
                                 href={option.href}
+                                onClick={(e) => handleSort(e, option)}
                                 className={classNames(
                                   option.current
                                     ? "font-medium text-gray-900"
@@ -817,7 +823,7 @@ export default function ProductList() {
                                 )}
                               >
                                 {option.name}
-                              </Link>
+                              </NavLink>
                             )}
                           </Menu.Item>
                         ))}
