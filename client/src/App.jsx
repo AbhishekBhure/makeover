@@ -34,9 +34,15 @@ function App() {
           <Route exact path="/sign-in" element={<SignIn />} />
           <Route exact path="/sign-up" element={<SignUp />} />
           <Route exact path="/face" element={<Face />} />
-          <Route exact path="/product-detail" element={<ProductDetailPage />} />
-          <Route exact path="/cart" element={<CartPage />} />
-          <Route exact path="/checkout" element={<CheckOut />} />
+          <Route element={<ProtectedRoute />}>
+            <Route exact path="/cart" element={<CartPage />} />
+            <Route exact path="/checkout" element={<CheckOut />} />
+          </Route>
+          <Route
+            exact
+            path="/product-detail/:id"
+            element={<ProductDetailPage />}
+          />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </Layout>

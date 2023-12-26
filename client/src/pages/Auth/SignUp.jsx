@@ -95,6 +95,7 @@ const SignUp = () => {
                 <input
                   type="email"
                   id="email"
+                  pattern="\b[\w\.-]+@[\w\.-]+\w{2,4}\b"
                   required
                   className="focus:outline-none bg-transparent w-64"
                   placeholder="enter your email..."

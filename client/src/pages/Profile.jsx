@@ -11,6 +11,9 @@ import {
 const Profile = () => {
   const { enqueueSnackbar } = useSnackbar();
   const dispatch = useDispatch();
+
+  const { currentUser, loading } = useSelector((state) => state.user);
+
   const handleSignOut = async () => {
     try {
       dispatch(signOutUserStart());
@@ -29,12 +32,14 @@ const Profile = () => {
     }
   };
   return (
-    <Layout>
-      Profile
-      <button type="button" onClick={handleSignOut}>
-        SignOut
-      </button>
-    </Layout>
+    <>
+      <Layout>
+        Profile
+        <button type="button" onClick={handleSignOut}>
+          SignOut
+        </button>
+      </Layout>
+    </>
   );
 };
 
