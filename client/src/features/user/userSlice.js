@@ -47,4 +47,6 @@ export const {
   signOutUserFail,
 } = userSlice.actions;
 
+export const selectUser = (state) => state.user;
+
 export default userSlice.reducer;

@@ -4,6 +4,8 @@ import { RadioGroup } from "@headlessui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProductByIdAsync, selectProductById } from "../productListSlice";
 import { useParams } from "react-router-dom";
+import { addToCartAsync } from "../../cart/cartSlice";
+import { selectUser } from "../../user/userSlice";
 
 const colors = [
   { name: "White", class: "bg-white", selectedClass: "ring-gray-400" },
@@ -40,12 +42,25 @@ export default function ProductDetail() {
   const [selectedSize, setSelectedSize] = useState(sizes[2]);
 
   const product = useSelector(selectProductById);
+  const user = useSelector(selectUser);
+  console.log(user.currentUser.user._id);
 
   useEffect(() => {
     dispatch(fetchProductByIdAsync(params.id));
   }, [dispatch, params.id]);
 
   //TODO: In server data we will add some things
+
+  const handleAddToCart = (e) => {
+    e.preventDefault();
+    dispatch(
+      addToCartAsync({
+        ...product,
+        quantity: 1,
+        user: user.currentUser.user._id,
+      })
+    );
+  };
 
   return (
     <div className="bg-white mt-8">
@@ -207,6 +222,7 @@ export default function ProductDetail() {
                 </div>
 
                 <button
+                  onClick={handleAddToCart}
                   type="submit"
                   className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 >
