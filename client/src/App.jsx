@@ -15,8 +15,22 @@ import Dashboard from "./pages/Admin/dashboard";
 import CartPage from "./pages/CartPage";
 import CheckOut from "./pages/CheckOut";
 import ProductDetailPage from "./pages/ProductDetailPage";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { selectUser } from "./features/user/userSlice";
+import { fetchCartItemsByUserIdAsync } from "./features/cart/cartSlice";
 
 function App() {
+  const dispatch = useDispatch();
+  const user = useSelector(selectUser);
+  const id = user.currentUser.user._id;
+  console.log("from app:", user.currentUser.user._id);
+  useEffect(() => {
+    if (user) {
+      dispatch(fetchCartItemsByUserIdAsync(id));
+    }
+  }, [dispatch, user, id]);
+
   return (
     <BrowserRouter>
       <Navbar />

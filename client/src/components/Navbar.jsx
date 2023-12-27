@@ -3,10 +3,13 @@ import { LuHeart, LuShoppingBag, LuSearch, LuText } from "../icons";
 import { useState } from "react";
 import MobileNav from "./MobileNav";
 import { useSelector } from "react-redux";
+import { selectItems } from "../features/cart/cartSlice";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  const items = useSelector(selectItems);
+  console.log(items.length);
   const { currentUser } = useSelector((state) => state.user);
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
@@ -86,9 +89,11 @@ const Navbar = () => {
             <div className="relative">
               <Link to="/cart" className="flex relative">
                 <LuShoppingBag className="text-xl" />
-                <span className=" hidden md:inline-flex absolute -top-2 left-3   items-center rounded-full bg-gray-50 px-1  text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">
-                  3
-                </span>
+                {items.length > 0 && (
+                  <span className=" hidden md:inline-flex absolute -top-2 left-3   items-center rounded-full bg-gray-50 px-1  text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">
+                    {items.length}
+                  </span>
+                )}
               </Link>
             </div>
             <div>
@@ -119,9 +124,11 @@ const Navbar = () => {
             <div>
               <Link to="/cart" className="flex relative">
                 <LuShoppingBag className="text-xl" />
-                <span className="absolute md:hidden  -top-2 left-3 items-center rounded-full bg-gray-50 px-1 text-xs  text-gray-600 ring-1 ring-inset ring-gray-500/10">
-                  3
-                </span>
+                {items.length > 0 && (
+                  <span className="absolute md:hidden  -top-2 left-3 items-center rounded-full bg-gray-50 px-1 text-xs  text-gray-600 ring-1 ring-inset ring-gray-500/10">
+                    {items.length}
+                  </span>
+                )}
               </Link>
             </div>
             <div>

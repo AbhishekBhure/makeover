@@ -1,5 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { addToCart } from "./cartApi";
+import {
+  addToCart,
+  deleteItemsFromCart,
+  fetchCartItemsByUserId,
+  updateItems,
+} from "./cartApi";
 
 const initialState = {
   items: [],
@@ -16,6 +21,33 @@ export const addToCartAsync = createAsyncThunk(
   }
 );
 
+export const fetchCartItemsByUserIdAsync = createAsyncThunk(
+  "cart/fetchCartItemsByUserId",
+  async (userId) => {
+    const response = await fetchCartItemsByUserId(userId);
+
+    return response.data;
+  }
+);
+
+export const updateItemsAsync = createAsyncThunk(
+  "cart/updateItems",
+  async (update) => {
+    const response = await updateItems(update);
+
+    return response.data;
+  }
+);
+
+export const deleteItemsFromCartAsync = createAsyncThunk(
+  "cart/deleteItemsFromCart",
+  async (itemId) => {
+    const response = await deleteItemsFromCart(itemId);
+
+    return response.data;
+  }
+);
+
 export const cartSlice = createSlice({
   name: "cart",
   initialState,
@@ -27,10 +59,37 @@ export const cartSlice = createSlice({
       .addCase(addToCartAsync.fulfilled, (state, action) => {
         state.loading = false;
         state.items.push(action.payload);
+      })
+      .addCase(fetchCartItemsByUserIdAsync.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchCartItemsByUserIdAsync.fulfilled, (state, action) => {
+        state.loading = false;
+        state.items = action.payload;
+      })
+      .addCase(updateItemsAsync.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(updateItemsAsync.fulfilled, (state, action) => {
+        state.loading = false;
+        const index = state.items.findIndex(
+          (item) => item.id === action.payload.id
+        );
+        state.items[index] = action.payload;
+      })
+      .addCase(deleteItemsFromCartAsync.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(deleteItemsFromCartAsync.fulfilled, (state, action) => {
+        state.loading = false;
+        const index = state.items.findIndex(
+          (item) => item.id === action.payload.id
+        );
+        state.items.splice(index, 1);
       });
   },
 });
 
-export const selectItems = (state) => state.items;
+export const selectItems = (state) => state.cart.items;
 
 export default cartSlice.reducer;
