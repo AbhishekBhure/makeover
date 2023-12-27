@@ -1,6 +1,6 @@
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import {
   deleteItemsFromCartAsync,
   selectItems,
@@ -26,6 +26,7 @@ export default function Cart() {
 
   return (
     <>
+      {!items.length && <Navigate to="/" replace={true} />}
       <div className="mt-8 ">
         <h1 className="text-4xl mb-3 font-primary">Cart</h1>
         <div className="flow-root font-secondary">
@@ -44,7 +45,9 @@ export default function Cart() {
                   <div>
                     <div className="flex justify-between text-base font-medium text-gray-900">
                       <h3>
-                        <Link href={item.href}>{item.title}</Link>
+                        <Link to={`/product-detail/${item.id}`}>
+                          {item.title}
+                        </Link>
                       </h3>
                       <p className="ml-4">${item.price}</p>
                     </div>
@@ -112,7 +115,6 @@ export default function Cart() {
               <button
                 type="button"
                 className="font-medium flex gap-1 items-center justify-center text-gray-500 hover:text-gray-700"
-                onClick={() => setOpen(false)}
               >
                 Continue Shopping
                 <span>

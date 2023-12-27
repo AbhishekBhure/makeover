@@ -89,7 +89,7 @@ const Navbar = () => {
             <div className="relative">
               <Link to="/cart" className="flex relative">
                 <LuShoppingBag className="text-xl" />
-                {items.length > 0 && (
+                {currentUser && items.length > 0 && (
                   <span className=" hidden md:inline-flex absolute -top-2 left-3   items-center rounded-full bg-gray-50 px-1  text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">
                     {items.length}
                   </span>
@@ -124,7 +124,7 @@ const Navbar = () => {
             <div>
               <Link to="/cart" className="flex relative">
                 <LuShoppingBag className="text-xl" />
-                {items.length > 0 && (
+                {currentUser && items.length > 0 && (
                   <span className="absolute md:hidden  -top-2 left-3 items-center rounded-full bg-gray-50 px-1 text-xs  text-gray-600 ring-1 ring-inset ring-gray-500/10">
                     {items.length}
                   </span>

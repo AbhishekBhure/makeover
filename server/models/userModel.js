@@ -21,10 +21,7 @@ const userSchema = new mongoose.Schema(
       required: [true, "Please enter password"],
       minLength: [5, "Password should have more than 5 characters"],
     },
-    address: {
-      type: String,
-      required: [true, "Please enter password"],
-    },
+    address: [],
     role: {
       type: String,
       default: "user",
