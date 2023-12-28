@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import Layout from "../../../components/Layout";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchLoggedInUserOrdersAsync, selectUserOrders } from "../userSlice";
 import { Link } from "react-router-dom";
@@ -16,7 +15,7 @@ const UserOrders = () => {
   }, [dispatch, userId]);
 
   return (
-    <Layout>
+    <>
       {orders &&
         orders.map((order) => (
           <div key={order.id}>
@@ -110,7 +109,7 @@ const UserOrders = () => {
             </div>
           </div>
         ))}
-    </Layout>
+    </>
   );
 };
 

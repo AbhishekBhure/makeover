@@ -20,7 +20,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "./features/auth/authSlice";
 import { fetchCartItemsByUserIdAsync } from "./features/cart/cartSlice";
 import OrderSuccessPage from "./pages/OrderSuccessPage";
-import UserOrders from "./features/user/components/UserOrders";
+import UserOrdersPage from "./pages/UserOrdersPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -59,7 +59,7 @@ function App() {
               element={<ProductDetailPage />}
             />
             <Route path="/order-success/:id" element={<OrderSuccessPage />} />
-            <Route path="/orders" element={<UserOrders />} />
+            <Route path="/orders" element={<UserOrdersPage />} />
           </Route>
           <Route path="*" element={<PageNotFound />} />
         </Routes>
