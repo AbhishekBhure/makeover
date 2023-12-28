@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { LuArrowLeft } from "../icons";
-import Layout from "./Layout";
+import Layout from "../components/Layout";
 const PageNotFound = () => {
   return (
     <Layout title={"Page Not Found"}>

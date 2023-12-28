@@ -10,13 +10,12 @@ import {
   signInSuccess,
 } from "../../features/user/userSlice";
 import Layout from "../../components/Layout";
+import { fetchCartItemsByUserIdAsync } from "../../features/cart/cartSlice";
 
 const SignIn = () => {
   const [formData, setFormData] = useState({});
   const { loading } = useSelector((state) => state.user);
   const [visible, setVisible] = useState(false);
-
-  console.log(formData);
 
   const { enqueueSnackbar } = useSnackbar();
 
@@ -35,26 +34,12 @@ const SignIn = () => {
     setVisible(!visible);
   };
 
-  // const hashPassword = async (password) => {
-  //   const encoder = new TextEncoder();
-  //   const data = encoder.encode(password);
-  //   const hashBuffer = await crypto.subtle.digest("SHA-256", data);
-  //   const hashArray = Array.from(new Uint8Array(hashBuffer));
-  //   const hashedPassword = hashArray
-  //     .map((byte) => byte.toString(16).padStart(2, "0"))
-  //     .join("");
-  //   return hashedPassword;
-  // };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     // const { password: pass, ...rest } = formData;
     try {
       dispatch(signInStart());
-
-      // Hash the password before sending it to the server
-      // const hashedPassword = await hashPassword(formData.password);
 
       const res = await fetch("/api/v1/auth/signin", {
         method: "POST",

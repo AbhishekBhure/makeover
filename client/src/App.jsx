@@ -8,7 +8,7 @@ import Navbar from "./components/Navbar";
 import Face from "./pages/Face";
 import Footer from "./components/Footer";
 import Layout from "./components/Layout";
-import PageNotFound from "./components/PageNotFound";
+import PageNotFound from "./pages/PageNotFound";
 import ProtectedRoute from "./components/Routes/ProtectedRoute";
 import AdminRoute from "./components/Routes/AdminRoute";
 import Dashboard from "./pages/Admin/dashboard";
@@ -19,12 +19,13 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "./features/user/userSlice";
 import { fetchCartItemsByUserIdAsync } from "./features/cart/cartSlice";
+import OrderSuccessPage from "./pages/OrderSuccessPage";
 
 function App() {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
-  const id = user.currentUser.user._id;
-  console.log("from app:", user.currentUser.user._id);
+  const id = user?.currentUser?.user?._id;
+  // console.log("from app:", user?.currentUser?.user?._id);
   useEffect(() => {
     if (user) {
       dispatch(fetchCartItemsByUserIdAsync(id));
@@ -57,6 +58,7 @@ function App() {
             path="/product-detail/:id"
             element={<ProductDetailPage />}
           />
+          <Route path="/order-success/:id" element={<OrderSuccessPage />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </Layout>

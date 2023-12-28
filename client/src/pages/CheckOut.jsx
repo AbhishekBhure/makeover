@@ -8,7 +8,11 @@ import {
   updateItemsAsync,
 } from "../features/cart/cartSlice";
 import { useState } from "react";
-import { createOrderAsync } from "../features/order/orderSlice";
+import {
+  createOrderAsync,
+  selectCurrentOrder,
+} from "../features/order/orderSlice";
+import { useSnackbar } from "notistack";
 
 const addresses = [
   {
@@ -31,13 +35,17 @@ const addresses = [
 
 function CheckOut() {
   const [selectedAddress, setSelectedAddress] = useState(null);
+  const [paymentMethod, setPaymentMethod] = useState(null);
 
   const dispatch = useDispatch();
 
+  const { enqueueSnackbar } = useSnackbar();
+
+  //selectors
   const { currentUser } = useSelector((state) => state.user);
   const user = currentUser.user;
-  console.log("from checkout", user);
   const items = useSelector(selectItems);
+  const currentOrder = useSelector(selectCurrentOrder);
 
   const totalAmount = items.reduce(
     (amount, item) => item.price * item.quantity + amount,
@@ -54,13 +62,28 @@ function CheckOut() {
   };
 
   const handleAddress = (e) => {
-    console.log(e.target.value);
     setSelectedAddress(addresses[e.target.value]);
   };
 
-  const handleOrder = (e) => {
-    const order = { items, totalAmount, totalItems, user, selectedAddress };
-    dispatch(createOrderAsync(order));
+  const handlePayment = (e) => {
+    setPaymentMethod(e.target.value);
+  };
+
+  const handleOrder = () => {
+    if (selectedAddress && paymentMethod) {
+      const order = {
+        items,
+        totalAmount,
+        totalItems,
+        user,
+        selectedAddress,
+        paymentMethod,
+        status: "pending", //other status can be deliverd
+      };
+      dispatch(createOrderAsync(order));
+    } else {
+      enqueueSnackbar("Enter Address and Payment Method", { variant: "error" });
+    }
     //TODO: redirect to order-success page
     //TODO: clear cart after order
     //TODO: on server change the stock of itmes
@@ -69,7 +92,9 @@ function CheckOut() {
   return (
     <Layout>
       {!items.length && <Navigate to="/" replace={true} />}
-
+      {currentOrder && (
+        <Navigate to={`/order-success/${currentOrder.id}`} replace={true} />
+      )}
       <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-5 shadow p-3">
         <div className="lg:col-span-3">
           <form className="mt-8">
@@ -243,9 +268,6 @@ function CheckOut() {
                         </div>
                       </div>
                       <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-                        <p className="text-sm leading-6 text-gray-900">
-                          Phone: {address.phone}
-                        </p>
                         <div className="flex gap-1 items-center justify-center">
                           <p className=" text-xs leading-5 text-gray-500">
                             {address.city} -
@@ -268,10 +290,11 @@ function CheckOut() {
                     <div className="mt-6 space-y-6">
                       <div className="flex items-center gap-x-3">
                         <input
+                          onChange={handlePayment}
+                          value="card"
                           id="card"
                           name="payments"
                           type="radio"
-                          checked={true}
                           className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
                         />
                         <label
