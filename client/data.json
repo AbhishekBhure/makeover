@@ -668,6 +668,55 @@
       "paymentMethod": "card",
       "status": "pending",
       "id": 1
+    },
+    {
+      "items": [
+        {
+          "title": "iPhone X",
+          "description": "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...",
+          "price": 899,
+          "discountPercentage": 17.94,
+          "rating": 4.44,
+          "stock": 34,
+          "brand": "lakme",
+          "category": "face",
+          "thumbnail": "https://i.dummyjson.com/data/products/2/thumbnail.jpg",
+          "images": [
+            "https://i.dummyjson.com/data/products/2/1.jpg",
+            "https://i.dummyjson.com/data/products/2/2.jpg",
+            "https://i.dummyjson.com/data/products/2/3.jpg",
+            "https://i.dummyjson.com/data/products/2/thumbnail.jpg"
+          ],
+          "quantity": 1,
+          "user": "6586763f99ae5711e8df568b",
+          "id": 1
+        }
+      ],
+      "totalAmount": 899,
+      "totalItems": 1,
+      "user": {
+        "_id": "6586763f99ae5711e8df568b",
+        "username": "test2",
+        "email": "test2@gmail.com",
+        "address": [
+          "test2 address"
+        ],
+        "role": "user",
+        "createdAt": "2023-12-23T05:55:11.588Z",
+        "updatedAt": "2023-12-23T05:55:11.588Z",
+        "__v": 0
+      },
+      "selectedAddress": {
+        "name": "John bhai",
+        "street": "11th cross",
+        "city": "Delhi",
+        "pinCode": 10011,
+        "state": "Delhi",
+        "phone": 1239863
+      },
+      "paymentMethod": "card",
+      "status": "pending",
+      "id": 2
     }
   ]
 }
