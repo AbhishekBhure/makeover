@@ -10,7 +10,7 @@ const OrderSuccessPage = () => {
   const params = useParams();
   const dispatch = useDispatch();
 
-  const { currentUser } = useSelector((state) => state.user);
+  const { currentUser } = useSelector((state) => state.auth);
   const user = currentUser.user;
   console.log(user._id);
 

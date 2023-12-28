@@ -17,9 +17,10 @@ import CheckOut from "./pages/CheckOut";
 import ProductDetailPage from "./pages/ProductDetailPage";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectUser } from "./features/user/userSlice";
+import { selectUser } from "./features/auth/authSlice";
 import { fetchCartItemsByUserIdAsync } from "./features/cart/cartSlice";
 import OrderSuccessPage from "./pages/OrderSuccessPage";
+import UserOrders from "./features/user/components/UserOrders";
 
 function App() {
   const dispatch = useDispatch();
@@ -52,13 +53,14 @@ function App() {
           <Route element={<ProtectedRoute />}>
             <Route exact path="/cart" element={<CartPage />} />
             <Route exact path="/checkout" element={<CheckOut />} />
+            <Route
+              exact
+              path="/product-detail/:id"
+              element={<ProductDetailPage />}
+            />
+            <Route path="/order-success/:id" element={<OrderSuccessPage />} />
+            <Route path="/orders" element={<UserOrders />} />
           </Route>
-          <Route
-            exact
-            path="/product-detail/:id"
-            element={<ProductDetailPage />}
-          />
-          <Route path="/order-success/:id" element={<OrderSuccessPage />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </Layout>

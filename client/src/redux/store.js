@@ -1,16 +1,18 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import userReducer from "../features/user/userSlice";
+import authReducer from "../features/auth/authSlice";
 import productReducer from "../features/product-list/productListSlice";
 import cartReducer from "../features/cart/cartSlice";
 import orderReducer from "../features/order/orderSlice";
+import userReducer from "../features/user/userSlice";
 import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
 const rootReducer = combineReducers({
-  user: userReducer,
+  auth: authReducer,
   product: productReducer,
   cart: cartReducer,
   order: orderReducer,
+  userInfo: userReducer,
 });
 
 const persistConfig = {

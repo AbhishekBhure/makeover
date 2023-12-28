@@ -6,13 +6,14 @@ import {
   signOutUserStart,
   signOutUserSuccess,
   signOutUserFail,
-} from "../features/user/userSlice";
+} from "../features/auth/authSlice";
+import { Link } from "react-router-dom";
 
 const Profile = () => {
   const { enqueueSnackbar } = useSnackbar();
   const dispatch = useDispatch();
 
-  const { loading } = useSelector((state) => state.user);
+  const { loading } = useSelector((state) => state.auth);
 
   const handleSignOut = async () => {
     try {
@@ -38,9 +39,14 @@ const Profile = () => {
       ) : (
         <Layout>
           Profile
-          <button type="button" onClick={handleSignOut}>
-            SignOut
-          </button>
+          <div className="flex gap-5">
+            <button type="button" onClick={handleSignOut}>
+              SignOut
+            </button>
+            <Link to="/orders">
+              <button type="button">My orders</button>
+            </Link>
+          </div>
         </Layout>
       )}
     </>

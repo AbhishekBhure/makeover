@@ -8,13 +8,12 @@ import {
   signInFail,
   signInStart,
   signInSuccess,
-} from "../../features/user/userSlice";
+} from "../../features/auth/authSlice";
 import Layout from "../../components/Layout";
-import { fetchCartItemsByUserIdAsync } from "../../features/cart/cartSlice";
 
 const SignIn = () => {
   const [formData, setFormData] = useState({});
-  const { loading } = useSelector((state) => state.user);
+  const { loading } = useSelector((state) => state.auth);
   const [visible, setVisible] = useState(false);
 
   const { enqueueSnackbar } = useSnackbar();

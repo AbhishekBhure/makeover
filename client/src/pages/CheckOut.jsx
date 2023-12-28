@@ -42,7 +42,7 @@ function CheckOut() {
   const { enqueueSnackbar } = useSnackbar();
 
   //selectors
-  const { currentUser } = useSelector((state) => state.user);
+  const { currentUser } = useSelector((state) => state.auth);
   const user = currentUser.user;
   const items = useSelector(selectItems);
   const currentOrder = useSelector(selectCurrentOrder);
