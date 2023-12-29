@@ -3,7 +3,7 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import SignIn from "./pages/Auth/SignIn";
 import SignUp from "./pages/Auth/SignUp";
-import Profile from "./pages/Profile";
+import UserProfilePage from "./pages/UserProfilePage";
 import Navbar from "./components/Navbar";
 import Face from "./pages/Face";
 import Footer from "./components/Footer";
@@ -21,15 +21,17 @@ import { selectUser } from "./features/auth/authSlice";
 import { fetchCartItemsByUserIdAsync } from "./features/cart/cartSlice";
 import OrderSuccessPage from "./pages/OrderSuccessPage";
 import UserOrdersPage from "./pages/UserOrdersPage";
+import { fetchLoggedInUserInfoAsync } from "./features/user/userSlice";
 
 function App() {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
-  const id = user?.currentUser?.user?._id;
-  // console.log("from app:", user?.currentUser?.user?._id);
+  const id = user?.user?._id;
+  console.log("from app:", user?.user?._id);
   useEffect(() => {
     if (user) {
       dispatch(fetchCartItemsByUserIdAsync(id));
+      // dispatch(fetchLoggedInUserInfoAsync(id));
     }
   }, [dispatch, user, id]);
 
@@ -41,7 +43,7 @@ function App() {
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route path="/profile" element={<ProtectedRoute />}>
-            <Route exact path="user" element={<Profile />} />
+            <Route exact path="user" element={<UserProfilePage />} />
           </Route>
           <Route path="/profile" element={<AdminRoute />}>
             <Route exact path="admin" element={<Dashboard />} />

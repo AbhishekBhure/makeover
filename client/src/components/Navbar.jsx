@@ -9,7 +9,6 @@ const Navbar = () => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const items = useSelector(selectItems);
-  console.log(items.length);
   const { currentUser } = useSelector((state) => state.auth);
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
@@ -19,7 +18,7 @@ const Navbar = () => {
     <header className="shadow font-primary">
       <div className="flex justify-between items-center max-w-7xl mx-auto py-3 px-5 md:px-0">
         <Link to="/">
-          <h1 className="font-primary text-xl flex flex-wrap md:text-4xl ">
+          <h1 className="font-primary text-3xl flex flex-wrap md:text-4xl ">
             <span>Make</span>
             <span className="text-pink-500">Over</span>
           </h1>
@@ -137,9 +136,21 @@ const Navbar = () => {
               </Link>
             </div>
           </div>
-          <Link to="/sign-in" className="md:hidden">
-            <span>SignIn</span>
-          </Link>
+          <div>
+            {currentUser ? (
+              <Link
+                to={`/profile/${
+                  currentUser.user.role === "admin" ? "admin" : "user"
+                }`}
+              >
+                <span>{currentUser.user.username}</span>
+              </Link>
+            ) : (
+              <Link to="/sign-in">
+                <span>SignIn</span>
+              </Link>
+            )}
+          </div>
           <button
             onClick={toggleMobileMenu}
             className="text-xl focus:outline-none"

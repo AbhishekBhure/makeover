@@ -7,7 +7,7 @@ const initialState = {
 };
 
 const authSlice = createSlice({
-  name: "user",
+  name: "auth",
   initialState,
   reducers: {
     signInStart: (state) => {
@@ -47,6 +47,6 @@ export const {
   signOutUserFail,
 } = authSlice.actions;
 
-export const selectUser = (state) => state.auth;
+export const selectUser = (state) => state.auth.currentUser;
 
 export default authSlice.reducer;

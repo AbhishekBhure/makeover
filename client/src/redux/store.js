@@ -12,7 +12,7 @@ const rootReducer = combineReducers({
   product: productReducer,
   cart: cartReducer,
   order: orderReducer,
-  userInfo: userReducer,
+  user: userReducer,
 });
 
 const persistConfig = {

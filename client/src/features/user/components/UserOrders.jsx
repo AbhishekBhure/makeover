@@ -18,9 +18,9 @@ const UserOrders = () => {
     <>
       {orders &&
         orders.map((order) => (
-          <div key={order.id}>
-            <div className="mt-8 ">
-              <h1 className="text-4xl mb-3 font-primary">
+          <div key={order.id} className="mb-6 border px-4">
+            <div className="mt-2">
+              <h1 className="text-xl mb-3 font-secondary">
                 Order: <span>#{order.id} </span>
               </h1>
               <h3 className=" mb-3 font-secondary">

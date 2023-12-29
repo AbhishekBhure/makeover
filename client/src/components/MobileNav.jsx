@@ -1,8 +1,10 @@
-import React from "react";
 import { LuX, LuSearch } from "../icons";
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const MobileNav = ({ isMobileMenuOpen, toggleMobileMenu }) => {
+  const { currentUser } = useSelector((state) => state.auth);
+
   return (
     <div className="md:hidden fixed inset-0 bg-gray-800 bg-opacity-75 z-50">
       <div className="max-w-6xl mx-auto h-full">

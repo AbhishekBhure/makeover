@@ -7,3 +7,11 @@ export function fetchLoggedInUserOrders(userId) {
     resolve({ data });
   });
 }
+
+export function fetchLoggedInUserInfo(userId) {
+  return new Promise(async (resolve) => {
+    const response = await fetch("/api/v1/users/" + userId);
+    const data = response.json();
+    resolve({ data });
+  });
+}

@@ -28,7 +28,7 @@ const OrderSuccessPage = () => {
       <Layout title={"Order Success"}>
         <div className="my-8">
           <div className="flex flex-col gap-4 items-center justify-center">
-            <h1 className="text-5xl text-pretty font-primary">
+            <h1 className="text-3xl text-pretty text-center font-primary">
               Order Successfully Placed
             </h1>
             <p className="font-secondary text-2xl">
