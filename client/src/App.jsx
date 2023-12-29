@@ -22,6 +22,8 @@ import { fetchCartItemsByUserIdAsync } from "./features/cart/cartSlice";
 import OrderSuccessPage from "./pages/OrderSuccessPage";
 import UserOrdersPage from "./pages/UserOrdersPage";
 import { fetchLoggedInUserInfoAsync } from "./features/user/userSlice";
+import AdminProductDetailPage from "./pages/Admin/AdminProductDetailPage";
+import AdminProductFromPage from "./pages/Admin/AdminProductFromPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -47,6 +49,10 @@ function App() {
           </Route>
           <Route path="/profile" element={<AdminRoute />}>
             <Route exact path="admin" element={<Dashboard />} />
+            <Route
+              path="admin/product-form"
+              element={<AdminProductFromPage />}
+            />
           </Route>
           <Route exact path="/about" element={<About />} />
           <Route exact path="/sign-in" element={<SignIn />} />

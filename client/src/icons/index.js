@@ -7,6 +7,7 @@ import {
   LuEye,
   LuEyeOff,
   LuArrowLeft,
+  LuTrash2,
 } from "react-icons/lu";
 import loader from "./loader.svg";
 
@@ -20,4 +21,5 @@ export {
   LuEye,
   LuEyeOff,
   LuArrowLeft,
+  LuTrash2,
 };

@@ -1,10 +1,10 @@
-import Layout from "../../components/Layout";
+import AdminProductList from "../../features/admin/components/AdminProductList";
 
 const Dashboard = () => {
   return (
-    <Layout>
-      <h1>dashboard</h1>
-    </Layout>
+    <>
+      <AdminProductList />
+    </>
   );
 };
 

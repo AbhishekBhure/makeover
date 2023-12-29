@@ -72,23 +72,6 @@
       ]
     },
     {
-      "id": 5,
-      "title": "Huawei P30",
-      "description": "Huawei’s re-badged P30 Pro New Edition was officially unveiled yesterday in Germany and now the device has made its way to the UK.",
-      "price": 499,
-      "discountPercentage": 10.58,
-      "rating": 4.09,
-      "stock": 32,
-      "brand": "lakme",
-      "category": "face",
-      "thumbnail": "https://i.dummyjson.com/data/products/5/thumbnail.jpg",
-      "images": [
-        "https://i.dummyjson.com/data/products/5/1.jpg",
-        "https://i.dummyjson.com/data/products/5/2.jpg",
-        "https://i.dummyjson.com/data/products/5/3.jpg"
-      ]
-    },
-    {
       "id": 6,
       "title": "MacBook Pro",
       "description": "MacBook Pro 2021 with mini-LED display may launch between September, November",
@@ -551,6 +534,95 @@
         "https://i.dummyjson.com/data/products/30/3.jpg",
         "https://i.dummyjson.com/data/products/30/thumbnail.jpg"
       ]
+    },
+    {
+      "title": "Face Primer",
+      "description": "    used to smooth the skin, fill in lines and wrinkles, and create a less porous surface for your makeup.\n",
+      "price": "100",
+      "discountPercentage": "20",
+      "stock": "10",
+      "brand": "lakme",
+      "category": "face",
+      "thumbnail": "",
+      "images": [
+        "https://firebasestorage.googleapis.com/v0/b/makeover-3436f.appspot.com/o/1703861240318img2.jpg?alt=media&token=23d783d2-3cac-4f15-9ac8-1fbb02f3c60c",
+        "https://firebasestorage.googleapis.com/v0/b/makeover-3436f.appspot.com/o/1703861240321img1.jpg?alt=media&token=87dc5d6e-2fd8-400f-acba-be40db595e01"
+      ],
+      "ratings": 0,
+      "id": 31
+    },
+    {
+      "title": "Eyes Liner",
+      "description": "Eye liner or eyeliner is a cosmetic used to define the eyes",
+      "price": "120",
+      "discountPercentage": "20",
+      "stock": "10",
+      "brand": "mac",
+      "category": "eyes",
+      "thumbnail": "",
+      "images": [
+        "https://firebasestorage.googleapis.com/v0/b/makeover-3436f.appspot.com/o/1703868838447img6.jpg?alt=media&token=bbff2558-352a-4bea-8af1-9da2eade71f5",
+        "https://firebasestorage.googleapis.com/v0/b/makeover-3436f.appspot.com/o/1703868838452img5.jpg?alt=media&token=0a96759f-99ae-4f91-ad90-f3690c8d09ac"
+      ],
+      "ratings": 0,
+      "id": 32
+    },
+    {
+      "title": "Nail Paint",
+      "description": "Nail paint",
+      "price": 130,
+      "discountPercentage": 20,
+      "stock": 20,
+      "brand": "lakme",
+      "category": "nails",
+      "images": [
+        "https://firebasestorage.googleapis.com/v0/b/makeover-3436f.appspot.com/o/1703871588218img4.jpg?alt=media&token=c1855b83-6333-42d7-9747-bbfe3da3b18f"
+      ],
+      "rating": 0,
+      "id": 33
+    },
+    {
+      "title": "Nails bursh",
+      "description": "Nails",
+      "price": 20,
+      "discountPercentage": 5,
+      "stock": 10,
+      "brand": " ",
+      "category": "face",
+      "images": [
+        "https://firebasestorage.googleapis.com/v0/b/makeover-3436f.appspot.com/o/1703872712929img3.jpg?alt=media&token=6d39d7a1-2252-4464-8171-bc4ba763b21f"
+      ],
+      "rating": 0,
+      "id": 34
+    },
+    {
+      "title": "Eye lashes",
+      "description": "eye lashes",
+      "price": 40,
+      "discountPercentage": 5,
+      "stock": 14,
+      "brand": " ",
+      "category": "eyes",
+      "images": [
+        "https://firebasestorage.googleapis.com/v0/b/makeover-3436f.appspot.com/o/1703872873543img2.jpg?alt=media&token=fa49140e-a944-4947-9a6a-57093f9755db"
+      ],
+      "rating": 0,
+      "id": 35
+    },
+    {
+      "title": "Red Lipstick",
+      "description": "Red Lipstick",
+      "price": 100,
+      "discountPercentage": 5,
+      "stock": 14,
+      "brand": "",
+      "category": "lips",
+      "images": [
+        "https://firebasestorage.googleapis.com/v0/b/makeover-3436f.appspot.com/o/1703873048584img5.jpg?alt=media&token=74026048-c1da-43cf-808c-999f8e84b122",
+        "https://firebasestorage.googleapis.com/v0/b/makeover-3436f.appspot.com/o/1703873048587img4.jpg?alt=media&token=5c705d77-5540-492a-a8bc-8b479474d353"
+      ],
+      "rating": 0,
+      "id": 36
     }
   ],
   "categories": [
