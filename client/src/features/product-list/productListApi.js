@@ -22,11 +22,28 @@ export function createProduct(product) {
   });
 }
 
+export function updateProduct(update) {
+  return new Promise(async (resolve) => {
+    const response = await fetch(
+      "http://localhost:8080/products/" + update.id,
+      {
+        method: "PATCH",
+        body: JSON.stringify(update),
+        headers: { "content-type": "application/json" },
+      }
+    );
+    const data = response.json();
+    resolve({ data });
+  });
+}
+
 export function fetchProductsByFilters(filter, sort, pagination) {
   //filter obj filter = {"category":["face","eyes",'lips' ]}
   //sort = {_sort="price", _order="desc"}
   //pagination = {_page=1, _limit=10}
   //TO-DO: on server we will support multi values
+  //TODO: Server will filter deleted Products in case of non-admin
+
   let queryStr = "";
   for (let key in filter) {
     const categoryValues = filter[key];

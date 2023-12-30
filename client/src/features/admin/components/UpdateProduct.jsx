@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
-import Loader from "../../../components/Loader";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import {
-  createProductAsync,
+  fetchProductByIdAsync,
   selectBrands,
   selectCategories,
+  selectProductById,
+  updateProductAsync,
 } from "../../product-list/productListSlice";
 import { LuTrash2 } from "../../../icons";
 import { app } from "../../../firebase";
@@ -14,15 +16,17 @@ import {
   ref,
   uploadBytesResumable,
 } from "firebase/storage";
+import Loader from "../../../components/Loader";
 
-const ProductForm = () => {
+const UpdateProduct = () => {
+  const params = useParams();
   const dispatch = useDispatch();
 
   //selectors
   const brands = useSelector(selectBrands);
   const categories = useSelector(selectCategories);
+  const selectedProduct = useSelector(selectProductById);
 
-  //states
   const [productDetails, setProductDetails] = useState({
     title: "",
     description: "",
@@ -40,7 +44,27 @@ const ProductForm = () => {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const handleDeleteImage = () => {};
+  useEffect(() => {
+    if (params.id) {
+      dispatch(fetchProductByIdAsync(params.id));
+    }
+  }, [dispatch, params.id]);
+
+  useEffect(() => {
+    if (selectProductById) {
+      setProductDetails({
+        title: selectedProduct.title,
+        description: selectedProduct.description,
+        price: selectedProduct.price,
+        discountPercentage: selectedProduct.discountPercentage,
+        stock: selectedProduct.stock,
+        brand: selectedProduct.brand,
+        category: selectedProduct.category,
+        rating: selectedProduct.rating,
+        images: selectedProduct.images,
+      });
+    }
+  }, [selectedProduct]);
 
   const storeImage = async (file) => {
     return new Promise((resolve, reject) => {
@@ -95,6 +119,8 @@ const ProductForm = () => {
     }
   };
 
+  const handleDeleteImage = () => {};
+
   const handleChange = (e) => {
     if (
       e.target.type === "number" ||
@@ -109,7 +135,7 @@ const ProductForm = () => {
     }
   };
 
-  const handleFormSubmit = (e) => {
+  const handleEditForm = (e) => {
     e.preventDefault();
     if (productDetails.images.length < 1)
       return setError("You must Upload atleast one image");
@@ -120,14 +146,31 @@ const ProductForm = () => {
     }
     const product = {
       ...productDetails,
-      rating: 0,
       price: +productDetails.price,
       discountPercentage: +productDetails.discountPercentage,
       stock: +productDetails.stock,
     };
-
-    dispatch(createProductAsync(product));
+    product.id = params.id;
+    dispatch(updateProductAsync(product));
     setError(false);
+    setProductDetails({
+      title: "",
+      description: "",
+      price: "",
+      discountPercentage: "",
+      stock: "",
+      brand: "",
+      category: "",
+      images: [],
+    });
+    //TODO: Show a alter message
+  };
+
+  const handleDelete = (e) => {
+    e.preventDefault();
+    const product = { ...selectedProduct };
+    product.deleted = true;
+    dispatch(updateProductAsync(product));
     setProductDetails({
       title: "",
       description: "",
@@ -143,9 +186,9 @@ const ProductForm = () => {
 
   return (
     <div className="mt-8">
-      <h1 className="text-3xl font-primary text-center"> Add new Product </h1>
+      <h1 className="text-3xl font-primary text-center"> Update Product </h1>
       <form
-        onSubmit={handleFormSubmit}
+        onSubmit={handleEditForm}
         className="my-8 flex flex-col sm:flex-row gap-4"
       >
         <div className="flex-col flex gap-4 flex-1">
@@ -280,7 +323,14 @@ const ProductForm = () => {
             disabled={loading || uploading}
             className="bg-pink-500 rounded-lg text-white uppercase hover:opacity-95 p-3 disabled:opacity-80 transition-all duration-500"
           >
-            {loading ? <Loader /> : "Add New Product "}
+            {loading ? <Loader /> : "Update Product "}
+          </button>
+          <button
+            onClick={handleDelete}
+            disabled={loading || uploading}
+            className="bg-pink-500 rounded-lg text-white uppercase hover:opacity-95 p-3 disabled:opacity-80 transition-all duration-500"
+          >
+            Delete Product
           </button>
           {error && <p className="text-sm text-red-700"> {error} </p>}
         </div>
@@ -289,4 +339,4 @@ const ProductForm = () => {
   );
 };
 
-export default ProductForm;
+export default UpdateProduct;

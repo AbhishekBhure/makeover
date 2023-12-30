@@ -24,6 +24,7 @@ import UserOrdersPage from "./pages/UserOrdersPage";
 import { fetchLoggedInUserInfoAsync } from "./features/user/userSlice";
 import AdminProductDetailPage from "./pages/Admin/AdminProductDetailPage";
 import AdminProductFromPage from "./pages/Admin/AdminProductFromPage";
+import UpdateProduct from "./features/admin/components/UpdateProduct";
 
 function App() {
   const dispatch = useDispatch();
@@ -52,6 +53,10 @@ function App() {
             <Route
               path="admin/product-form"
               element={<AdminProductFromPage />}
+            />
+            <Route
+              path="admin/product-form/edit/:id"
+              element={<UpdateProduct />}
             />
           </Route>
           <Route exact path="/about" element={<About />} />

@@ -68,6 +68,7 @@ export default function ProductList() {
   useEffect(() => {
     const pagination = { _page: page, _limit: ITEMS_PER_PAGE };
     dispatch(fetchProductsByFiltersAsync({ filter, sort, pagination }));
+    //TODO: Server will filter deleted Products
   }, [dispatch, filter, sort, page]);
 
   useEffect(() => {
@@ -357,6 +358,8 @@ function MobileFilter({
     </>
   );
 }
+
+// Desktop Filters
 function DesktopFilter({ handleFilter }) {
   const categories = useSelector(selectCategories);
   const brands = useSelector(selectBrands);
@@ -429,6 +432,9 @@ function DesktopFilter({ handleFilter }) {
     </>
   );
 }
+// Desktop Filters End
+
+//Pagination
 function Pagination({ page, setPage, handlePage }) {
   const totalItems = useSelector(selectTotalItems);
 
@@ -512,6 +518,9 @@ function Pagination({ page, setPage, handlePage }) {
     </>
   );
 }
+//Pagination End
+
+//Product Grid
 function ProductGrid({ products }) {
   return (
     <>
@@ -556,6 +565,11 @@ function ProductGrid({ products }) {
                         </p>
                       </div>
                     </div>
+                    {product.deleted && (
+                      <div>
+                        <p className="text-red-500 text-xs">product deleted</p>
+                      </div>
+                    )}
                   </Link>
                 </div>
               ))}
@@ -565,3 +579,4 @@ function ProductGrid({ products }) {
     </>
   );
 }
+//Product Grid End

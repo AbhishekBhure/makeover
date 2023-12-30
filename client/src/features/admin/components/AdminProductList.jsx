@@ -564,11 +564,20 @@ function ProductGrid({ products }) {
                           </p>
                         </div>
                       </div>
+                      {product.deleted && (
+                        <div>
+                          <p className="text-red-500 text-xs">
+                            product deleted
+                          </p>
+                        </div>
+                      )}
                     </Link>
                   </div>
-                  <button className="bg-pink-500 px-3 py-1 shadow-md text-white rounded mt-3">
-                    Edit Product
-                  </button>
+                  <Link to={`/profile/admin/product-form/edit/${product.id}`}>
+                    <button className="bg-pink-500 px-3 py-1 shadow-md text-white rounded mt-3">
+                      Edit Product
+                    </button>
+                  </Link>
                 </div>
               ))}
           </div>

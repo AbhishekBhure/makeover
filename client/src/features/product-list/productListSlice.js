@@ -6,6 +6,7 @@ import {
   fetchCategories,
   fetchProductById,
   createProduct,
+  updateProduct,
 } from "./productListApi";
 
 const initialState = {
@@ -30,6 +31,14 @@ export const createProductAsync = createAsyncThunk(
   "product/create",
   async (product) => {
     const response = await createProduct(product);
+    return response.data;
+  }
+);
+
+export const updateProductAsync = createAsyncThunk(
+  "product/update",
+  async (update) => {
+    const response = await updateProduct(update);
     return response.data;
   }
 );
@@ -118,6 +127,16 @@ export const productSlice = createSlice({
       .addCase(createProductAsync.fulfilled, (state, action) => {
         state.loading = false;
         state.products.push(action.payload);
+      })
+      .addCase(updateProductAsync.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(updateProductAsync.fulfilled, (state, action) => {
+        state.loading = false;
+        const index = state.products.findIndex(
+          (product) => product.id === action.payload.id
+        );
+        state.products[index] = action.payload;
       });
   },
 });
