@@ -8,6 +8,7 @@ import {
   LuEyeOff,
   LuArrowLeft,
   LuTrash2,
+  LuPencilLine,
 } from "react-icons/lu";
 import loader from "./loader.svg";
 
@@ -22,4 +23,5 @@ export {
   LuEyeOff,
   LuArrowLeft,
   LuTrash2,
+  LuPencilLine,
 };

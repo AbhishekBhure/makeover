@@ -43,6 +43,7 @@ const UpdateProduct = () => {
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
+  //TODO: Set the loading to False
 
   useEffect(() => {
     if (params.id) {

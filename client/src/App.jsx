@@ -25,6 +25,7 @@ import { fetchLoggedInUserInfoAsync } from "./features/user/userSlice";
 import AdminProductDetailPage from "./pages/Admin/AdminProductDetailPage";
 import AdminProductFromPage from "./pages/Admin/AdminProductFromPage";
 import AdminUpdateProductPage from "./pages/Admin/AdminUpdateProductPage";
+import AdminOrdersPage from "./pages/Admin/AdminOrdersPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -48,6 +49,7 @@ function App() {
           <Route path="/profile" element={<ProtectedRoute />}>
             <Route exact path="user" element={<UserProfilePage />} />
           </Route>
+          {/* AdminProtected Routes */}
           <Route path="/profile" element={<AdminRoute />}>
             <Route exact path="admin" element={<Dashboard />} />
             <Route
@@ -58,7 +60,10 @@ function App() {
               path="admin/product-form/edit/:id"
               element={<AdminUpdateProductPage />}
             />
+            <Route path="admin/orders" element={<AdminOrdersPage />} />
           </Route>
+          {/* AdminProtected Routes End*/}
+
           <Route exact path="/about" element={<About />} />
           <Route exact path="/sign-in" element={<SignIn />} />
           <Route exact path="/sign-up" element={<SignUp />} />
