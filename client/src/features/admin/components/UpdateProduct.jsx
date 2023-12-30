@@ -51,7 +51,7 @@ const UpdateProduct = () => {
   }, [dispatch, params.id]);
 
   useEffect(() => {
-    if (selectProductById) {
+    if (selectedProduct) {
       setProductDetails({
         title: selectedProduct.title,
         description: selectedProduct.description,
