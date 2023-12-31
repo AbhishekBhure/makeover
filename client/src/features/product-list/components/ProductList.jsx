@@ -24,7 +24,7 @@ import {
   fetchCategoriesAsync,
   fetchBrandsAsync,
 } from "../productListSlice";
-import { ITEMS_PER_PAGE } from "../../../constants/constants";
+import { ITEMS_PER_PAGE, discountedPrice } from "../../../constants/constants";
 
 const sortOptions = [
   { name: "Best Seller", sort: "seller", current: true },
@@ -554,11 +554,7 @@ function ProductGrid({ products }) {
                       </div>
                       <div className="">
                         <p className="text-sm font-medium text-gray-700">
-                          $
-                          {Math.round(
-                            product.price *
-                              (1 - product.discountPercentage / 100)
-                          )}
+                          ${discountedPrice(product)}
                         </p>
                         <p className="text-sm mt-1 line-through font-medium text-gray-400">
                           ${product.price}

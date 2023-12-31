@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { ITEMS_PER_PAGE } from "../../../constants/constants";
+import { ITEMS_PER_PAGE, discountedPrice } from "../../../constants/constants";
 import {
   fetchAllOrdersAsync,
   selectOrders,
   selectTotalOrders,
+  updateOrderStatusAsync,
 } from "../../order/orderSlice";
 import { LuEye, LuPencilLine } from "../../../icons";
+import Pagination from "../../../components/Pagination";
 
 const AdminOrders = () => {
   const dispatch = useDispatch();
@@ -17,6 +19,11 @@ const AdminOrders = () => {
 
   //states
   const [page, setPage] = useState(1);
+  const [editOrderId, setEditOrderId] = useState(-1);
+
+  const handlePage = (page) => {
+    setPage(page);
+  };
 
   useEffect(() => {
     const pagination = { _page: page, _limit: ITEMS_PER_PAGE };
@@ -27,8 +34,29 @@ const AdminOrders = () => {
     console.log("show");
   };
 
-  const handleEdit = () => {
-    console.log("edit");
+  const handleEdit = (order) => {
+    setEditOrderId(order.id);
+  };
+
+  const handleUpdateStatus = (e, order) => {
+    const updatedOrderStatus = { ...order, status: e.target.value };
+    dispatch(updateOrderStatusAsync(updatedOrderStatus));
+    setEditOrderId(-1);
+  };
+
+  const statusColors = (status) => {
+    switch (status) {
+      case "pending":
+        return "bg-purple-200 text-purple-600";
+      case "dispatched":
+        return "bg-green-200 text-green-600";
+      case "delivered":
+        return "bg-yellow-200 text-yellow-600";
+      case "cancelled":
+        return "bg-red-200 text-red-600";
+      default:
+        return "bg-purple-200 text-purple-600";
+    }
   };
 
   return (
@@ -94,7 +122,7 @@ const AdminOrders = () => {
                               key={order.id}
                               className="flex items-center justify-center"
                             >
-                              <span> ${item.price}</span>
+                              <span> ${discountedPrice(item)}</span>
                             </div>
                           ))}
                         </td>
@@ -112,9 +140,24 @@ const AdminOrders = () => {
                           <p> {order.selectedAddress.pinCode}. </p>
                         </td>
                         <td className="py-3 px-6 text-center">
-                          <span className="bg-purple-200 text-purple-600 py-1 px-3 rounded-full text-xs">
-                            {order.status}
-                          </span>
+                          {order.id === editOrderId ? (
+                            <select
+                              onChange={(e) => handleUpdateStatus(e, order)}
+                            >
+                              <option value="pending">Pending</option>
+                              <option value="dispatched">Dispatched</option>
+                              <option value="delivered">Delivered</option>
+                              <option value="cancelled">Cancelled</option>
+                            </select>
+                          ) : (
+                            <span
+                              className={`${statusColors(
+                                order.status
+                              )} py-1 px-3 rounded-full text-xs`}
+                            >
+                              {order.status}
+                            </span>
+                          )}
                         </td>
                         <td className="py-3 px-6 text-center">
                           <div className="flex item-center gap-1 justify-center">
@@ -139,6 +182,12 @@ const AdminOrders = () => {
             </div>
           </div>
         </div>
+        <Pagination
+          page={page}
+          setPage={setPage}
+          handlePage={handlePage}
+          totalItems={totalOrders}
+        />
       </div>
     </>
   );

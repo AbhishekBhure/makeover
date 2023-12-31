@@ -739,7 +739,7 @@
         "phone": 1239863
       },
       "paymentMethod": "card",
-      "status": "pending",
+      "status": "dispatched",
       "id": 1
     },
     {
@@ -788,7 +788,7 @@
         "phone": 1239863
       },
       "paymentMethod": "card",
-      "status": "pending",
+      "status": "delivered",
       "id": 2
     },
     {
@@ -838,7 +838,7 @@
         "phone": 1239863
       },
       "paymentMethod": "card",
-      "status": "pending",
+      "status": "cancelled",
       "id": 3
     },
     {
@@ -886,6 +886,328 @@
       "paymentMethod": "card",
       "status": "pending",
       "id": 4
+    },
+    {
+      "items": [
+        {
+          "title": "Samsung Universe 9",
+          "description": "Samsung's new variant which goes beyond Galaxy to the Universe",
+          "price": 1249,
+          "discountPercentage": 15.46,
+          "rating": 4.09,
+          "stock": 36,
+          "brand": "lakme",
+          "category": "face",
+          "thumbnail": "https://i.dummyjson.com/data/products/3/thumbnail.jpg",
+          "images": [
+            "https://i.dummyjson.com/data/products/3/1.jpg"
+          ],
+          "quantity": 1,
+          "user": "6586763f99ae5711e8df568b",
+          "id": 1
+        }
+      ],
+      "totalAmount": 1249,
+      "totalItems": 1,
+      "user": {
+        "_id": "6586763f99ae5711e8df568b",
+        "username": "test2",
+        "email": "test2@gmail.com",
+        "address": [
+          "test2 address"
+        ],
+        "role": "user",
+        "createdAt": "2023-12-23T05:55:11.588Z",
+        "updatedAt": "2023-12-23T05:55:11.588Z",
+        "__v": 0
+      },
+      "selectedAddress": {
+        "name": "John bhai",
+        "street": "11th cross",
+        "city": "Delhi",
+        "pinCode": 10011,
+        "state": "Delhi",
+        "phone": 1239863
+      },
+      "paymentMethod": "card",
+      "status": "pending",
+      "id": 5
+    },
+    {
+      "items": [
+        {
+          "title": "Samsung Universe 9",
+          "description": "Samsung's new variant which goes beyond Galaxy to the Universe",
+          "price": 1249,
+          "discountPercentage": 15.46,
+          "rating": 4.09,
+          "stock": 36,
+          "brand": "lakme",
+          "category": "face",
+          "thumbnail": "https://i.dummyjson.com/data/products/3/thumbnail.jpg",
+          "images": [
+            "https://i.dummyjson.com/data/products/3/1.jpg"
+          ],
+          "quantity": 1,
+          "user": "6586763f99ae5711e8df568b",
+          "id": 1
+        }
+      ],
+      "totalAmount": 1249,
+      "totalItems": 1,
+      "user": {
+        "_id": "6586763f99ae5711e8df568b",
+        "username": "test2",
+        "email": "test2@gmail.com",
+        "address": [
+          "test2 address"
+        ],
+        "role": "user",
+        "createdAt": "2023-12-23T05:55:11.588Z",
+        "updatedAt": "2023-12-23T05:55:11.588Z",
+        "__v": 0
+      },
+      "selectedAddress": {
+        "name": "John bhai",
+        "street": "11th cross",
+        "city": "Delhi",
+        "pinCode": 10011,
+        "state": "Delhi",
+        "phone": 1239863
+      },
+      "paymentMethod": "card",
+      "status": "pending",
+      "id": 6
+    },
+    {
+      "items": [
+        {
+          "title": "Samsung Universe 9",
+          "description": "Samsung's new variant which goes beyond Galaxy to the Universe",
+          "price": 1249,
+          "discountPercentage": 15.46,
+          "rating": 4.09,
+          "stock": 36,
+          "brand": "lakme",
+          "category": "face",
+          "thumbnail": "https://i.dummyjson.com/data/products/3/thumbnail.jpg",
+          "images": [
+            "https://i.dummyjson.com/data/products/3/1.jpg"
+          ],
+          "quantity": 1,
+          "user": "6586763f99ae5711e8df568b",
+          "id": 1
+        }
+      ],
+      "totalAmount": 1249,
+      "totalItems": 1,
+      "user": {
+        "_id": "6586763f99ae5711e8df568b",
+        "username": "test2",
+        "email": "test2@gmail.com",
+        "address": [
+          "test2 address"
+        ],
+        "role": "user",
+        "createdAt": "2023-12-23T05:55:11.588Z",
+        "updatedAt": "2023-12-23T05:55:11.588Z",
+        "__v": 0
+      },
+      "selectedAddress": {
+        "name": "John bhai",
+        "street": "11th cross",
+        "city": "Delhi",
+        "pinCode": 10011,
+        "state": "Delhi",
+        "phone": 1239863
+      },
+      "paymentMethod": "card",
+      "status": "pending",
+      "id": 7
+    },
+    {
+      "items": [
+        {
+          "title": "Samsung Universe 9",
+          "description": "Samsung's new variant which goes beyond Galaxy to the Universe",
+          "price": 1249,
+          "discountPercentage": 15.46,
+          "rating": 4.09,
+          "stock": 36,
+          "brand": "lakme",
+          "category": "face",
+          "thumbnail": "https://i.dummyjson.com/data/products/3/thumbnail.jpg",
+          "images": [
+            "https://i.dummyjson.com/data/products/3/1.jpg"
+          ],
+          "quantity": 1,
+          "user": "6586763f99ae5711e8df568b",
+          "id": 1
+        }
+      ],
+      "totalAmount": 1249,
+      "totalItems": 1,
+      "user": {
+        "_id": "6586763f99ae5711e8df568b",
+        "username": "test2",
+        "email": "test2@gmail.com",
+        "address": [
+          "test2 address"
+        ],
+        "role": "user",
+        "createdAt": "2023-12-23T05:55:11.588Z",
+        "updatedAt": "2023-12-23T05:55:11.588Z",
+        "__v": 0
+      },
+      "selectedAddress": {
+        "name": "John bhai",
+        "street": "11th cross",
+        "city": "Delhi",
+        "pinCode": 10011,
+        "state": "Delhi",
+        "phone": 1239863
+      },
+      "paymentMethod": "card",
+      "status": "pending",
+      "id": 8
+    },
+    {
+      "items": [
+        {
+          "title": "Samsung Universe 9",
+          "description": "Samsung's new variant which goes beyond Galaxy to the Universe",
+          "price": 1249,
+          "discountPercentage": 15.46,
+          "rating": 4.09,
+          "stock": 36,
+          "brand": "lakme",
+          "category": "face",
+          "thumbnail": "https://i.dummyjson.com/data/products/3/thumbnail.jpg",
+          "images": [
+            "https://i.dummyjson.com/data/products/3/1.jpg"
+          ],
+          "quantity": 1,
+          "user": "6586763f99ae5711e8df568b",
+          "id": 1
+        }
+      ],
+      "totalAmount": 1249,
+      "totalItems": 1,
+      "user": {
+        "_id": "6586763f99ae5711e8df568b",
+        "username": "test2",
+        "email": "test2@gmail.com",
+        "address": [
+          "test2 address"
+        ],
+        "role": "user",
+        "createdAt": "2023-12-23T05:55:11.588Z",
+        "updatedAt": "2023-12-23T05:55:11.588Z",
+        "__v": 0
+      },
+      "selectedAddress": {
+        "name": "John bhai",
+        "street": "11th cross",
+        "city": "Delhi",
+        "pinCode": 10011,
+        "state": "Delhi",
+        "phone": 1239863
+      },
+      "paymentMethod": "card",
+      "status": "pending",
+      "id": 9
+    },
+    {
+      "items": [
+        {
+          "title": "Samsung Universe 9",
+          "description": "Samsung's new variant which goes beyond Galaxy to the Universe",
+          "price": 1249,
+          "discountPercentage": 15.46,
+          "rating": 4.09,
+          "stock": 36,
+          "brand": "lakme",
+          "category": "face",
+          "thumbnail": "https://i.dummyjson.com/data/products/3/thumbnail.jpg",
+          "images": [
+            "https://i.dummyjson.com/data/products/3/1.jpg"
+          ],
+          "quantity": 1,
+          "user": "6586763f99ae5711e8df568b",
+          "id": 1
+        }
+      ],
+      "totalAmount": 1249,
+      "totalItems": 1,
+      "user": {
+        "_id": "6586763f99ae5711e8df568b",
+        "username": "test2",
+        "email": "test2@gmail.com",
+        "address": [
+          "test2 address"
+        ],
+        "role": "user",
+        "createdAt": "2023-12-23T05:55:11.588Z",
+        "updatedAt": "2023-12-23T05:55:11.588Z",
+        "__v": 0
+      },
+      "selectedAddress": {
+        "name": "John bhai",
+        "street": "11th cross",
+        "city": "Delhi",
+        "pinCode": 10011,
+        "state": "Delhi",
+        "phone": 1239863
+      },
+      "paymentMethod": "card",
+      "status": "pending",
+      "id": 10
+    },
+    {
+      "items": [
+        {
+          "title": "Samsung Universe 9",
+          "description": "Samsung's new variant which goes beyond Galaxy to the Universe",
+          "price": 1249,
+          "discountPercentage": 15.46,
+          "rating": 4.09,
+          "stock": 36,
+          "brand": "lakme",
+          "category": "face",
+          "thumbnail": "https://i.dummyjson.com/data/products/3/thumbnail.jpg",
+          "images": [
+            "https://i.dummyjson.com/data/products/3/1.jpg"
+          ],
+          "quantity": 1,
+          "user": "6586763f99ae5711e8df568b",
+          "id": 1
+        }
+      ],
+      "totalAmount": 1249,
+      "totalItems": 1,
+      "user": {
+        "_id": "6586763f99ae5711e8df568b",
+        "username": "test2",
+        "email": "test2@gmail.com",
+        "address": [
+          "test2 address"
+        ],
+        "role": "user",
+        "createdAt": "2023-12-23T05:55:11.588Z",
+        "updatedAt": "2023-12-23T05:55:11.588Z",
+        "__v": 0
+      },
+      "selectedAddress": {
+        "name": "John bhai",
+        "street": "11th cross",
+        "city": "Delhi",
+        "pinCode": 10011,
+        "state": "Delhi",
+        "phone": 1239863
+      },
+      "paymentMethod": "card",
+      "status": "pending",
+      "id": 11
     }
   ]
 }
