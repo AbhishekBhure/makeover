@@ -10,8 +10,13 @@ export function createOrder(order) {
   });
 }
 
-export function fetchAllOrders(pagination) {
+export function fetchAllOrders(sort, pagination) {
   let queryStr = "";
+
+  for (let key in sort) {
+    queryStr += `${key}=${sort[key]}&`;
+  }
+
   for (let key in pagination) {
     queryStr += `${key}=${pagination[key]}&`;
   }

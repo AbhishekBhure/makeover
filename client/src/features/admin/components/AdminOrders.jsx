@@ -7,7 +7,7 @@ import {
   selectTotalOrders,
   updateOrderStatusAsync,
 } from "../../order/orderSlice";
-import { LuEye, LuPencilLine } from "../../../icons";
+import { LuEye, LuPencilLine, LuArrowDown, LuArrowUp } from "../../../icons";
 import Pagination from "../../../components/Pagination";
 
 const AdminOrders = () => {
@@ -19,6 +19,7 @@ const AdminOrders = () => {
 
   //states
   const [page, setPage] = useState(1);
+  const [sort, setSort] = useState({});
   const [editOrderId, setEditOrderId] = useState(-1);
 
   const handlePage = (page) => {
@@ -27,8 +28,8 @@ const AdminOrders = () => {
 
   useEffect(() => {
     const pagination = { _page: page, _limit: ITEMS_PER_PAGE };
-    dispatch(fetchAllOrdersAsync(pagination));
-  }, [dispatch, page]);
+    dispatch(fetchAllOrdersAsync({ sort, pagination }));
+  }, [dispatch, page, sort]);
 
   const handleShow = () => {
     console.log("show");
@@ -59,17 +60,42 @@ const AdminOrders = () => {
     }
   };
 
+  const handleSort = (sortOption) => {
+    const sort = { _sort: sortOption.sort, _order: sortOption.order };
+    setSort(sort);
+    console.log({ sort });
+  };
+
   return (
     <>
       {/* component */}
       <div className="overflow-x-auto">
-        <div className="font-secondary flex items-center justify-center bg-gray-100  overflow-hidden">
+        <div className="font-secondary flex items-center justify-center  ">
           <div className="w-full ">
             <div className="bg-white shadow-md rounded my-6">
               <table className="min-w-max w-full table-auto">
                 <thead>
                   <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                    <th className="py-3 px-6 text-left">Order No.</th>
+                    <th
+                      className="py-3 px-6 inline-flex gap-1 items-center text-left cursor-pointer"
+                      onClick={(e) =>
+                        handleSort({
+                          sort: "id",
+                          order: sort?._order === "asc" ? "desc" : "asc",
+                        })
+                      }
+                    >
+                      Order No.
+                      {sort?._order === "asc" ? (
+                        <span>
+                          <LuArrowUp className="w-5 h-5" />
+                        </span>
+                      ) : (
+                        <span>
+                          <LuArrowDown className="w-5 h-5" />
+                        </span>
+                      )}
+                    </th>
                     <th className="py-3 px-6 text-left">Items</th>
                     <th className="py-3 px-6 text-left">Total Qantity</th>
                     <th className="py-3 px-6 text-left">Price</th>

@@ -477,6 +477,11 @@ function ProductGrid({ products }) {
                           </p>
                         </div>
                       )}
+                      {product.stock <= 0 && (
+                        <div>
+                          <p className="text-red-500 text-xs">Out of stock</p>
+                        </div>
+                      )}
                     </Link>
                   </div>
                   <Link to={`/profile/admin/product-form/edit/${product.id}`}>

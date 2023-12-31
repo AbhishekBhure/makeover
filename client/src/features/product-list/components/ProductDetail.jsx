@@ -4,9 +4,10 @@ import { RadioGroup } from "@headlessui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProductByIdAsync, selectProductById } from "../productListSlice";
 import { useParams } from "react-router-dom";
-import { addToCartAsync } from "../../cart/cartSlice";
+import { addToCartAsync, selectItems } from "../../cart/cartSlice";
 import { selectUser } from "../../auth/authSlice";
 import { discountedPrice } from "../../../constants/constants";
+import { useSnackbar } from "notistack";
 
 const colors = [
   { name: "White", class: "bg-white", selectedClass: "ring-gray-400" },
@@ -39,11 +40,15 @@ export default function ProductDetail() {
   const dispatch = useDispatch();
   const params = useParams();
 
+  const { enqueueSnackbar } = useSnackbar();
+
   const [selectedColor, setSelectedColor] = useState(colors[0]);
   const [selectedSize, setSelectedSize] = useState(sizes[2]);
 
+  //selectors
   const product = useSelector(selectProductById);
   const user = useSelector(selectUser);
+  const items = useSelector(selectItems);
 
   useEffect(() => {
     dispatch(fetchProductByIdAsync(params.id));
@@ -53,13 +58,18 @@ export default function ProductDetail() {
 
   const handleAddToCart = (e) => {
     e.preventDefault();
-    const newItem = {
-      ...product,
-      quantity: 1,
-      user: user.user._id,
-    };
-    delete newItem["id"];
-    dispatch(addToCartAsync(newItem));
+    if (items.findIndex((item) => item.productId === product.id) < 0) {
+      const newItem = {
+        ...product,
+        productId: product.id,
+        quantity: 1,
+        user: user.user._id,
+      };
+      delete newItem["id"];
+      dispatch(addToCartAsync(newItem));
+    } else {
+      enqueueSnackbar("Item Alredy Added in the cart", { variant: "warning" });
+    }
   };
 
   return (
