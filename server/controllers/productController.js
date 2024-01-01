@@ -2,6 +2,7 @@ import Product from "../models/productModel.js";
 
 //get all products
 export const getAllProducts = async (req, res) => {
+  //TODO: i have to try with multiple category and brands after change in frontend
   try {
     let query = Product.find({});
     let totalProductsQuery = Product.find({});
