@@ -15,6 +15,7 @@ const initialState = {
   categories: [],
   brands: [],
   loading: false,
+  error: null,
   totalItems: 0,
   selectedProduct: null,
 };
@@ -78,11 +79,6 @@ export const fetchBrandsAsync = createAsyncThunk(
 export const productSlice = createSlice({
   name: "product",
   initialState,
-  reducers: {
-    increment: (state) => {
-      state.value += 1;
-    },
-  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchAllProductsAsync.pending, (state) => {
@@ -90,6 +86,7 @@ export const productSlice = createSlice({
       })
       .addCase(fetchAllProductsAsync.fulfilled, (state, action) => {
         state.loading = false;
+        state.error = null;
         state.products = action.payload;
       })
       .addCase(fetchProductsByFiltersAsync.pending, (state) => {
@@ -137,16 +134,16 @@ export const productSlice = createSlice({
           (product) => product.id === action.payload.id
         );
         state.products[index] = action.payload;
+        state.selectedProduct = action.payload;
       });
   },
 });
-
-export const { increment } = productSlice.actions;
 
 export const selectAllProduct = (state) => state.product.products;
 export const selectCategories = (state) => state.product.categories;
 export const selectBrands = (state) => state.product.brands;
 export const selectTotalItems = (state) => state.product.totalItems;
 export const selectProductById = (state) => state.product.selectedProduct;
+export const selectLoading = (state) => state.product.loading;
 
 export default productSlice.reducer;

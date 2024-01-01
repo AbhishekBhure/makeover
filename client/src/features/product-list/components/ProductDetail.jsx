@@ -67,6 +67,7 @@ export default function ProductDetail() {
       };
       delete newItem["id"];
       dispatch(addToCartAsync(newItem));
+      enqueueSnackbar("Item Added to cart", { variant: "success" });
     } else {
       enqueueSnackbar("Item Alredy Added in the cart", { variant: "warning" });
     }

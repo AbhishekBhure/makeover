@@ -7,10 +7,20 @@ import {
   updateItemsAsync,
 } from "./cartSlice";
 import { discountedPrice } from "../../constants/constants";
+import { useSnackbar } from "notistack";
+import ConfirmationModal from "../../components/ConfirmationModal";
+import { useState } from "react";
 
 export default function Cart() {
+  const { enqueueSnackbar } = useSnackbar();
   const dispatch = useDispatch();
+
+  //states
+  const [showModal, setShowModal] = useState(false);
+  const [deleteId, setDeleteId] = useState(null);
+  //selectors
   const items = useSelector(selectItems);
+
   const totalAmount = items.reduce(
     (amount, item) => discountedPrice(item) * item.quantity + amount,
     0
@@ -21,14 +31,30 @@ export default function Cart() {
     dispatch(updateItemsAsync({ ...item, quantity: +e.target.value }));
   };
 
-  const handleDeleteItem = (e, itemId) => {
+  const handleDeleteItem = (itemId) => {
     dispatch(deleteItemsFromCartAsync(itemId));
+    setShowModal(false);
+    enqueueSnackbar("Item Removed", { variant: "success" });
+  };
+
+  const showConfirmationModal = (itemId) => {
+    setShowModal(true);
+    setDeleteId(itemId);
   };
 
   return (
     <>
       {!items.length && <Navigate to="/" replace={true} />}
       <div className="mt-8 ">
+        <ConfirmationModal
+          title="Delete Cart Item"
+          message="Are you sure you want to delete item from the car?"
+          dangerTag="Delete"
+          cancelTag="Cancel"
+          dangerAction={() => handleDeleteItem(deleteId)}
+          cancelAction={() => setShowModal(false)}
+          showModal={showModal}
+        />
         <h1 className="text-4xl mb-3 font-primary">Cart</h1>
         <div className="flow-root font-secondary">
           <ul role="list" className="-my-6 divide-y divide-gray-200">
@@ -73,7 +99,7 @@ export default function Cart() {
 
                     <div className="flex">
                       <button
-                        onClick={(e) => handleDeleteItem(e, item.id)}
+                        onClick={() => showConfirmationModal(item.id)}
                         type="button"
                         className="font-medium text-indigo-600 hover:text-indigo-500"
                       >

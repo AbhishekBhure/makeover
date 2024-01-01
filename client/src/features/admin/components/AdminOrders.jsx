@@ -9,8 +9,10 @@ import {
 } from "../../order/orderSlice";
 import { LuEye, LuPencilLine, LuArrowDown, LuArrowUp } from "../../../icons";
 import Pagination from "../../../components/Pagination";
+import { useSnackbar } from "notistack";
 
 const AdminOrders = () => {
+  const { enqueueSnackbar } = useSnackbar();
   const dispatch = useDispatch();
 
   //selectors
@@ -42,6 +44,7 @@ const AdminOrders = () => {
   const handleUpdateStatus = (e, order) => {
     const updatedOrderStatus = { ...order, status: e.target.value };
     dispatch(updateOrderStatusAsync(updatedOrderStatus));
+    enqueueSnackbar("Order Updated Successfully", { variant: "success" });
     setEditOrderId(-1);
   };
 

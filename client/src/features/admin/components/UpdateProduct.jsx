@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import {
@@ -17,8 +17,11 @@ import {
   uploadBytesResumable,
 } from "firebase/storage";
 import Loader from "../../../components/Loader";
+import { useSnackbar } from "notistack";
+import ConfirmationModal from "../../../components/ConfirmationModal";
 
 const UpdateProduct = () => {
+  const { enqueueSnackbar } = useSnackbar();
   const params = useParams();
   const dispatch = useDispatch();
 
@@ -27,6 +30,7 @@ const UpdateProduct = () => {
   const categories = useSelector(selectCategories);
   const selectedProduct = useSelector(selectProductById);
 
+  //states
   const [productDetails, setProductDetails] = useState({
     title: "",
     description: "",
@@ -38,12 +42,11 @@ const UpdateProduct = () => {
     images: [],
   });
   const [files, setFiles] = useState([]);
-  console.log(files);
   const [imageUploadError, setImageUploadError] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
-  //TODO: Set the loading to False
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     if (params.id) {
@@ -120,7 +123,12 @@ const UpdateProduct = () => {
     }
   };
 
-  const handleDeleteImage = () => {};
+  const handleDeleteImage = (index) => {
+    setProductDetails({
+      ...productDetails,
+      images: productDetails.images.filter((_, i) => i !== index),
+    });
+  };
 
   const handleChange = (e) => {
     if (
@@ -154,6 +162,7 @@ const UpdateProduct = () => {
     product.id = params.id;
     dispatch(updateProductAsync(product));
     setError(false);
+    setLoading(false);
     setProductDetails({
       title: "",
       description: "",
@@ -164,11 +173,10 @@ const UpdateProduct = () => {
       category: "",
       images: [],
     });
-    //TODO: Show a alter message
+    enqueueSnackbar("Product Updated Successfully", { variant: "success" });
   };
 
-  const handleDelete = (e) => {
-    e.preventDefault();
+  const handleDelete = () => {
     const product = { ...selectedProduct };
     product.deleted = true;
     dispatch(updateProductAsync(product));
@@ -182,12 +190,28 @@ const UpdateProduct = () => {
       category: "",
       images: [],
     });
-    //TODO: Show a alter message
+    setShowModal(false);
+    enqueueSnackbar("Product Deleted Successfully", { variant: "success" });
   };
 
   return (
     <div className="mt-8">
+      <ConfirmationModal
+        title="Delete Product"
+        message="Are you sure you want to delete this product?"
+        dangerTag="Delete"
+        cancelTag="Cancel"
+        dangerAction={handleDelete}
+        cancelAction={() => setShowModal(false)}
+        showModal={showModal}
+      />
       <h1 className="text-3xl font-primary text-center"> Update Product </h1>
+
+      {selectedProduct && selectedProduct.deleted && (
+        <h1 className="text-red-500 text-center text-xl">
+          This product has been deleted
+        </h1>
+      )}
       <form
         onSubmit={handleEditForm}
         className="my-8 flex flex-col sm:flex-row gap-4"
@@ -326,13 +350,19 @@ const UpdateProduct = () => {
           >
             {loading ? <Loader /> : "Update Product "}
           </button>
-          <button
-            onClick={handleDelete}
-            disabled={loading || uploading}
-            className="bg-pink-500 rounded-lg text-white uppercase hover:opacity-95 p-3 disabled:opacity-80 transition-all duration-500"
-          >
-            Delete Product
-          </button>
+          {selectedProduct && !selectedProduct.deleted && (
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                setShowModal(true);
+              }}
+              disabled={loading || uploading}
+              className="bg-pink-500 rounded-lg text-white uppercase hover:opacity-95 p-3 disabled:opacity-80 transition-all duration-500"
+            >
+              Delete Product
+            </button>
+          )}
+
           {error && <p className="text-sm text-red-700"> {error} </p>}
         </div>
       </form>

@@ -82,6 +82,7 @@ function CheckOut() {
         status: "pending", //other status can be deliverd
       };
       dispatch(createOrderAsync(order));
+      enqueueSnackbar("Order Placed Successfully", { variant: "success" });
     } else {
       enqueueSnackbar("Enter Address and Payment Method", { variant: "error" });
     }

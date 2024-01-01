@@ -14,8 +14,10 @@ import {
   ref,
   uploadBytesResumable,
 } from "firebase/storage";
+import { useSnackbar } from "notistack";
 
 const ProductForm = () => {
+  const { enqueueSnackbar } = useSnackbar();
   const dispatch = useDispatch();
 
   //selectors
@@ -128,6 +130,7 @@ const ProductForm = () => {
 
     dispatch(createProductAsync(product));
     setError(false);
+    setLoading(false);
     setProductDetails({
       title: "",
       description: "",
@@ -138,7 +141,7 @@ const ProductForm = () => {
       category: "",
       images: [],
     });
-    //TODO: Show a alter message
+    enqueueSnackbar("Product Created Successfully", { variant: "success" });
   };
 
   return (
