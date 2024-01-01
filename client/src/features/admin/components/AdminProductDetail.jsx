@@ -56,8 +56,6 @@ export default function AdminProductDetail() {
 
   return (
     <div className="bg-white mt-8">
-      <h1>Admin Product Detail</h1>
-
       {product && (
         <div className="pt-6">
           {/* <nav aria-label="Breadcrumb">
@@ -102,8 +100,6 @@ export default function AdminProductDetail() {
 
           {/* Image gallery */}
           <div className="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
-            <h1>Admin Product Detail</h1>
-
             <div className="aspect-h-4 aspect-w-3 hidden overflow-hidden rounded-lg lg:block">
               <img
                 src={product.images[0]}

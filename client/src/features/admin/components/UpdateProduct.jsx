@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   fetchProductByIdAsync,
   selectBrands,
@@ -24,6 +24,7 @@ const UpdateProduct = () => {
   const { enqueueSnackbar } = useSnackbar();
   const params = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   //selectors
   const brands = useSelector(selectBrands);
@@ -162,7 +163,6 @@ const UpdateProduct = () => {
     product.id = params.id;
     dispatch(updateProductAsync(product));
     setError(false);
-    setLoading(false);
     setProductDetails({
       title: "",
       description: "",
@@ -173,6 +173,8 @@ const UpdateProduct = () => {
       category: "",
       images: [],
     });
+    setLoading(false);
+navigate()
     enqueueSnackbar("Product Updated Successfully", { variant: "success" });
   };
 

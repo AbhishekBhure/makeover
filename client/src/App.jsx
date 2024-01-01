@@ -53,6 +53,11 @@ function App() {
           <Route path="/profile" element={<AdminRoute />}>
             <Route exact path="admin" element={<Dashboard />} />
             <Route
+              exact
+              path="admin/product-detail/:id"
+              element={<AdminProductDetailPage />}
+            />
+            <Route
               path="admin/product-form"
               element={<AdminProductFromPage />}
             />

@@ -48,7 +48,7 @@ export default function Cart() {
       <div className="mt-8 ">
         <ConfirmationModal
           title="Delete Cart Item"
-          message="Are you sure you want to delete item from the car?"
+          message="Are you sure you want to delete item from the cart?"
           dangerTag="Delete"
           cancelTag="Cancel"
           dangerAction={() => handleDeleteItem(deleteId)}
