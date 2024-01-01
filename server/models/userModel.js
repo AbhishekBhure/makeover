@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 import validator from "validator";
 
 const userSchema = new mongoose.Schema(
@@ -21,7 +21,8 @@ const userSchema = new mongoose.Schema(
       required: [true, "Please enter password"],
       minLength: [5, "Password should have more than 5 characters"],
     },
-    address: [],
+    address: { type: [Schema.Types.Mixed] },
+    orders: { type: [Schema.Types.Mixed] },
     role: {
       type: String,
       default: "user",

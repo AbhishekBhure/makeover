@@ -29,7 +29,12 @@ app.use("/api/v1/categories", categoryRoute);
 app.use("/api/v1/brands", brandRoute);
 
 //middleware
-app.use(cors());
+app.use(
+  cors({
+    exposedHeaders: ["X-Total-Count"],
+  })
+);
+
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
   const message = err.message || "Internal server Error";

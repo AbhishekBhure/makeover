@@ -7,7 +7,7 @@ import { comparePassword, hashPassword } from "../utils/authHelper.js";
 //Creating a user
 export const signup = async (req, res, next) => {
   try {
-    const { username, email, password, address, role } = req.body;
+    const { username, email, password, role } = req.body;
 
     if (!username) {
       return next(errorHandler(400, "Name is required"));
@@ -17,9 +17,6 @@ export const signup = async (req, res, next) => {
     }
     if (!password) {
       return next(errorHandler(400, "Password is required"));
-    }
-    if (!address) {
-      return next(errorHandler(400, "Address is required"));
     }
 
     //checking user
@@ -36,7 +33,6 @@ export const signup = async (req, res, next) => {
       username,
       email,
       password: hashedPassword,
-      address,
       role,
     });
     await newUser.save();
