@@ -91,11 +91,11 @@ const AdminOrders = () => {
                       Order No.
                       {sort?._order === "asc" ? (
                         <span>
-                          <LuArrowUp className="w-5 h-5" />
+                          <LuArrowUp className="text-xl" />
                         </span>
                       ) : (
                         <span>
-                          <LuArrowDown className="w-5 h-5" />
+                          <LuArrowDown className="text-xl" />
                         </span>
                       )}
                     </th>
@@ -193,13 +193,13 @@ const AdminOrders = () => {
                             <div className="w-4 mr-2 cursor-pointer transform hover:text-pink-500 hover:scale-110">
                               <LuEye
                                 onClick={(e) => handleShow(order)}
-                                className="w-5 h-5"
+                                className="text-xl"
                               />
                             </div>
                             <div className="w-4 mr-2 cursor-pointer transform hover:text-pink-500 hover:scale-110">
                               <LuPencilLine
                                 onClick={(e) => handleEdit(order)}
-                                className="w-5 h-5"
+                                className="text-xl"
                               />
                             </div>
                           </div>

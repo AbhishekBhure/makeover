@@ -92,11 +92,14 @@ const SignIn = () => {
                 />
                 {visible ? (
                   <span className="absolute right-3 cursor-pointer">
-                    <LuEyeOff className="" onClick={handlePasswordtoggle} />
+                    <LuEyeOff
+                      className="text-xl"
+                      onClick={handlePasswordtoggle}
+                    />
                   </span>
                 ) : (
                   <span className="absolute right-3 cursor-pointer">
-                    <LuEye onClick={handlePasswordtoggle} />
+                    <LuEye className="text-xl" onClick={handlePasswordtoggle} />
                   </span>
                 )}
               </div>

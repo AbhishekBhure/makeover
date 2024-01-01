@@ -84,7 +84,7 @@ const Navbar = () => {
             />
             <LuSearch className="text-xl" />
           </form>
-          <div className="flex gap-5 items-center">
+          <div className="flex gap-4 items-center">
             <div className="relative">
               <Link to="/cart" className="flex relative">
                 <LuShoppingBag className="text-xl" />
