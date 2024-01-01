@@ -6,7 +6,6 @@ const productSchema = new Schema({
   title: {
     type: String,
     trim: true,
-    unique: true,
     required: [true, "Please enter product title"],
     maxLength: [20, "Title cannot exceed more than 20 character"],
     minLength: [5, "Title should have more than 5 character"],
