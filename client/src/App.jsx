@@ -31,7 +31,6 @@ function App() {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
   const id = user?.user?._id;
-  console.log("from app:", user?.user?._id);
   useEffect(() => {
     if (user) {
       dispatch(fetchCartItemsByUserIdAsync(id));
