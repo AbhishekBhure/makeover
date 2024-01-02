@@ -5,6 +5,7 @@ import authRoute from "./routes/authRoute.js";
 import productRoute from "./routes/productRoute.js";
 import categoryRoute from "./routes/categoryRoute.js";
 import brandRoute from "./routes/brandRoute.js";
+import cartRoute from "./routes/cartRoute.js";
 import connectDB from "./config/db.js";
 import cors from "cors";
 
@@ -27,6 +28,7 @@ app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/products", productRoute);
 app.use("/api/v1/categories", categoryRoute);
 app.use("/api/v1/brands", brandRoute);
+app.use("/api/v1/cart", cartRoute);
 
 //middleware
 app.use(

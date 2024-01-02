@@ -55,11 +55,11 @@ export const signin = async (req, res, next) => {
   try {
     const validUser = await User.findOne({ email });
     if (!validUser) {
-      return next(errorHandler(404, "Email is not register"));
+      return next(errorHandler(404, "Invalid credentials"));
     }
     const validPassword = await comparePassword(password, validUser.password);
     if (!validPassword) {
-      return next(errorHandler(200, "Invalid Password"));
+      return next(errorHandler(400, "Invalid credentials"));
     }
     const token = jwt.sign({ id: validUser._id }, process.env.JWT_SECRET, {
       expiresIn: process.env.JWT_EXPIRE,

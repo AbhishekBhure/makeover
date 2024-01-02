@@ -51,6 +51,7 @@ export const createProduct = async (req, res) => {
   }
 };
 
+//Get A Single Product
 export const getProductById = async (req, res) => {
   try {
     const { id } = req.params;
@@ -61,6 +62,7 @@ export const getProductById = async (req, res) => {
   }
 };
 
+//Update a Product
 export const updateProduct = async (req, res) => {
   try {
     const { id } = req.params;
