@@ -76,7 +76,7 @@ function CheckOut() {
         items,
         totalAmount,
         totalItems,
-        user,
+        user: user._id,
         selectedAddress,
         paymentMethod,
         status: "pending", //other status can be deliverd
