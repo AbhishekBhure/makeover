@@ -7,32 +7,17 @@ import {
   selectItems,
   updateItemsAsync,
 } from "../features/cart/cartSlice";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   createOrderAsync,
   selectCurrentOrder,
 } from "../features/order/orderSlice";
 import { useSnackbar } from "notistack";
 import { discountedPrice } from "../constants/constants";
-
-const addresses = [
-  {
-    name: "John bhai",
-    street: "11th cross",
-    city: "Delhi",
-    pinCode: 10011,
-    state: "Delhi",
-    phone: 1239863,
-  },
-  {
-    name: "John Doe",
-    street: "11th cross",
-    city: "Delhi",
-    pinCode: 586101,
-    state: "Delhi",
-    phone: 1239863,
-  },
-];
+import {
+  fetchAddressByUserIdAsync,
+  selectAddress,
+} from "../features/address/addressSlice";
 
 function CheckOut() {
   const [selectedAddress, setSelectedAddress] = useState(null);
@@ -45,8 +30,16 @@ function CheckOut() {
   //selectors
   const { currentUser } = useSelector((state) => state.auth);
   const user = currentUser.user;
+  const userId = user._id;
   const items = useSelector(selectItems);
   const currentOrder = useSelector(selectCurrentOrder);
+  const addressess = useSelector(selectAddress);
+
+  useEffect(() => {
+    if (user) {
+      dispatch(fetchAddressByUserIdAsync(userId));
+    }
+  }, [dispatch, userId, user]);
 
   const totalAmount = items.reduce(
     (amount, item) => discountedPrice(item.product) * item.quantity + amount,
@@ -63,7 +56,7 @@ function CheckOut() {
   };
 
   const handleAddress = (e) => {
-    setSelectedAddress(addresses[e.target.value]);
+    setSelectedAddress(addressess[e.target.value]);
   };
 
   const handlePayment = (e) => {
@@ -242,45 +235,49 @@ function CheckOut() {
                   Choose from existing address
                 </p>
                 <ul role="list" className="divide-y divide-gray-100">
-                  {addresses.map((address, index) => (
-                    <li
-                      key={index}
-                      className="flex justify-between px-4 gap-x-6 py-5  border-solid border-2 border-gray-200"
-                    >
-                      <div className="flex min-w-0 gap-x-4">
-                        <input
-                          onChange={handleAddress}
-                          name="address"
-                          type="radio"
-                          value={index}
-                          className="h-4 w-4 border-gray-300 text-pink-600 focus:ring-pink-700"
-                        />
-                        <div className="min-w-0 flex-auto">
-                          <p className="text-sm font-semibold leading-6 text-gray-900">
-                            {address.name}
-                          </p>
-                          <div className="flex gap-2 items-center justify-center">
-                            <p className=" text-xs leading-5 text-gray-500">
-                              {address.street},
+                  {addressess.length > 0 ? (
+                    addressess.map((address, index) => (
+                      <li
+                        key={index}
+                        className="flex justify-between px-4 gap-x-6 py-5  border-solid border-2 border-gray-200"
+                      >
+                        <div className="flex min-w-0 gap-x-4">
+                          <input
+                            onChange={handleAddress}
+                            name="address"
+                            type="radio"
+                            value={index}
+                            className="h-4 w-4 border-gray-300 text-pink-600 focus:ring-pink-700"
+                          />
+                          <div className="min-w-0 flex-auto">
+                            <p className="text-sm font-semibold leading-6 text-gray-900">
+                              {address.name}
                             </p>
+                            <div className="flex gap-2 items-center justify-center">
+                              <p className=" text-xs leading-5 text-gray-500">
+                                {address.street},
+                              </p>
+                              <p className=" text-xs leading-5 text-gray-500">
+                                {address.state}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+                          <div className="flex gap-1 items-center justify-center">
                             <p className=" text-xs leading-5 text-gray-500">
-                              {address.state}
+                              {address.city} -
+                            </p>
+                            <p className="text-xs leading-5 text-gray-500">
+                              {address.pinCode}
                             </p>
                           </div>
                         </div>
-                      </div>
-                      <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-                        <div className="flex gap-1 items-center justify-center">
-                          <p className=" text-xs leading-5 text-gray-500">
-                            {address.city} -
-                          </p>
-                          <p className="text-xs leading-5 text-gray-500">
-                            {address.pinCode}
-                          </p>
-                        </div>
-                      </div>
-                    </li>
-                  ))}
+                      </li>
+                    ))
+                  ) : (
+                    <p>No Address</p>
+                  )}
                 </ul>
 
                 <div className="mt-10 space-y-10">

@@ -39,7 +39,7 @@ const OrderSuccessPage = () => {
             </p>
 
             <Link
-              to="/orders"
+              to="/profile/user/orders"
               className="font-secondary bg-pink-500 text-white hover:bg-pink-800 transition-colors duration-500 rounded-full p-2"
             >
               <button type="button" className="px-3 flex items-center gap-2">

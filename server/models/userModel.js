@@ -21,8 +21,8 @@ const userSchema = new mongoose.Schema(
       required: [true, "Please enter password"],
       minLength: [5, "Password should have more than 5 characters"],
     },
-    address: { type: [Schema.Types.Mixed] },
-    orders: { type: [Schema.Types.Mixed] },
+    addressess: { type: [Schema.Types.Mixed] },
+    orders: { type: Schema.Types.Mixed, ref: "Order" },
     role: {
       type: String,
       default: "user",

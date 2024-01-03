@@ -11,9 +11,9 @@ import {
 const router = express.Router();
 
 router
-  .get("/", requireSignIn, getOrdersByUser)
-  .post("/", requireSignIn, createOrder)
-  .patch("/:id", requireSignIn, updateOrder)
-  .delete("/:id", requireSignIn, deleteOrder);
+  .get("/", getOrdersByUser)
+  .post("/", createOrder)
+  .patch("/:id", updateOrder)
+  .delete("/:id", deleteOrder);
 
 export default router;

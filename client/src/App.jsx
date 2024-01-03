@@ -26,6 +26,7 @@ import AdminProductDetailPage from "./pages/Admin/AdminProductDetailPage";
 import AdminProductFromPage from "./pages/Admin/AdminProductFromPage";
 import AdminUpdateProductPage from "./pages/Admin/AdminUpdateProductPage";
 import AdminOrdersPage from "./pages/Admin/AdminOrdersPage";
+import UserUpdate from "./features/user/components/UserUpdate";
 
 function App() {
   const dispatch = useDispatch();
@@ -47,6 +48,8 @@ function App() {
           <Route exact path="/" element={<Home />} />
           <Route path="/profile" element={<ProtectedRoute />}>
             <Route exact path="user" element={<UserProfilePage />} />
+            <Route path="user/orders" element={<UserOrdersPage />} />
+            <Route path="user/update/:id" element={<UserUpdate />} />
           </Route>
           {/* AdminProtected Routes */}
           <Route path="/profile" element={<AdminRoute />}>
@@ -81,7 +84,6 @@ function App() {
               element={<ProductDetailPage />}
             />
             <Route path="/order-success/:id" element={<OrderSuccessPage />} />
-            <Route path="/orders" element={<UserOrdersPage />} />
           </Route>
           <Route path="*" element={<PageNotFound />} />
         </Routes>

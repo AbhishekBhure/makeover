@@ -24,7 +24,6 @@ export const getAllProducts = async (req, res) => {
       query = query.sort({ [req.query._sort]: req.query._order });
     }
     const totalDocs = await totalProductsQuery.count().exec();
-    console.log({ totalDocs });
 
     if (req.query._page && req.query._limit) {
       const pageSize = req.query._limit;

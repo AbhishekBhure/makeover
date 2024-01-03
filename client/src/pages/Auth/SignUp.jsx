@@ -121,16 +121,6 @@ const SignUp = () => {
                   </span>
                 )}
               </div>
-              <div className="relative p-2 md:p-3 rounded-full flex items-center border  focus-within:border-pink-800 transition-border duration-300">
-                <input
-                  type="text"
-                  id="address"
-                  required
-                  className="focus:outline-none bg-transparent w-64"
-                  placeholder="enter address..."
-                  onChange={handleChange}
-                />
-              </div>
               <button className="font-secondary rounded-full bg-pink-500 p-3 text-white md:uppercase">
                 {loading ? <Loader /> : "Sign Up"}
               </button>

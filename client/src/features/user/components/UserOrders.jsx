@@ -8,6 +8,7 @@ const UserOrders = () => {
   const dispatch = useDispatch();
 
   const orders = useSelector(selectUserOrders);
+  console.log(orders);
   const { currentUser } = useSelector((state) => state.auth);
   const userId = currentUser.user._id;
 
@@ -29,7 +30,7 @@ const UserOrders = () => {
               </h3>
               <div className="flow-root font-secondary">
                 <ul role="list" className="-my-6 divide-y divide-gray-200">
-                  {order.items.map((item) => (
+                  {/* {order.items.map((item) => (
                     <li key={item.product.id} className="flex py-6">
                       <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                         <img
@@ -64,7 +65,7 @@ const UserOrders = () => {
                         </div>
                       </div>
                     </li>
-                  ))}
+                  ))} */}
                 </ul>
               </div>
             </div>

@@ -4,12 +4,15 @@ import { useState } from "react";
 import MobileNav from "./MobileNav";
 import { useSelector } from "react-redux";
 import { selectItems } from "../features/cart/cartSlice";
+import { selectUser } from "../features/auth/authSlice";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const items = useSelector(selectItems);
-  const { currentUser } = useSelector((state) => state.auth);
+  // const { currentUser } = useSelector((state) => state.auth);
+  const currentUser = useSelector(selectUser);
+  console.log("currentUser", currentUser);
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
   };
@@ -89,7 +92,7 @@ const Navbar = () => {
               <Link to="/cart" className="flex relative">
                 <LuShoppingBag className="text-xl" />
                 {currentUser && items.length > 0 && (
-                  <span className=" hidden md:inline-flex absolute -top-2 left-3   items-center rounded-full bg-gray-50 px-1  text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">
+                  <span className="hidden md:inline-flex absolute -top-2 left-3 items-center rounded-full bg-gray-50 px-1  text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">
                     {items.length}
                   </span>
                 )}
@@ -102,7 +105,7 @@ const Navbar = () => {
             </div>
           </div>
           <div>
-            {currentUser ? (
+            {currentUser && currentUser ? (
               <Link
                 to={`/profile/${
                   currentUser.user.role === "admin" ? "admin" : "user"

@@ -7,6 +7,7 @@ import categoryRoute from "./routes/categoryRoute.js";
 import brandRoute from "./routes/brandRoute.js";
 import cartRoute from "./routes/cartRoute.js";
 import orderRoute from "./routes/orderRoute.js";
+import addressRoute from "./routes/addressRoute.js";
 import connectDB from "./config/db.js";
 import cors from "cors";
 
@@ -31,6 +32,7 @@ app.use("/api/v1/categories", categoryRoute);
 app.use("/api/v1/brands", brandRoute);
 app.use("/api/v1/cart", cartRoute);
 app.use("/api/v1/order", orderRoute);
+app.use("/api/v1/address", addressRoute);
 
 //middleware
 app.use(

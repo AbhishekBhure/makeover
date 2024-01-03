@@ -47,8 +47,10 @@ export default function ProductDetail() {
 
   //selectors
   const product = useSelector(selectProductById);
+  console.log(product);
   const user = useSelector(selectUser);
   const items = useSelector(selectItems);
+  console.log("items:", items);
 
   useEffect(() => {
     dispatch(fetchProductByIdAsync(params.id));

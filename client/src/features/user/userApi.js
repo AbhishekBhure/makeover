@@ -1,8 +1,6 @@
 export function fetchLoggedInUserOrders(userId) {
   return new Promise(async (resolve) => {
-    const response = await fetch(
-      "http://localhost:8080/orders/?user=" + userId
-    );
+    const response = await fetch("/api/v1/order/?user=" + userId);
     const data = await response.json();
     resolve({ data });
   });
@@ -15,3 +13,17 @@ export function fetchLoggedInUserInfo(userId) {
     resolve({ data });
   });
 }
+
+// export function updateLoggedInUser(update) {
+//   return new Promise(async (resolve) => {
+//     const userId = update.user._id;
+//     console.log("userId", userId);
+//     const response = await fetch("/api/v1/users/update/" + userId, {
+//       method: "PATCH",
+//       body: JSON.stringify(update),
+//       headers: { "content-type": "application/json" },
+//     });
+//     const data = response.json();
+//     resolve({ data });
+//   });
+// }
