@@ -77,6 +77,7 @@ const UserProfile = () => {
         pinCode: "",
       });
       setShowAddAddressForm(false);
+      enqueueSnackbar("Address added Successfully", { variant: "success" });
     } catch (error) {
       dispatch(addAddressAsync(error.message));
       enqueueSnackbar(error.message, { variant: "error" });
