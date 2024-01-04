@@ -13,6 +13,7 @@ import {
   LuArrowUp,
 } from "react-icons/lu";
 import loader from "./loader.svg";
+import google from "./google.png";
 
 export {
   LuShoppingBag,
@@ -28,4 +29,5 @@ export {
   LuPencilLine,
   LuArrowDown,
   LuArrowUp,
+  google,
 };

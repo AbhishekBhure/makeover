@@ -4,6 +4,7 @@ import {
   signin,
   test,
   signout,
+  google,
 } from "../controllers/authController.js";
 import { isAdmin, requireSignIn } from "../middleware/authMiddleware.js";
 
@@ -12,6 +13,7 @@ const router = express.Router();
 router.post("/signup", signup);
 router.post("/signin", signin);
 router.get("/signout", signout);
+router.post("/google", google);
 
 router.get("/test", requireSignIn, isAdmin, test);
 

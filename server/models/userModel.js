@@ -23,6 +23,11 @@ const userSchema = new mongoose.Schema(
     },
     addressess: { type: [Schema.Types.Mixed] },
     orders: { type: Schema.Types.Mixed, ref: "Order" },
+    avatar: {
+      type: String,
+      default:
+        "https://www.google.com/url?sa=i&url=https%3A%2F%2Fpixabay.com%2Fvectors%2Fblank-profile-picture-mystery-man-973460%2F&psig=AOvVaw2KOO0ioBUUIR8k44e3p-dV&ust=1704435675080000&source=images&cd=vfe&ved=0CBIQjRxqFwoTCPCfueqLw4MDFQAAAAAdAAAAABAE",
+    },
     role: {
       type: String,
       default: "user",

@@ -10,6 +10,7 @@ import {
   signInSuccess,
 } from "../../features/auth/authSlice";
 import Layout from "../../components/Layout";
+import OAuth from "../../features/googleAuth/OAuth";
 
 const SignIn = () => {
   const [formData, setFormData] = useState({});
@@ -106,6 +107,7 @@ const SignIn = () => {
               <button className="font-secondary rounded-full bg-pink-500 p-3 text-white md:uppercase">
                 {loading ? <Loader /> : "Sign In"}
               </button>
+              <OAuth />
               <div className="flex gap-3 mt-5 items-center justify-center">
                 <p className="font-secondary">Dont have an Account?</p>
                 <Link to="/sign-up">

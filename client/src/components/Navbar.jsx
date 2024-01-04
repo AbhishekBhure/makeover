@@ -111,7 +111,11 @@ const Navbar = () => {
                   currentUser.user.role === "admin" ? "admin" : "user"
                 }`}
               >
-                <span>{currentUser.user.username}</span>
+                <img
+                  src={currentUser.user.avatar}
+                  alt={currentUser.user._id}
+                  className="w-9 h-9 rounded-full"
+                />
               </Link>
             ) : (
               <Link to="/sign-in">
@@ -122,7 +126,7 @@ const Navbar = () => {
         </div>
         {/* Mobile navigation */}
         <div className="md:hidden flex gap-3 items-center">
-          <div className="flex gap-5 items-center">
+          <div className="flex gap-3 items-center">
             <div>
               <Link to="/cart" className="flex relative">
                 <LuShoppingBag className="text-xl" />
@@ -146,7 +150,11 @@ const Navbar = () => {
                   currentUser.user.role === "admin" ? "admin" : "user"
                 }`}
               >
-                <span>{currentUser.user.username}</span>
+                <img
+                  src={currentUser.user.avatar}
+                  alt={currentUser.user._id}
+                  className=" w-7 h-7 md:w-9 md:h-9 rounded-full"
+                />
               </Link>
             ) : (
               <Link to="/sign-in">

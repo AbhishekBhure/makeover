@@ -4,6 +4,7 @@ import { LuEye, LuEyeOff } from "../../icons";
 import Loader from "../../components/Loader";
 import { useSnackbar } from "notistack";
 import Layout from "../../components/Layout";
+import OAuth from "../../features/googleAuth/OAuth";
 
 const SignUp = () => {
   const [formData, setFormData] = useState({});
@@ -124,6 +125,7 @@ const SignUp = () => {
               <button className="font-secondary rounded-full bg-pink-500 p-3 text-white md:uppercase">
                 {loading ? <Loader /> : "Sign Up"}
               </button>
+              <OAuth />
               <div className="flex gap-3 mt-5 items-center justify-center">
                 <p className="font-secondary">Have an Account?</p>
                 <Link to="/sign-in">
