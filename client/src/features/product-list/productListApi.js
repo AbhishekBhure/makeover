@@ -34,7 +34,7 @@ export function updateProduct(update) {
   });
 }
 
-export function fetchProductsByFilters(filter, sort, pagination) {
+export function fetchProductsByFilters(filter, sort, pagination, admin) {
   //filter obj filter = {"category":["face","eyes",'lips' ]}
   //sort = {_sort="price", _order="desc"}
   //pagination = {_page=1, _limit=10}
@@ -56,6 +56,10 @@ export function fetchProductsByFilters(filter, sort, pagination) {
 
   for (let key in pagination) {
     queryStr += `${key}=${pagination[key]}&`;
+  }
+
+  if (admin) {
+    queryStr += "admin=true";
   }
 
   return new Promise(async (resolve) => {

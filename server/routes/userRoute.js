@@ -4,12 +4,13 @@ import {
   singleUser,
   updateUser,
 } from "../controllers/userController.js";
+import { requireSignIn } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
 router
   .get("/", getAllUsers)
   .get("/:id", singleUser)
-  .patch("/update/:id", updateUser);
+  .patch("/update/:id", requireSignIn, updateUser);
 
 export default router;

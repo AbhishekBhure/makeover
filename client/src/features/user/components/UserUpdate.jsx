@@ -98,7 +98,7 @@ const UserUpdate = () => {
             <h1 className="text-4xl font-primary leading-7 text-gray-900">
               Update Profile
             </h1>
-            <div className=" h-[90px] shadow-md w-[90px] rounded-full border-4 overflow-hidden border-white">
+            <div className=" h-[90px] shadow-md w-[90px] rounded-full border-4  border-white">
               <input
                 type="file"
                 ref={fileRef}
@@ -107,27 +107,30 @@ const UserUpdate = () => {
                 onChange={(e) => setFile(e.target.files[0])}
               />
               <img
-                className="w-full h-full rounded-full object-center object-cover"
+                className="w-full h-full cursor-pointer rounded-full object-center object-cover"
                 src={userDetails.avatar || currentUser.user.avatar}
                 alt="photo"
                 onClick={() => fileRef.current.click()}
               />
-              <p>
-                {fileUploadError ? (
-                  <span className="text-red-700">Error Image upload (2mb)</span>
-                ) : filePercentage > 0 && filePercentage < 100 ? (
-                  <span className="text-slate-700">
-                    {`Uploading ${filePercentage}%`}
-                  </span>
-                ) : filePercentage === 100 ? (
-                  <span className="text-green-700">
-                    Image Successfully uploaded
-                  </span>
-                ) : (
-                  ""
-                )}
-              </p>
             </div>
+            <p className="">
+              {fileUploadError ? (
+                <span className="text-red-700">Error Image upload (3mb)</span>
+              ) : filePercentage > 0 && filePercentage < 100 ? (
+                <span className="text-slate-700">
+                  {`Uploading ${filePercentage}%`}
+                </span>
+              ) : filePercentage === 100 ? (
+                <span className="text-green-700">
+                  Image Successfully uploaded
+                </span>
+              ) : (
+                ""
+              )}
+            </p>
+            <p className="text-gray-400 font-secondary">
+              Click on the above image to update it
+            </p>
             <label className="block text-sm font-medium leading-3 text-gray-900">
               Full name
             </label>

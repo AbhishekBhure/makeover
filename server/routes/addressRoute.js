@@ -3,9 +3,10 @@ import {
   addAddress,
   getAddressByUser,
 } from "../controllers/addressController.js";
+import { requireSignIn } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-router.post("/", addAddress).get("/", getAddressByUser);
+router.post("/", requireSignIn, addAddress).get("/", getAddressByUser);
 
 export default router;

@@ -4,8 +4,12 @@ import Product from "../models/productModel.js";
 export const getAllProducts = async (req, res) => {
   //TODO: i have to try with multiple category and brands after change in frontend
   try {
-    let query = Product.find({ deleted: { $ne: true } });
-    let totalProductsQuery = Product.find({ deleted: { $ne: true } });
+    let condition = {};
+    if (!req.query.admin) {
+      condition.deleted = { $ne: true };
+    }
+    let query = Product.find(condition);
+    let totalProductsQuery = Product.find(condition);
 
     if (req.query.category) {
       query = query.find({ category: req.query.category });

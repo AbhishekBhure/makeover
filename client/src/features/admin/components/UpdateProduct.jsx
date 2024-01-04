@@ -24,7 +24,7 @@ const UpdateProduct = () => {
   const { enqueueSnackbar } = useSnackbar();
   const params = useParams();
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   //selectors
   const brands = useSelector(selectBrands);
@@ -174,7 +174,7 @@ const UpdateProduct = () => {
       images: [],
     });
     setLoading(false);
-navigate()
+    navigate();
     enqueueSnackbar("Product Updated Successfully", { variant: "success" });
   };
 
@@ -213,6 +213,9 @@ navigate()
         <h1 className="text-red-500 text-center text-xl">
           This product has been deleted
         </h1>
+      )}
+      {selectedProduct && selectedProduct.stock === 0 && (
+        <h1 className="text-red-500 text-center text-xl">Out of Stock</h1>
       )}
       <form
         onSubmit={handleEditForm}
@@ -265,7 +268,6 @@ navigate()
             id="stock"
             type="number"
             placeholder="Product Stock"
-            min={1}
             max={20}
             required
             onChange={handleChange}

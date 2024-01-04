@@ -1,9 +1,10 @@
 import express from "express";
 
-import { requireSignIn } from "../middleware/authMiddleware.js";
+import { isAdmin, requireSignIn } from "../middleware/authMiddleware.js";
 import {
   createOrder,
   deleteOrder,
+  getAllOrdersByAdmin,
   getOrdersByUser,
   updateOrder,
 } from "../controllers/orderController.js";
@@ -11,9 +12,10 @@ import {
 const router = express.Router();
 
 router
-  .get("/", getOrdersByUser)
-  .post("/", createOrder)
-  .patch("/:id", updateOrder)
-  .delete("/:id", deleteOrder);
+  .get("/user/:userId", getOrdersByUser)
+  .post("/", requireSignIn, createOrder)
+  .patch("/:id", requireSignIn, isAdmin, updateOrder)
+  .delete("/:id", deleteOrder)
+  .get("/", requireSignIn, isAdmin, getAllOrdersByAdmin);
 
 export default router;

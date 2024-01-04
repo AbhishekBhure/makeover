@@ -10,9 +10,9 @@ import { requireSignIn } from "../middleware/authMiddleware.js";
 const router = express.Router();
 
 router
-  .get("/", getCartItemsByUser)
-  .post("/", addToCart)
-  .patch("/:id", updateCart)
-  .delete("/:id", deleteItemFromCart);
+  .get("/", requireSignIn, getCartItemsByUser)
+  .post("/", requireSignIn, addToCart)
+  .patch("/:id", requireSignIn, updateCart)
+  .delete("/:id", requireSignIn, deleteItemFromCart);
 
 export default router;

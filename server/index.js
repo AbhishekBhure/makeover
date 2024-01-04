@@ -10,6 +10,7 @@ import orderRoute from "./routes/orderRoute.js";
 import addressRoute from "./routes/addressRoute.js";
 import connectDB from "./config/db.js";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 
 //config env
 dotenv.config();
@@ -21,6 +22,7 @@ connectDB();
 const app = express();
 
 app.use(express.json());
+app.use(cookieParser());
 
 const PORT = 3000;
 

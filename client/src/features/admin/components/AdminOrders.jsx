@@ -17,6 +17,7 @@ const AdminOrders = () => {
 
   //selectors
   const orders = useSelector(selectOrders);
+  console.log(orders[0].items[0].product.price);
   const totalOrders = useSelector(selectTotalOrders);
 
   //states
@@ -79,16 +80,20 @@ const AdminOrders = () => {
               <table className="min-w-max w-full table-auto">
                 <thead>
                   <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                    <th className="py-3 px-6 text-left">Order No.</th>
+                    <th className="py-3 px-6 text-left">Items</th>
+                    <th className="py-3 px-6 text-left">Total Qantity</th>
+                    <th className="py-3 px-6 text-left">Price</th>
                     <th
                       className="py-3 px-6 inline-flex gap-1 items-center text-left cursor-pointer"
                       onClick={(e) =>
                         handleSort({
-                          sort: "id",
+                          sort: "totalAmount",
                           order: sort?._order === "asc" ? "desc" : "asc",
                         })
                       }
                     >
-                      Order No.
+                      Total Amount
                       {sort?._order === "asc" ? (
                         <span>
                           <LuArrowUp className="text-xl" />
@@ -99,10 +104,6 @@ const AdminOrders = () => {
                         </span>
                       )}
                     </th>
-                    <th className="py-3 px-6 text-left">Items</th>
-                    <th className="py-3 px-6 text-left">Total Qantity</th>
-                    <th className="py-3 px-6 text-left">Price</th>
-                    <th className="py-3 px-6 text-center">Total Amount</th>
                     <th className="py-3 px-6 text-center">Shipping Address</th>
                     <th className="py-3 px-6 text-center">Status</th>
                     <th className="py-3 px-6 text-center">Actions</th>
@@ -126,11 +127,11 @@ const AdminOrders = () => {
                               <div className="mr-2 ">
                                 <img
                                   className="w-8 h-8 rounded-full"
-                                  src={item.images[0]}
-                                  alt={item.title}
+                                  src={item.product.images[0]}
+                                  alt={item.product.title}
                                 />
                               </div>
-                              <span>{item.title}</span>
+                              <span>{item.product.title}</span>
                             </div>
                           ))}
                         </td>
@@ -151,7 +152,7 @@ const AdminOrders = () => {
                               key={order.id}
                               className="flex items-center justify-center"
                             >
-                              <span> ${discountedPrice(item)}</span>
+                              <span> ${discountedPrice(item.product)}</span>
                             </div>
                           ))}
                         </td>
@@ -165,7 +166,6 @@ const AdminOrders = () => {
                           <p> {order.selectedAddress.street}, </p>
                           <p> {order.selectedAddress.city}, </p>
                           <p> {order.selectedAddress.state}, </p>
-                          <p> {order.selectedAddress.phone}, </p>
                           <p> {order.selectedAddress.pinCode}. </p>
                         </td>
                         <td className="py-3 px-6 text-center">
