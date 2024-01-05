@@ -557,7 +557,8 @@ function ProductGrid({ products }) {
                               aria-hidden="true"
                               className="absolute inset-0"
                             />
-                            {product.title}
+                            {product.title}{" "}
+                            <span className="text-xs">({product.brand})</span>
                           </h3>
                           <div className="mt-1 items-center gap-1 flex text-gray-500">
                             <StarIcon className="w-4 h-4" />
