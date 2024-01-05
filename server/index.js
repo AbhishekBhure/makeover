@@ -11,6 +11,7 @@ import addressRoute from "./routes/addressRoute.js";
 import connectDB from "./config/db.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+import Stripe from "stripe";
 
 //config env
 dotenv.config();
@@ -51,6 +52,31 @@ app.use((err, req, res, next) => {
     success: false,
     statusCode,
     message,
+  });
+});
+
+//Paymenst
+// This is your test secret API key.
+
+const stripe = new Stripe(
+  "sk_test_51OV904SEaOdv63aI1qj9qoPnqfaeayFTDzXF27D98vkA7EBtkNQ7d8JdvmFtp0eGJ6P9rFRzMByJOvnBWRKxLQUX00uDI3qRcQ"
+);
+
+app.post("/api/v1/create-payment-intent", async (req, res) => {
+  const { totalAmount } = req.body;
+
+  // Create a PaymentIntent with the order amount and currency
+  const paymentIntent = await stripe.paymentIntents.create({
+    amount: totalAmount * 100,
+    currency: "inr",
+    // In the latest version of the API, specifying the `automatic_payment_methods` parameter is optional because Stripe enables its functionality by default.
+    automatic_payment_methods: {
+      enabled: true,
+    },
+  });
+
+  res.send({
+    clientSecret: paymentIntent.client_secret,
   });
 });
 

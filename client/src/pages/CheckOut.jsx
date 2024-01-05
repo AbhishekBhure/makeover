@@ -4,12 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, Navigate } from "react-router-dom";
 import {
   deleteItemsFromCartAsync,
+  resetCartAsync,
   selectItems,
   updateItemsAsync,
 } from "../features/cart/cartSlice";
 import { useEffect, useState } from "react";
 import {
   createOrderAsync,
+  resetOrder,
   selectCurrentOrder,
 } from "../features/order/orderSlice";
 import { useSnackbar } from "notistack";
@@ -46,6 +48,7 @@ function CheckOut() {
   const currentOrder = useSelector(selectCurrentOrder);
   const addressess = useSelector(selectAddress);
   console.log("checkout-address", addressess);
+  console.log("currentorder", currentOrder);
 
   useEffect(() => {
     if (user) {
@@ -110,7 +113,11 @@ function CheckOut() {
         status: "pending", //other status can be deliverd
       };
       dispatch(createOrderAsync(order));
-      enqueueSnackbar("Order Placed Successfully", { variant: "success" });
+      //reset cart
+      dispatch(resetCartAsync(user._id));
+
+      //reset currentOrder
+      dispatch(resetOrder());
     } else {
       enqueueSnackbar("Enter Address and Payment Method", { variant: "error" });
     }
@@ -122,9 +129,10 @@ function CheckOut() {
   return (
     <Layout>
       {!items.length && <Navigate to="/" replace={true} />}
-      {currentOrder && (
+      {/* {currentOrder && (
         <Navigate to={`/order-success/${currentOrder.id}`} replace={true} />
-      )}
+      )} */}
+      {currentOrder && <Navigate to={`/stripe-checkout/`} replace={true} />}
       <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-5 shadow p-3">
         <div className="lg:col-span-3">
           <form className="mt-8" onSubmit={handleAddNewAddress}>

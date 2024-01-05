@@ -27,6 +27,7 @@ import AdminProductFromPage from "./pages/Admin/AdminProductFromPage";
 import AdminUpdateProductPage from "./pages/Admin/AdminUpdateProductPage";
 import AdminOrdersPage from "./pages/Admin/AdminOrdersPage";
 import UserUpdate from "./features/user/components/UserUpdate";
+import StripeCheckout from "./pages/Payment/StripeCheckout";
 
 function App() {
   const dispatch = useDispatch();
@@ -76,14 +77,23 @@ function App() {
           <Route exact path="/sign-up" element={<SignUp />} />
           <Route exact path="/face" element={<Face />} />
           <Route element={<ProtectedRoute />}>
-            <Route exact path="/cart" element={<CartPage />} />
-            <Route exact path="/checkout" element={<CheckOut />} />
             <Route
               exact
               path="/product-detail/:id"
               element={<ProductDetailPage />}
             />
-            <Route path="/order-success/:id" element={<OrderSuccessPage />} />
+            <Route exact path="/cart" element={<CartPage />} />
+            <Route exact path="/checkout" element={<CheckOut />} />
+            <Route
+              exact
+              path="/stripe-checkout/"
+              element={<StripeCheckout />}
+            />
+            <Route
+              exact
+              path="/order-success/:id"
+              element={<OrderSuccessPage />}
+            />
           </Route>
           <Route path="*" element={<PageNotFound />} />
         </Routes>
