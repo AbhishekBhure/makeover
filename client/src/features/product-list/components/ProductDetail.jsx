@@ -56,6 +56,7 @@ export default function ProductDetail() {
   const user = useSelector(selectUser);
   const items = useSelector(selectItems);
   const productLoading = useSelector(selectLoading);
+  console.log(productLoading);
 
   useEffect(() => {
     dispatch(fetchProductByIdAsync(params.id));
@@ -129,11 +130,13 @@ export default function ProductDetail() {
               {/* Image gallery */}
               <div className="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
                 <div className="aspect-h-4 aspect-w-3 hidden overflow-hidden rounded-lg lg:block">
-                  <img
-                    src={product.images[0]}
-                    alt={product.title}
-                    className="h-full w-full object-cover object-center"
-                  />
+                  {product.images.length > 0 && (
+                    <img
+                      src={product.images[0]}
+                      alt={product.title}
+                      className="h-full w-full object-cover object-center"
+                    />
+                  )}
                 </div>
                 <div className="hidden lg:grid lg:grid-cols-1 lg:gap-y-8">
                   <div className="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg">

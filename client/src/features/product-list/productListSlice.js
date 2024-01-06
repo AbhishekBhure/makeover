@@ -123,6 +123,10 @@ export const productSlice = createSlice({
         state.loading = false;
         state.selectedProduct = action.payload;
       })
+      .addCase(fetchProductByIdAsync.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
       .addCase(createProductAsync.pending, (state) => {
         state.loading = true;
       })
