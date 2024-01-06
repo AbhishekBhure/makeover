@@ -49,6 +49,13 @@ const AdminOrders = () => {
     setEditOrderId(-1);
   };
 
+  const handlePaymentStatus = (e, order) => {
+    const updatedOrderStatus = { ...order, paymentStatus: e.target.value };
+    dispatch(updateOrderStatusAsync(updatedOrderStatus));
+    enqueueSnackbar("Order Updated Successfully", { variant: "success" });
+    setEditOrderId(-1);
+  };
+
   const statusColors = (status) => {
     switch (status) {
       case "pending":
@@ -59,6 +66,8 @@ const AdminOrders = () => {
         return "bg-yellow-200 text-yellow-600";
       case "cancelled":
         return "bg-red-200 text-red-600";
+      case "recived":
+        return "bg-green-200 text-green-600";
       default:
         return "bg-purple-200 text-purple-600";
     }
@@ -76,16 +85,16 @@ const AdminOrders = () => {
       <div className="overflow-x-auto">
         <div className="font-secondary flex items-center justify-center  ">
           <div className="w-full ">
-            <div className="bg-white shadow-md rounded my-6">
+            <div className="bg-white rounded my-6">
               <table className="min-w-max w-full table-auto">
                 <thead>
                   <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                    <th className="py-3 px-6 text-left">Order No.</th>
-                    <th className="py-3 px-6 text-left">Items</th>
-                    <th className="py-3 px-6 text-left">Total Qantity</th>
-                    <th className="py-3 px-6 text-left">Price</th>
+                    <th className="py-3 px-4 text-left">Order No.</th>
+                    <th className="py-3 px-4 text-left">Items</th>
+                    <th className="py-3 px-4 text-left">Total Qantity</th>
+                    <th className="py-3 px-4 text-left">Price</th>
                     <th
-                      className="py-3 px-6 inline-flex gap-1 items-center text-left cursor-pointer"
+                      className="py-3 px-4 inline-flex gap-1 items-center text-left cursor-pointer"
                       onClick={(e) =>
                         handleSort({
                           sort: "totalAmount",
@@ -104,24 +113,46 @@ const AdminOrders = () => {
                         </span>
                       )}
                     </th>
-                    <th className="py-3 px-6 text-center">Shipping Address</th>
-                    <th className="py-3 px-6 text-center">Status</th>
-                    <th className="py-3 px-6 text-center">Actions</th>
+                    {/* <th className="py-3 px-4 text-center">Shipping Address</th> */}
+                    <th className="py-3 px-4 text-center">Order Status</th>
+                    <th className="py-3 px-4 text-center">Payment Status</th>
+                    <th
+                      className="py-3 px-4 inline-flex gap-1 items-center text-left cursor-pointer"
+                      onClick={(e) =>
+                        handleSort({
+                          sort: "createdAt",
+                          order: sort?._order === "asc" ? "desc" : "asc",
+                        })
+                      }
+                    >
+                      Order Time
+                      {sort._sort === "createdAt" && sort._order === "asc" ? (
+                        <span>
+                          <LuArrowUp className="text-xl" />
+                        </span>
+                      ) : (
+                        <span>
+                          <LuArrowDown className="text-xl" />
+                        </span>
+                      )}
+                    </th>
+                    <th className="py-3 px-4 ">Last Updated</th>
+                    <th className="py-3 px-4 text-center">Actions</th>
                   </tr>
                 </thead>
                 <tbody className=" text-sm font-light">
                   {orders &&
-                    orders.map((order) => (
+                    orders.map((order, index) => (
                       <tr
                         key={order.id}
                         className="border-b border-gray-200 hover:bg-gray-100"
                       >
-                        <td className="py-3 px-6 text-left whitespace-nowrap">
+                        <td className="py-3 px-4 text-left whitespace-nowrap">
                           <div className="flex items-center">
-                            <span className="font-medium">{order.id}</span>
+                            <span className="font-medium">{index + 1}</span>
                           </div>
                         </td>
-                        <td className="py-3 px-6 text-left">
+                        <td className="py-3 px-4 text-left">
                           {order.items.map((item) => (
                             <div key={order.id} className="flex items-center">
                               <div className="mr-2 ">
@@ -135,7 +166,7 @@ const AdminOrders = () => {
                             </div>
                           ))}
                         </td>
-                        <td className="py-3 px-6 text-center">
+                        <td className="py-3 px-4 text-center">
                           {order.items.map((item) => (
                             <div
                               key={order.id}
@@ -146,7 +177,7 @@ const AdminOrders = () => {
                           ))}
                         </td>
 
-                        <td className="py-3 px-6 text-center">
+                        <td className="py-3 px-4 text-center">
                           {order.items.map((item) => (
                             <div
                               key={order.id}
@@ -156,10 +187,10 @@ const AdminOrders = () => {
                             </div>
                           ))}
                         </td>
-                        <td className="py-3 px-6 text-center">
+                        <td className="py-3 px-4 text-center">
                           <span className="">${order.totalAmount}</span>
                         </td>
-                        <td className="py-3 px-6 text-center">
+                        {/* <td className="py-3 px-4 text-center">
                           <strong className="">
                             {order.selectedAddress.name}
                           </strong>
@@ -167,8 +198,8 @@ const AdminOrders = () => {
                           <p> {order.selectedAddress.city}, </p>
                           <p> {order.selectedAddress.state}, </p>
                           <p> {order.selectedAddress.pinCode}. </p>
-                        </td>
-                        <td className="py-3 px-6 text-center">
+                        </td> */}
+                        <td className="py-3 px-4 text-center">
                           {order.id === editOrderId ? (
                             <select
                               onChange={(e) => handleUpdateStatus(e, order)}
@@ -188,7 +219,39 @@ const AdminOrders = () => {
                             </span>
                           )}
                         </td>
-                        <td className="py-3 px-6 text-center">
+                        <td className="py-3 px-4 text-center">
+                          {order.id === editOrderId ? (
+                            <select
+                              onChange={(e) => handlePaymentStatus(e, order)}
+                            >
+                              <option value="pending">Pending</option>
+                              <option value="recived">Recived</option>
+                            </select>
+                          ) : (
+                            <span
+                              className={`${statusColors(
+                                order.paymentStatus
+                              )} py-1 px-3 rounded-full text-xs`}
+                            >
+                              {order.paymentStatus}
+                            </span>
+                          )}
+                        </td>
+                        <td className="py-3 px-4 text-center">
+                          <span className="">
+                            {order.createdAt
+                              ? new Date(order.createdAt).toLocaleString()
+                              : "N/A"}
+                          </span>
+                        </td>
+                        <td className="py-3 px-4 text-center">
+                          <span className="">
+                            {order.updatedAt
+                              ? new Date(order.updatedAt).toLocaleString()
+                              : "N/A"}
+                          </span>
+                        </td>
+                        <td className="py-3 px-4 text-center">
                           <div className="flex item-center gap-1 justify-center">
                             <div className="w-4 mr-2 cursor-pointer transform hover:text-pink-500 hover:scale-110">
                               <LuEye

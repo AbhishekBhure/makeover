@@ -451,24 +451,24 @@ function ProductGrid({ products }) {
                       </div>
                       <div className="mt-4 flex justify-between">
                         <div>
-                          <h3 className="text-sm text-gray-700">
+                          <h3 className="text-sm ">
                             <span
                               aria-hidden="true"
                               className="absolute inset-0"
                             />
                             {product.title}
                           </h3>
-                          <div className="mt-1 items-center gap-1 flex text-gray-500">
+                          <div className="mt-1 items-center gap-1 flex text-gray-600">
                             <StarIcon className="w-4 h-4" />
                             <span className=" text-sm">{product.rating}</span>
                           </div>
                         </div>
                         <div className="">
-                          <p className="text-sm font-medium text-gray-700">
-                            ${discountedPrice(product)}
+                          <p className="text-sm font-medium ">
+                            ₹{discountedPrice(product)}
                           </p>
                           <p className="text-sm mt-1 line-through font-medium text-gray-400">
-                            ${product.price}
+                            ₹{product.price}
                           </p>
                         </div>
                       </div>
