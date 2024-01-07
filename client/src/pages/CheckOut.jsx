@@ -1,5 +1,5 @@
 import Layout from "../components/Layout";
-import { ArrowRightIcon } from "@heroicons/react/24/outline";
+import { LuArrowRight } from "../icons";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Navigate } from "react-router-dom";
 import {
@@ -459,7 +459,7 @@ function CheckOut() {
                     >
                       Continue Shopping
                       <span>
-                        <ArrowRightIcon className="w-4" />
+                        <LuArrowRight className="w-4" />
                       </span>
                     </button>
                   </Link>
