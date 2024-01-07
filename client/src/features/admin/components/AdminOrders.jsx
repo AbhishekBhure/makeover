@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { ITEMS_PER_PAGE, discountedPrice } from "../../../constants/constants";
+import { ITEMS_PER_PAGE } from "../../../constants/constants";
 import {
   fetchAllOrdersAsync,
   selectOrders,
@@ -183,7 +183,7 @@ const AdminOrders = () => {
                                 key={order.id}
                                 className="flex items-center justify-center"
                               >
-                                <span> ₹{discountedPrice(item.product)}</span>
+                                <span> ₹{item.discountPrice}</span>
                               </div>
                             ))}
                           </td>

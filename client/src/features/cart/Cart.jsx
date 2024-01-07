@@ -6,7 +6,6 @@ import {
   selectItems,
   updateItemsAsync,
 } from "./cartSlice";
-import { discountedPrice } from "../../constants/constants";
 import { useSnackbar } from "notistack";
 import ConfirmationModal from "../../components/ConfirmationModal";
 import { useState } from "react";
@@ -23,7 +22,7 @@ export default function Cart() {
   const items = useSelector(selectItems);
 
   const totalAmount = items.reduce(
-    (amount, item) => discountedPrice(item.product) * item.quantity + amount,
+    (amount, item) => item.product.discountPrice * item.quantity + amount,
     0
   );
   const totalItems = items.reduce((total, item) => item.quantity + total, 0);
@@ -80,9 +79,7 @@ export default function Cart() {
                               {item.product.title}
                             </Link>
                           </h3>
-                          <p className="ml-4">
-                            ${discountedPrice(item.product)}
-                          </p>
+                          <p className="ml-4">${item.product.discountPrice}</p>
                         </div>
                         <p className="mt-1 text-sm text-gray-500">
                           {item.product.brand}

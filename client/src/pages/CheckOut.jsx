@@ -15,7 +15,6 @@ import {
   selectCurrentOrder,
 } from "../features/order/orderSlice";
 import { useSnackbar } from "notistack";
-import { discountedPrice } from "../constants/constants";
 import {
   addAddressAsync,
   fetchAddressByUserIdAsync,
@@ -57,7 +56,7 @@ function CheckOut() {
   }, [dispatch, userId, user]);
 
   const totalAmount = items.reduce(
-    (amount, item) => discountedPrice(item.product) * item.quantity + amount,
+    (amount, item) => item.product.discountPrice * item.quantity + amount,
     0
   );
   const totalItems = items.reduce((total, item) => item.quantity + total, 0);
@@ -383,9 +382,7 @@ function CheckOut() {
                               {item.product.title}
                             </Link>
                           </h3>
-                          <p className="ml-4">
-                            ${discountedPrice(item.product)}
-                          </p>
+                          <p className="ml-4">${item.product.discountPrice}</p>
                         </div>
                         <p className="mt-1 text-sm text-gray-500">
                           {item.product.brand}

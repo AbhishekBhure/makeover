@@ -25,13 +25,23 @@ import {
   fetchBrandsAsync,
   selectLoading,
 } from "../productListSlice";
-import { ITEMS_PER_PAGE, discountedPrice } from "../../../constants/constants";
+import { ITEMS_PER_PAGE } from "../../../constants/constants";
 import Loader from "../../../components/Loader";
 
 const sortOptions = [
   { name: "Best Rating", sort: "rating", order: "desc", current: false },
-  { name: "Price: Low to High", sort: "price", order: "asc", current: false },
-  { name: "Price: High to Low", sort: "price", order: "desc", current: false },
+  {
+    name: "Price: Low to High",
+    sort: "discountPrice",
+    order: "asc",
+    current: false,
+  },
+  {
+    name: "Price: High to Low",
+    sort: "discountPrice",
+    order: "desc",
+    current: false,
+  },
 ];
 
 function classNames(...classes) {
@@ -566,7 +576,7 @@ function ProductGrid({ products }) {
                         </div>
                         <div className="">
                           <p className="text-sm font-medium text-gray-700">
-                            ₹{discountedPrice(product)}
+                            ₹{product.discountPrice}
                           </p>
                           <p className="text-sm mt-1 line-through font-medium text-gray-400">
                             ₹{product.price}

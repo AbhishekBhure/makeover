@@ -10,7 +10,6 @@ import {
 import { useParams } from "react-router-dom";
 import { addToCartAsync, selectItems } from "../../cart/cartSlice";
 import { selectUser } from "../../auth/authSlice";
-import { discountedPrice } from "../../../constants/constants";
 import { useSnackbar } from "notistack";
 import Loader from "../../../components/Loader";
 
@@ -175,7 +174,7 @@ export default function ProductDetail() {
                 <div className="mt-4 lg:row-span-3 lg:mt-0">
                   <h2 className="sr-only">Product information</h2>
                   <p className="text-3xl tracking-tight text-gray-900">
-                    ₹{discountedPrice(product)}
+                    ₹{product.discountPrice}
                   </p>
                   <p className="text-xl line-through tracking-tight text-gray-500">
                     ₹{product.price}
