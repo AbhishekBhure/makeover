@@ -86,20 +86,16 @@ export default function Cart() {
                         </p>
                       </div>
                       <div className="flex flex-1 items-end justify-between text-sm">
-                        <div className=" flex gap-1 items-center font-secondary">
+                        <div className=" flex gap-3 items-center font-secondary">
                           <label htmlFor="quantity">Qty</label>
 
-                          <select
+                          <input
+                            className="w-10 border"
+                            type="number"
                             onChange={(e) => handleQuantity(e, item)}
                             value={item.quantity}
-                          >
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                          </select>
+                            max={item.product.stock}
+                          />
                         </div>
 
                         <div className="flex">

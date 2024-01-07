@@ -51,6 +51,10 @@ export const orderSlice = createSlice({
         state.orders.push(action.payload);
         state.currentOrder = action.payload;
       })
+      .addCase(createOrderAsync.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
       .addCase(fetchAllOrdersAsync.pending, (state) => {
         state.loading = true;
       })
@@ -58,6 +62,10 @@ export const orderSlice = createSlice({
         state.loading = false;
         state.orders = action.payload.orders;
         state.totalOrders = action.payload.totalOrders;
+      })
+      .addCase(fetchAllOrdersAsync.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
       })
       .addCase(updateOrderStatusAsync.pending, (state) => {
         state.loading = true;
@@ -68,6 +76,10 @@ export const orderSlice = createSlice({
           (order) => order.id === action.payload.id
         );
         state.orders[index] = action.payload;
+      })
+      .addCase(updateOrderStatusAsync.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
       });
   },
 });
@@ -77,5 +89,6 @@ export const { resetOrder } = orderSlice.actions;
 export const selectCurrentOrder = (state) => state.order.currentOrder;
 export const selectOrders = (state) => state.order.orders;
 export const selectTotalOrders = (state) => state.order.totalOrders;
+export const selectOrderLoading = (state) => state.order.loading;
 
 export default orderSlice.reducer;
