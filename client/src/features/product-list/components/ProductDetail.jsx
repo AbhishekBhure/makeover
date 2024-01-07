@@ -4,7 +4,7 @@ import { RadioGroup } from "@headlessui/react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchProductByIdAsync,
-  selectLoading,
+  selectProductLoading,
   selectProductById,
 } from "../productListSlice";
 import { useParams } from "react-router-dom";
@@ -51,11 +51,9 @@ export default function ProductDetail() {
 
   //selectors
   const product = useSelector(selectProductById);
-  console.log(product);
   const user = useSelector(selectUser);
   const items = useSelector(selectItems);
-  const productLoading = useSelector(selectLoading);
-  console.log(productLoading);
+  const productLoading = useSelector(selectProductLoading);
 
   useEffect(() => {
     dispatch(fetchProductByIdAsync(params.id));
@@ -71,8 +69,8 @@ export default function ProductDetail() {
         quantity: 1,
         user: user.user._id,
       };
-      dispatch(addToCartAsync(newItem));
-      enqueueSnackbar("Item Added to cart", { variant: "success" });
+      dispatch(addToCartAsync({ item: newItem, alert: enqueueSnackbar }));
+      // enqueueSnackbar("Item Added to cart", { variant: "success" });
     } else {
       enqueueSnackbar("Item Alredy Added in the cart", { variant: "warning" });
     }

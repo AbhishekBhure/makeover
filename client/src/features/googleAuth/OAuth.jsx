@@ -28,7 +28,6 @@ const OAuth = () => {
         }),
       });
       const user = await response.json();
-      console.log({ user });
       dispatch(signInSuccess({ user }));
       enqueueSnackbar("SignedIn With Google ✅", { variant: "success" });
       navigate("/");

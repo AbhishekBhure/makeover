@@ -17,6 +17,8 @@ import {
 
 const UserProfile = () => {
   const dispatch = useDispatch();
+
+  //selectors
   const { currentUser } = useSelector((state) => state.auth);
   const { loading } = useSelector((state) => state.auth);
   const user = useSelector(selectUser);

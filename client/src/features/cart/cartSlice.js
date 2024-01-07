@@ -15,9 +15,9 @@ const initialState = {
 
 export const addToCartAsync = createAsyncThunk(
   "cart/addToCart",
-  async (item) => {
+  async ({ item, alert }) => {
     const response = await addToCart(item);
-
+    alert("Item added to Cart", { variant: "success" });
     return response.data;
   }
 );
@@ -69,12 +69,20 @@ export const cartSlice = createSlice({
         state.loading = false;
         state.items.push(action.payload);
       })
+      .addCase(addToCartAsync.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
       .addCase(fetchCartItemsByUserIdAsync.pending, (state) => {
         state.loading = true;
       })
       .addCase(fetchCartItemsByUserIdAsync.fulfilled, (state, action) => {
         state.loading = false;
         state.items = action.payload;
+      })
+      .addCase(fetchCartItemsByUserIdAsync.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
       })
       .addCase(updateItemsAsync.pending, (state) => {
         state.loading = true;
@@ -86,6 +94,10 @@ export const cartSlice = createSlice({
         );
         state.items[index] = action.payload;
       })
+      .addCase(updateItemsAsync.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
       .addCase(deleteItemsFromCartAsync.pending, (state) => {
         state.loading = true;
       })
@@ -96,16 +108,25 @@ export const cartSlice = createSlice({
         );
         state.items.splice(index, 1);
       })
+      .addCase(deleteItemsFromCartAsync.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
       .addCase(resetCartAsync.pending, (state) => {
         state.loading = true;
       })
       .addCase(resetCartAsync.fulfilled, (state) => {
         state.loading = false;
         state.items = [];
+      })
+      .addCase(resetCartAsync.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
       });
   },
 });
 
 export const selectItems = (state) => state.cart.items;
+export const selectCartLoading = (state) => state.cart.loading;
 
 export default cartSlice.reducer;

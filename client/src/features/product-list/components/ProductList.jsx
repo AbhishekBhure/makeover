@@ -23,7 +23,7 @@ import {
   selectBrands,
   fetchCategoriesAsync,
   fetchBrandsAsync,
-  selectLoading,
+  selectProductLoading,
 } from "../productListSlice";
 import { ITEMS_PER_PAGE } from "../../../constants/constants";
 import Loader from "../../../components/Loader";
@@ -535,11 +535,11 @@ function Pagination({ page, setPage, handlePage }) {
 
 //Product Grid
 function ProductGrid({ products }) {
-  const loading = useSelector(selectLoading);
+  const productLoading = useSelector(selectProductLoading);
 
   return (
     <>
-      {loading ? (
+      {productLoading ? (
         <Loader />
       ) : (
         <div className="bg-white">

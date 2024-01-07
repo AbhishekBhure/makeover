@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { ITEMS_PER_PAGE } from "../../../constants/constants";
 import {
   fetchAllOrdersAsync,
+  selectOrderLoading,
   selectOrders,
   selectTotalOrders,
   updateOrderStatusAsync,
@@ -10,6 +11,7 @@ import {
 import { LuEye, LuPencilLine, LuArrowDown, LuArrowUp } from "../../../icons";
 import Pagination from "../../../components/Pagination";
 import { useSnackbar } from "notistack";
+import Loader from "../../../components/Loader";
 
 const AdminOrders = () => {
   const { enqueueSnackbar } = useSnackbar();
@@ -18,6 +20,7 @@ const AdminOrders = () => {
   //selectors
   const orders = useSelector(selectOrders);
   const totalOrders = useSelector(selectTotalOrders);
+  const orderLoading = useSelector(selectOrderLoading);
 
   //states
   const [page, setPage] = useState(1);
@@ -81,7 +84,9 @@ const AdminOrders = () => {
   return (
     <>
       {/* component */}
-      {orders && orders.map && (
+      {orderLoading ? (
+        <Loader />
+      ) : (
         <div className="overflow-x-auto">
           <div className="font-secondary flex items-center justify-center  ">
             <div className="w-full ">

@@ -94,13 +94,22 @@ export const productSlice = createSlice({
         state.error = null;
         state.products = action.payload;
       })
+      .addCase(fetchAllProductsAsync.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
       .addCase(fetchProductsByFiltersAsync.pending, (state) => {
         state.loading = true;
       })
       .addCase(fetchProductsByFiltersAsync.fulfilled, (state, action) => {
         state.loading = false;
+        state.error = null;
         state.products = action.payload.products;
         state.totalItems = action.payload.totalItems;
+      })
+      .addCase(fetchProductsByFiltersAsync.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
       })
       .addCase(fetchCategoriesAsync.pending, (state) => {
         state.loading = true;
@@ -109,12 +118,20 @@ export const productSlice = createSlice({
         state.loading = false;
         state.categories = action.payload;
       })
+      .addCase(fetchCategoriesAsync.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
       .addCase(fetchBrandsAsync.pending, (state) => {
         state.loading = true;
       })
       .addCase(fetchBrandsAsync.fulfilled, (state, action) => {
         state.loading = false;
         state.brands = action.payload;
+      })
+      .addCase(fetchBrandsAsync.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
       })
       .addCase(fetchProductByIdAsync.pending, (state) => {
         state.loading = true;
@@ -134,6 +151,10 @@ export const productSlice = createSlice({
         state.loading = false;
         state.products.push(action.payload);
       })
+      .addCase(createProductAsync.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
       .addCase(updateProductAsync.pending, (state) => {
         state.loading = true;
       })
@@ -144,6 +165,10 @@ export const productSlice = createSlice({
         );
         state.products[index] = action.payload;
         state.selectedProduct = action.payload;
+      })
+      .addCase(updateProductAsync.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
       });
   },
 });
@@ -153,6 +178,6 @@ export const selectCategories = (state) => state.product.categories;
 export const selectBrands = (state) => state.product.brands;
 export const selectTotalItems = (state) => state.product.totalItems;
 export const selectProductById = (state) => state.product.selectedProduct;
-export const selectLoading = (state) => state.product.loading;
+export const selectProductLoading = (state) => state.product.loading;
 
 export default productSlice.reducer;

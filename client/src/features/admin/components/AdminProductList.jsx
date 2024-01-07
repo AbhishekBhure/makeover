@@ -1,10 +1,6 @@
 import { Fragment, useEffect, useState } from "react";
 import { Dialog, Disclosure, Menu, Transition } from "@headlessui/react";
-import {
-  ChevronLeftIcon,
-  ChevronRightIcon,
-  XMarkIcon,
-} from "@heroicons/react/24/outline";
+import { XMarkIcon } from "@heroicons/react/24/outline";
 import {
   ChevronDownIcon,
   FunnelIcon,
@@ -23,9 +19,11 @@ import {
   selectBrands,
   fetchCategoriesAsync,
   fetchBrandsAsync,
+  selectProductLoading,
 } from "../../product-list/productListSlice";
 import { ITEMS_PER_PAGE } from "../../../constants/constants";
 import Pagination from "../../../components/Pagination";
+import Loader from "../../../components/Loader";
 
 const sortOptions = [
   { name: "Best Rating", sort: "rating", order: "desc", current: false },
@@ -57,6 +55,7 @@ export default function AdminProductList() {
 
   const products = useSelector(selectAllProduct);
   const totalItems = useSelector(selectTotalItems);
+  const productLoading = useSelector(selectProductLoading);
   const categories = useSelector(selectCategories);
   const brands = useSelector(selectBrands);
 
@@ -109,115 +108,122 @@ export default function AdminProductList() {
 
   return (
     <>
-      <div className="bg-white">
-        <div>
-          {/* Mobile filter dialog */}
-          <MobileFilter
-            handleFilter={handleFilter}
-            mobileFiltersOpen={mobileFiltersOpen}
-            setMobileFiltersOpen={setMobileFiltersOpen}
-          />
+      {productLoading ? (
+        <Loader />
+      ) : (
+        <div className="bg-white">
+          <div>
+            {/* Mobile filter dialog */}
+            <MobileFilter
+              handleFilter={handleFilter}
+              mobileFiltersOpen={mobileFiltersOpen}
+              setMobileFiltersOpen={setMobileFiltersOpen}
+            />
 
-          <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-24">
-              <h1 className="text-4xl tracking-tight text-gray-900 font-primary">
-                Admin Panel
-              </h1>
+            <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+              <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-24">
+                <h1 className="text-4xl tracking-tight text-gray-900 font-primary">
+                  Admin Panel
+                </h1>
 
-              <div className="flex items-center">
-                <Menu as="div" className="relative inline-block text-left">
-                  <div>
-                    <Menu.Button className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
-                      Sort
-                      <ChevronDownIcon
-                        className="-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
-                        aria-hidden="true"
-                      />
-                    </Menu.Button>
-                  </div>
+                <div className="flex items-center">
+                  <Menu as="div" className="relative inline-block text-left">
+                    <div>
+                      <Menu.Button className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
+                        Sort
+                        <ChevronDownIcon
+                          className="-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
+                          aria-hidden="true"
+                        />
+                      </Menu.Button>
+                    </div>
 
-                  <Transition
-                    as={Fragment}
-                    enter="transition ease-out duration-100"
-                    enterFrom="transform opacity-0 scale-95"
-                    enterTo="transform opacity-100 scale-100"
-                    leave="transition ease-in duration-75"
-                    leaveFrom="transform opacity-100 scale-100"
-                    leaveTo="transform opacity-0 scale-95"
+                    <Transition
+                      as={Fragment}
+                      enter="transition ease-out duration-100"
+                      enterFrom="transform opacity-0 scale-95"
+                      enterTo="transform opacity-100 scale-100"
+                      leave="transition ease-in duration-75"
+                      leaveFrom="transform opacity-100 scale-100"
+                      leaveTo="transform opacity-0 scale-95"
+                    >
+                      <Menu.Items className="absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-white shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none">
+                        <div className="py-1">
+                          {sortOptions.map((option) => (
+                            <Menu.Item key={option.name}>
+                              {({ active }) => (
+                                <NavLink
+                                  href={option.href}
+                                  onClick={(e) => handleSort(e, option)}
+                                  className={classNames(
+                                    option.current
+                                      ? "font-medium text-gray-900"
+                                      : "text-gray-500",
+                                    active ? "bg-gray-100" : "",
+                                    "block px-4 py-2 text-sm"
+                                  )}
+                                >
+                                  {option.name}
+                                </NavLink>
+                              )}
+                            </Menu.Item>
+                          ))}
+                        </div>
+                      </Menu.Items>
+                    </Transition>
+                  </Menu>
+
+                  <button
+                    type="button"
+                    className="-m-2 ml-5 p-2 text-gray-400 hover:text-gray-500 sm:ml-7"
                   >
-                    <Menu.Items className="absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-white shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none">
-                      <div className="py-1">
-                        {sortOptions.map((option) => (
-                          <Menu.Item key={option.name}>
-                            {({ active }) => (
-                              <NavLink
-                                href={option.href}
-                                onClick={(e) => handleSort(e, option)}
-                                className={classNames(
-                                  option.current
-                                    ? "font-medium text-gray-900"
-                                    : "text-gray-500",
-                                  active ? "bg-gray-100" : "",
-                                  "block px-4 py-2 text-sm"
-                                )}
-                              >
-                                {option.name}
-                              </NavLink>
-                            )}
-                          </Menu.Item>
-                        ))}
-                      </div>
-                    </Menu.Items>
-                  </Transition>
-                </Menu>
-
-                <button
-                  type="button"
-                  className="-m-2 ml-5 p-2 text-gray-400 hover:text-gray-500 sm:ml-7"
-                >
-                  <span className="sr-only">View grid</span>
-                  <Squares2X2Icon className="h-5 w-5" aria-hidden="true" />
-                </button>
-                <button
-                  type="button"
-                  className="-m-2 ml-4 p-2 text-gray-400 hover:text-gray-500 sm:ml-6 lg:hidden"
-                  onClick={() => setMobileFiltersOpen(true)}
-                >
-                  <span className="sr-only">Filters</span>
-                  <FunnelIcon className="h-5 w-5" aria-hidden="true" />
-                </button>
-              </div>
-            </div>
-
-            <section aria-labelledby="products-heading" className="pb-24 pt-6">
-              <h2 id="products-heading" className="sr-only">
-                Products
-              </h2>
-
-              <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
-                {/* Filters */}
-                <DesktopFilter handleFilter={handleFilter} />
-
-                {/* Product grid */}
-                <div className="lg:col-span-3">
-                  {/* Product Lists */}
-                  <ProductGrid products={products} />
+                    <span className="sr-only">View grid</span>
+                    <Squares2X2Icon className="h-5 w-5" aria-hidden="true" />
+                  </button>
+                  <button
+                    type="button"
+                    className="-m-2 ml-4 p-2 text-gray-400 hover:text-gray-500 sm:ml-6 lg:hidden"
+                    onClick={() => setMobileFiltersOpen(true)}
+                  >
+                    <span className="sr-only">Filters</span>
+                    <FunnelIcon className="h-5 w-5" aria-hidden="true" />
+                  </button>
                 </div>
               </div>
-            </section>
-            {/* Productlist and filter section end here */}
 
-            {/* Pagination handlePage totalitmes totalPages Item_per_page */}
-            <Pagination
-              page={page}
-              setPage={setPage}
-              handlePage={handlePage}
-              totalItems={totalItems}
-            />
-            {/* Pagination */}
-          </main>
+              <section
+                aria-labelledby="products-heading"
+                className="pb-24 pt-6"
+              >
+                <h2 id="products-heading" className="sr-only">
+                  Products
+                </h2>
+
+                <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
+                  {/* Filters */}
+                  <DesktopFilter handleFilter={handleFilter} />
+
+                  {/* Product grid */}
+                  <div className="lg:col-span-3">
+                    {/* Product Lists */}
+                    <ProductGrid products={products} />
+                  </div>
+                </div>
+              </section>
+              {/* Productlist and filter section end here */}
+
+              {/* Pagination handlePage totalitmes totalPages Item_per_page */}
+              <Pagination
+                page={page}
+                setPage={setPage}
+                handlePage={handlePage}
+                totalItems={totalItems}
+              />
+              {/* Pagination */}
+            </main>
+          </div>
         </div>
-      </div>
+      )}
     </>
   );
 }
@@ -441,71 +447,77 @@ function DesktopFilter({ handleFilter }) {
 }
 
 function ProductGrid({ products }) {
+  const productLoading = useSelector(selectProductLoading);
+
   return (
     <>
-      <div className="bg-white font-secondary">
-        <div className="mx-auto max-w-2xl px-4 py-0 sm:px-6 sm:py-0 lg:max-w-7xl lg:px-8">
-          <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
-            {products &&
-              products.length > 0 &&
-              products.map((product) => (
-                <div key={product.id}>
-                  <div className="group relative shadow-md  p-3">
-                    <Link to={`/profile/admin/product-detail/${product.id}`}>
-                      <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-60 ">
-                        <img
-                          src={product.images[0]}
-                          alt={product.title}
-                          className="h-full w-full object-cover object-center lg:h-full lg:w-full"
-                        />
-                      </div>
-                      <div className="mt-4 flex justify-between">
-                        <div>
-                          <h3 className="text-sm ">
-                            <span
-                              aria-hidden="true"
-                              className="absolute inset-0"
-                            />
-                            {product.title}
-                          </h3>
-                          <div className="mt-1 items-center gap-1 flex text-gray-600">
-                            <StarIcon className="w-4 h-4" />
-                            <span className=" text-sm">{product.rating}</span>
+      {productLoading ? (
+        <Loader />
+      ) : (
+        <div className="bg-white font-secondary">
+          <div className="mx-auto max-w-2xl px-4 py-0 sm:px-6 sm:py-0 lg:max-w-7xl lg:px-8">
+            <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
+              {products &&
+                products.length > 0 &&
+                products.map((product) => (
+                  <div key={product.id}>
+                    <div className="group relative shadow-md  p-3">
+                      <Link to={`/profile/admin/product-detail/${product.id}`}>
+                        <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-60 ">
+                          <img
+                            src={product.images[0]}
+                            alt={product.title}
+                            className="h-full w-full object-cover object-center lg:h-full lg:w-full"
+                          />
+                        </div>
+                        <div className="mt-4 flex justify-between">
+                          <div>
+                            <h3 className="text-sm ">
+                              <span
+                                aria-hidden="true"
+                                className="absolute inset-0"
+                              />
+                              {product.title}
+                            </h3>
+                            <div className="mt-1 items-center gap-1 flex text-gray-600">
+                              <StarIcon className="w-4 h-4" />
+                              <span className=" text-sm">{product.rating}</span>
+                            </div>
+                          </div>
+                          <div className="">
+                            <p className="text-sm font-medium ">
+                              ₹{product.discountPrice}
+                            </p>
+                            <p className="text-sm mt-1 line-through font-medium text-gray-400">
+                              ₹{product.price}
+                            </p>
                           </div>
                         </div>
-                        <div className="">
-                          <p className="text-sm font-medium ">
-                            ₹{product.discountPrice}
-                          </p>
-                          <p className="text-sm mt-1 line-through font-medium text-gray-400">
-                            ₹{product.price}
-                          </p>
-                        </div>
-                      </div>
-                      {product.deleted && (
-                        <div>
-                          <p className="text-red-500 text-xs">
-                            product deleted
-                          </p>
-                        </div>
-                      )}
-                      {product.stock <= 0 && (
-                        <div>
-                          <p className="text-red-500 text-xs">Out of stock</p>
-                        </div>
-                      )}
+                        {product.deleted && (
+                          <div>
+                            <p className="text-red-500 text-xs">
+                              product deleted
+                            </p>
+                          </div>
+                        )}
+                        {product.stock <= 0 && (
+                          <div>
+                            <p className="text-red-500 text-xs">Out of stock</p>
+                          </div>
+                        )}
+                      </Link>
+                    </div>
+                    <Link to={`/profile/admin/product-form/edit/${product.id}`}>
+                      <button className="bg-pink-500 px-3 py-1 shadow-md text-white rounded mt-3">
+                        Edit Product
+                      </button>
                     </Link>
                   </div>
-                  <Link to={`/profile/admin/product-form/edit/${product.id}`}>
-                    <button className="bg-pink-500 px-3 py-1 shadow-md text-white rounded mt-3">
-                      Edit Product
-                    </button>
-                  </Link>
-                </div>
-              ))}
+                ))}
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </>
   );
 }

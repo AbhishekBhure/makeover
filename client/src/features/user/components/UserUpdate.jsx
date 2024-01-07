@@ -23,8 +23,12 @@ const UserUpdate = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const fileRef = useRef();
+
+  //selectors
   const { currentUser } = useSelector((state) => state.auth);
   const { loading } = useSelector((state) => state.auth);
+
+  //states
   const [userDetails, setUserDetails] = useState(currentUser);
   const [file, setFile] = useState(undefined);
   const [filePercentage, setFilePercentage] = useState(0);

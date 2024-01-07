@@ -88,7 +88,6 @@ export function fetchBrands() {
 
 export function fetchProductById(id) {
   return new Promise(async (resolve) => {
-    //TO-DO we will not hard-code server URL here
     const response = await fetch("/api/v1/products/" + id);
     const data = await response.json();
     resolve({ data });
