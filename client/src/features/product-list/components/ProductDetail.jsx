@@ -205,7 +205,7 @@ export default function ProductDetail() {
 
                   <form className="mt-10">
                     {/* Colors */}
-                    <div>
+                    {/* <div>
                       <h3 className="text-sm font-medium text-gray-900">
                         Color
                       </h3>
@@ -249,7 +249,7 @@ export default function ProductDetail() {
                             ))}
                         </div>
                       </RadioGroup>
-                    </div>
+                    </div> */}
 
                     {product.stock === 0 && (
                       <p className="mt-6 text-center text-red-500">
@@ -280,7 +280,7 @@ export default function ProductDetail() {
                     </div>
                   </div>
 
-                  <div className="mt-10">
+                  {/* <div className="mt-10">
                     <h3 className="text-sm font-medium text-gray-900">
                       Highlights
                     </h3>
@@ -297,9 +297,9 @@ export default function ProductDetail() {
                         ))}
                       </ul>
                     </div>
-                  </div>
+                  </div> */}
 
-                  <div className="mt-10">
+                  {/* <div className="mt-10">
                     <h2 className="text-sm font-medium text-gray-900">
                       Details
                     </h2>
@@ -309,7 +309,7 @@ export default function ProductDetail() {
                         {product.description}
                       </p>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>

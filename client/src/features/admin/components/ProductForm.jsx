@@ -17,6 +17,12 @@ import {
 import { useSnackbar } from "notistack";
 
 const ProductForm = () => {
+  const colors = [
+    { name: "White", class: "bg-white", selectedClass: "ring-gray-400" },
+    { name: "Gray", class: "bg-gray-200", selectedClass: "ring-gray-400" },
+    { name: "Black", class: "bg-gray-900", selectedClass: "ring-gray-900" },
+  ];
+
   const { enqueueSnackbar } = useSnackbar();
   const dispatch = useDispatch();
 
@@ -33,10 +39,11 @@ const ProductForm = () => {
     stock: "",
     brand: "",
     category: "",
+    // colors: [],
     images: [],
   });
+  // console.log(productDetails);
   const [files, setFiles] = useState([]);
-  console.log(files);
   const [imageUploadError, setImageUploadError] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState(false);
@@ -102,7 +109,8 @@ const ProductForm = () => {
       e.target.type === "number" ||
       e.target.type === "text" ||
       e.target.type === "textarea" ||
-      e.target.tagName === "SELECT"
+      e.target.tagName === "SELECT" ||
+      e.target.type === "checkbox"
     ) {
       setProductDetails({
         ...productDetails,
@@ -233,6 +241,21 @@ const ProductForm = () => {
                 </option>
               ))}
           </select>
+          {/* <div className="flex gap-3">
+            <h2>Product Color</h2>
+            {colors &&
+              colors.map((color, index) => (
+                <div key={index} className="flex gap-2">
+                  <input
+                    type="checkbox"
+                    value={color.name}
+                    checked={productDetails.colors.includes(color.name)}
+                    onChange={handleChange}
+                  />
+                  <span>{color.name}</span>
+                </div>
+              ))}
+          </div> */}
         </div>
         <div className="flex flex-col flex-1 gap-4">
           <p className="font-semibold">

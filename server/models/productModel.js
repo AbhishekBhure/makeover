@@ -60,6 +60,8 @@ const productSchema = new Schema({
     maxLength: [50, "Category cannot exceed more than 50 character"],
     minLength: [2, "Category should have more than 2 character"],
   },
+  colors: { type: [Schema.Types.Mixed] },
+  highlights: { type: [String] },
   images: {
     type: [String],
     required: [true, "Please add product images"],

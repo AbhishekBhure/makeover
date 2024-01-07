@@ -174,7 +174,7 @@ export default function AdminProductDetail() {
 
               <form className="mt-10">
                 {/* Colors */}
-                <div>
+                {/* <div>
                   <h3 className="text-sm font-medium text-gray-900">Color</h3>
 
                   <RadioGroup
@@ -214,7 +214,7 @@ export default function AdminProductDetail() {
                         ))}
                     </div>
                   </RadioGroup>
-                </div>
+                </div> */}
 
                 <button
                   onClick={handleAddToCart}
@@ -238,7 +238,7 @@ export default function AdminProductDetail() {
                 </div>
               </div>
 
-              <div className="mt-10">
+              {/* <div className="mt-10">
                 <h3 className="text-sm font-medium text-gray-900">
                   Highlights
                 </h3>
@@ -252,15 +252,7 @@ export default function AdminProductDetail() {
                     ))}
                   </ul>
                 </div>
-              </div>
-
-              <div className="mt-10">
-                <h2 className="text-sm font-medium text-gray-900">Details</h2>
-
-                <div className="mt-4 space-y-6">
-                  <p className="text-sm text-gray-600">{product.description}</p>
-                </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

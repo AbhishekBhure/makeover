@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { LuArrowLeft } from "../icons";
 
 const BackButton = () => {
   const navigate = useNavigate();
@@ -8,8 +9,12 @@ const BackButton = () => {
   };
 
   return (
-    <button type="button" onClick={handleGoBack} className="hidden md:flex">
-      Go Back
+    <button
+      type="button"
+      onClick={handleGoBack}
+      className="hidden md:flex rounded-full w-10 h-10 items-center justify-center absolute bg-pink-500"
+    >
+      <LuArrowLeft color="white" className="" />
     </button>
   );
 };
