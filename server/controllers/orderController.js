@@ -1,4 +1,5 @@
 import Order from "../models/orderModel.js";
+import Product from "../models/productModel.js";
 
 //Get All Orders By User
 export const getOrdersByUser = async (req, res, next) => {
@@ -14,6 +15,13 @@ export const getOrdersByUser = async (req, res, next) => {
 //Create Order
 export const createOrder = async (req, res, next) => {
   const order = new Order(req.body);
+
+  for (let item of order.items) {
+    let product = await Product.findOne({ _id: item.product.id });
+    product.$inc("stock", -1 * item.quantity);
+
+    await product.save();
+  }
   try {
     const data = await order.save();
     res.status(201).json(data);
