@@ -1,4 +1,4 @@
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
+import { LuChevronLeft, LuChevronRight } from "../icons";
 import { ITEMS_PER_PAGE } from "../constants/constants";
 import { useSelector } from "react-redux";
 import { selectTotalItems } from "../features/product-list/productListSlice";
@@ -47,10 +47,10 @@ export default function Pagination({ page, setPage, handlePage, totalItems }) {
             >
               <div
                 onClick={() => handlePage(page > 1 ? page - 1 : page)}
-                className="relative inline-flex cursor-pointer items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
+                className="relative inline-flex cursor-pointer items-center rounded-l-md px-2 py-2  ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
               >
                 <span className="sr-only">Previous</span>
-                <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
+                <LuChevronLeft className="h-5 w-5" aria-hidden="true" />
               </div>
 
               {Array.from({
@@ -73,9 +73,9 @@ export default function Pagination({ page, setPage, handlePage, totalItems }) {
 
               <div
                 onClick={() => handlePage(page < totalPages ? page + 1 : page)}
-                className="relative inline-flex cursor-pointer items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
+                className="relative inline-flex cursor-pointer items-center rounded-r-md px-2 py-2  ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
               >
-                <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
+                <LuChevronRight className="h-5 w-5" aria-hidden="true" />
               </div>
             </nav>
           </div>

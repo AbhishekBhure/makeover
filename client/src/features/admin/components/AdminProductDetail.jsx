@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import { StarIcon } from "@heroicons/react/20/solid";
-import { RadioGroup } from "@headlessui/react";
+import { LuStar } from "../../../icons";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchProductByIdAsync,
@@ -162,7 +161,7 @@ export default function AdminProductDetail() {
                     <div className="flex items-center">
                       <div className="flex items-center">
                         {[0, 1, 2, 3, 4].map((rating) => (
-                          <StarIcon
+                          <LuStar
                             key={rating}
                             className={classNames(
                               product.rating > rating

@@ -16,6 +16,7 @@ import {
   uploadBytesResumable,
 } from "firebase/storage";
 import { app } from "../../../firebase";
+import BackButton from "../../../components/BackButton";
 
 const UserUpdate = () => {
   const { enqueueSnackbar } = useSnackbar();
@@ -98,6 +99,7 @@ const UserUpdate = () => {
     <>
       {currentUser && (
         <div className="mx-auto">
+          <BackButton />
           <form className="mt-8  flex flex-col gap-4" onSubmit={handleSubmit}>
             <h1 className="text-4xl font-primary leading-7 text-gray-900">
               Update Profile

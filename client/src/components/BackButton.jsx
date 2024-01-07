@@ -12,7 +12,7 @@ const BackButton = () => {
     <button
       type="button"
       onClick={handleGoBack}
-      className="hidden md:flex rounded-full w-10 h-10 items-center justify-center absolute bg-pink-500"
+      className="hidden md:flex rounded-full w-10 h-10 items-center justify-center absolute top-20 left-10 bg-pink-500"
     >
       <LuArrowLeft color="white" className="" />
     </button>

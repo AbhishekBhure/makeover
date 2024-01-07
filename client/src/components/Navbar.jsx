@@ -22,7 +22,7 @@ const Navbar = () => {
       <div className="flex justify-between items-center max-w-7xl mx-auto py-3 px-5 md:px-0">
         <Link to="/">
           <h1 className="font-primary text-3xl flex flex-wrap md:text-4xl ">
-            <span>Make</span>
+            <span className="text-black">Make</span>
             <span className="text-pink-500">Over</span>
           </h1>
         </Link>
@@ -124,6 +124,7 @@ const Navbar = () => {
             )}
           </div>
         </div>
+
         {/* Mobile navigation */}
         <div className="md:hidden flex gap-3 items-center">
           <div className="flex gap-3 items-center">

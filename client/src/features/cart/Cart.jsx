@@ -1,4 +1,4 @@
-import { ArrowRightIcon } from "@heroicons/react/24/outline";
+import { LuArrowRight, LuTrash2 } from "../../icons";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {
@@ -67,7 +67,7 @@ export default function Cart() {
                   showModal={showModal}
                 />
                 <h1 className="text-4xl mb-3 font-primary">Cart</h1>
-                <div className="flow-root font-secondary">
+                <div className="flow-root">
                   <ul role="list" className="-my-6 divide-y divide-gray-200">
                     {items.map((item) => (
                       <li key={item.id} className="flex py-6">
@@ -82,16 +82,16 @@ export default function Cart() {
                         <div className="ml-4 flex flex-1 flex-col">
                           <div>
                             <div className="flex justify-between text-base font-medium text-gray-900">
-                              <h3>
+                              <h3 className="font-secondary">
                                 <Link to={`/product-detail/${item.product.id}`}>
                                   {item.product.title}
                                 </Link>
                               </h3>
                               <p className="ml-4">
-                                ${item.product.discountPrice}
+                                ₹{item.product.discountPrice}
                               </p>
                             </div>
-                            <p className="mt-1 text-sm text-gray-500">
+                            <p className="mt-1 text-sm text-gray-500 font-secondary">
                               {item.product.brand}
                             </p>
                           </div>
@@ -112,9 +112,9 @@ export default function Cart() {
                               <button
                                 onClick={() => showConfirmationModal(item.id)}
                                 type="button"
-                                className="font-medium text-indigo-600 hover:text-indigo-500"
+                                className="p-3"
                               >
-                                Remove
+                                <LuTrash2 className="w-5 h-5" />
                               </button>
                             </div>
                           </div>
@@ -125,13 +125,13 @@ export default function Cart() {
                 </div>
               </div>
               <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
-                <div className="flex justify-between text-base font-medium text-gray-900">
+                <div className="flex justify-between text-base font-medium font-secondary text-gray-900">
                   <p>Total Itmes</p>
                   <p>{totalItems} items</p>
                 </div>
                 <div className="flex justify-between text-base font-medium text-gray-900">
-                  <p>Subtotal</p>
-                  <p>${totalAmount}</p>
+                  <p className="font-secondary">Subtotal</p>
+                  <p>₹{totalAmount}</p>
                 </div>
 
                 <p className="mt-0.5 text-sm text-gray-500">
@@ -146,17 +146,16 @@ export default function Cart() {
                   </Link>
                 </div>
                 <div className="mt-6 flex  justify-center text-center text-sm text-gray-500">
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center justify-center gap-2">
                     <span className="font-bold">OR</span>
-
                     <Link to="/">
                       <button
                         type="button"
-                        className="font-medium flex gap-1 items-center justify-center text-gray-500 hover:text-gray-700"
+                        className="font-medium flex gap-1 items-center justify-center  text-gray-500 hover:text-gray-600 "
                       >
-                        Continue Shopping
+                        <span>Continue Shopping</span>
                         <span>
-                          <ArrowRightIcon className="w-4" />
+                          <LuArrowRight className="w-5 h-5" />
                         </span>
                       </button>
                     </Link>

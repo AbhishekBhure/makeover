@@ -4,7 +4,7 @@ import Layout from "./Layout";
 
 const EmptyCart = () => {
   return (
-    <Layout title={"Empty Cart"}>
+    <Layout title={"MakeOver - Empty Cart"}>
       <div className="flex flex-col mt-8 gap-4 items-center justify-center">
         <h1 className="text-5xl text-center leading-normal font-primary">
           Oops! Cart is Empty

@@ -1,18 +1,15 @@
 import { Fragment, useEffect, useState } from "react";
 import { Dialog, Disclosure, Menu, Transition } from "@headlessui/react";
 import {
-  ChevronLeftIcon,
-  ChevronRightIcon,
-  XMarkIcon,
-} from "@heroicons/react/24/outline";
-import {
-  ChevronDownIcon,
-  FunnelIcon,
-  MinusIcon,
-  PlusIcon,
-  Squares2X2Icon,
-  StarIcon,
-} from "@heroicons/react/20/solid";
+  LuChevronDown,
+  LuChevronLeft,
+  LuChevronRight,
+  LuFilter,
+  LuMinus,
+  LuPlus,
+  LuStar,
+  LuX,
+} from "../../../icons";
 import { Link, NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -144,8 +141,8 @@ export default function ProductList() {
                   <div>
                     <Menu.Button className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
                       Sort
-                      <ChevronDownIcon
-                        className="-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
+                      <LuChevronDown
+                        className="-mr-1 ml-1 h-5 w-5 flex-shrink-0  group-hover:text-gray-500"
                         aria-hidden="true"
                       />
                     </Menu.Button>
@@ -188,18 +185,11 @@ export default function ProductList() {
 
                 <button
                   type="button"
-                  className="-m-2 ml-5 p-2 text-gray-400 hover:text-gray-500 sm:ml-7"
-                >
-                  <span className="sr-only">View grid</span>
-                  <Squares2X2Icon className="h-5 w-5" aria-hidden="true" />
-                </button>
-                <button
-                  type="button"
-                  className="-m-2 ml-4 p-2 text-gray-400 hover:text-gray-500 sm:ml-6 lg:hidden"
+                  className="-m-2 ml-4 p-2  hover:text-gray-500 sm:ml-6 lg:hidden"
                   onClick={() => setMobileFiltersOpen(true)}
                 >
                   <span className="sr-only">Filters</span>
-                  <FunnelIcon className="h-5 w-5" aria-hidden="true" />
+                  <LuFilter className="h-5 w-5" aria-hidden="true" />
                 </button>
               </div>
             </div>
@@ -224,7 +214,6 @@ export default function ProductList() {
 
             {/* Pagination handlePage totalitmes totalPages Item_per_page */}
             <Pagination page={page} setPage={setPage} handlePage={handlePage} />
-
             {/* Pagination */}
           </main>
         </div>
@@ -289,11 +278,11 @@ function MobileFilter({
                   <h2 className="text-lg font-medium text-gray-900">Filters</h2>
                   <button
                     type="button"
-                    className="-mr-2 flex h-10 w-10 items-center justify-center rounded-md bg-white p-2 text-gray-400"
+                    className="-mr-2 flex h-10 w-10 items-center justify-center rounded-md bg-white p-2 "
                     onClick={() => setMobileFiltersOpen(false)}
                   >
                     <span className="sr-only">Close menu</span>
-                    <XMarkIcon className="h-6 w-6" aria-hidden="true" />
+                    <LuX className="h-6 w-6" aria-hidden="true" />
                   </button>
                 </div>
 
@@ -310,18 +299,18 @@ function MobileFilter({
                       {({ open }) => (
                         <>
                           <h3 className="-mx-2 -my-3 flow-root">
-                            <Disclosure.Button className="flex w-full items-center justify-between bg-white px-2 py-3 text-gray-400 hover:text-gray-500">
+                            <Disclosure.Button className="flex w-full items-center justify-between bg-white px-2 py-3  hover:text-gray-500">
                               <span className="font-medium text-gray-900">
                                 {section.name}
                               </span>
                               <span className="ml-6 flex items-center">
                                 {open ? (
-                                  <MinusIcon
+                                  <LuMinus
                                     className="h-5 w-5"
                                     aria-hidden="true"
                                   />
                                 ) : (
-                                  <PlusIcon
+                                  <LuPlus
                                     className="h-5 w-5"
                                     aria-hidden="true"
                                   />
@@ -400,15 +389,15 @@ function DesktopFilter({ handleFilter }) {
             {({ open }) => (
               <>
                 <h3 className="-my-3 flow-root">
-                  <Disclosure.Button className="flex w-full items-center justify-between bg-white py-3 text-sm text-gray-400 hover:text-gray-500">
+                  <Disclosure.Button className="flex w-full items-center justify-between bg-white py-3 text-sm  hover:text-gray-500">
                     <span className="font-medium text-gray-900">
                       {section.name}
                     </span>
                     <span className="ml-6 flex items-center">
                       {open ? (
-                        <MinusIcon className="h-5 w-5" aria-hidden="true" />
+                        <LuMinus className="h-5 w-5" aria-hidden="true" />
                       ) : (
-                        <PlusIcon className="h-5 w-5" aria-hidden="true" />
+                        <LuPlus className="h-5 w-5" aria-hidden="true" />
                       )}
                     </span>
                   </Disclosure.Button>
@@ -494,10 +483,10 @@ function Pagination({ page, setPage, handlePage }) {
             >
               <div
                 onClick={() => handlePage(page > 1 ? page - 1 : page)}
-                className="relative inline-flex cursor-pointer items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
+                className="relative inline-flex cursor-pointer items-center rounded-l-md px-2 py-2  ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
               >
                 <span className="sr-only">Previous</span>
-                <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
+                <LuChevronLeft className="h-5 w-5" aria-hidden="true" />
               </div>
 
               {Array.from({
@@ -520,9 +509,9 @@ function Pagination({ page, setPage, handlePage }) {
 
               <div
                 onClick={() => handlePage(page < totalPages ? page + 1 : page)}
-                className="relative inline-flex cursor-pointer items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
+                className="relative inline-flex cursor-pointer items-center rounded-r-md px-2 py-2  ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
               >
-                <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
+                <LuChevronRight className="h-5 w-5" aria-hidden="true" />
               </div>
             </nav>
           </div>
@@ -568,17 +557,15 @@ function ProductGrid({ products }) {
                             <span className="text-xs">({product.brand})</span>
                           </h3>
                           <div className="mt-1 items-center gap-1 flex text-gray-600">
-                            <StarIcon className="w-4 h-4" />
-                            <span className="text-sm pt-1">
-                              {product.rating}
-                            </span>
+                            <LuStar className="w-4 h-4" />
+                            <span className="text-sm">{product.rating}</span>
                           </div>
                         </div>
                         <div className="">
                           <p className="text-sm font-medium text-gray-700">
                             ₹{product.discountPrice}
                           </p>
-                          <p className="text-sm mt-1 line-through font-medium text-gray-400">
+                          <p className="text-sm mt-1 line-through font-medium ">
                             ₹{product.price}
                           </p>
                         </div>

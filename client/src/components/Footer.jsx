@@ -1,11 +1,18 @@
+import { Link } from "react-router-dom";
+
 const Footer = () => {
   return (
     <>
-      <footer className="bg-gray-100 font-secondary">
+      <footer className="bg-gray-950 text-white font-secondary">
         <div className="max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
             <div>
-              <img src="#" className="mr-5 h-6 sm:h-9" alt="logo" />
+              <Link to="/">
+                <h1 className="font-primary text-3xl flex flex-wrap md:text-4xl ">
+                  <span className="text-white">Make</span>
+                  <span className="text-pink-500">Over</span>
+                </h1>
+              </Link>
               <p className="max-w-xs mt-4 text-sm text-gray-600">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 Voluptas, accusantium.

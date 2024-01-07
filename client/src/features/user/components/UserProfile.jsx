@@ -92,7 +92,7 @@ const UserProfile = () => {
         <Loader />
       ) : (
         <>
-          <div className="bg-white my-8 md:mx-auto rounded shadow-xl w-full md:w-1/2 overflow-hidden font-secondary">
+          <div className="bg-white my-8 md:mx-auto rounded shadow-md w-full  overflow-hidden font-secondary">
             <div className="h-[140px] bg-gradient-to-r from-cyan-500 to-blue-500"></div>
             <div className="px-5 py-2 flex flex-col gap-3 pb-6">
               <div className="h-[90px] shadow-md w-[90px] rounded-full border-4 overflow-hidden -mt-14 border-white">
@@ -108,7 +108,7 @@ const UserProfile = () => {
                 </h3>
                 <p className="text-sm text-gray-600">{user.user.email}</p>
               </div>
-              <div className="flex justify-around md:justify-normal gap-2">
+              <div className="flex gap-2 flex-wrap">
                 <Link to="/profile/user/orders">
                   <button
                     type="button"
@@ -287,10 +287,13 @@ const UserProfile = () => {
 
               <h4 className="text-md font-medium leading-3">Your Addresses</h4>
 
-              <div className="flex flex-col gap-3 border px-2 py-3">
-                {Array.isArray(addressess) && addressess.length > 0 ? (
-                  addressess.map((add, index) => (
-                    <div key={index} className="flex justify-between">
+              {Array.isArray(addressess) && addressess.length > 0 ? (
+                addressess.map((add, index) => (
+                  <div
+                    key={index}
+                    className="flex flex-col gap-3 border px-2 py-3 md:w-1/2"
+                  >
+                    <div className="flex justify-between">
                       <div>
                         <p className=" text-sm font-bold text-slate-700">
                           {add.name}
@@ -306,11 +309,11 @@ const UserProfile = () => {
                         <p className="text-sm text-slate-600">{add.state}</p>
                       </div>
                     </div>
-                  ))
-                ) : (
-                  <p>No Addresses</p>
-                )}
-              </div>
+                  </div>
+                ))
+              ) : (
+                <p>No Addresses</p>
+              )}
             </div>
           </div>
         </>
