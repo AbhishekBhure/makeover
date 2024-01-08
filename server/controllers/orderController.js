@@ -77,6 +77,7 @@ export const getAllOrdersByAdmin = async (req, res) => {
     if (req.query._sort && req.query._order) {
       query = query.sort({ [req.query._sort]: req.query._order });
     }
+
     const totalDocs = await totalOrdersQuery.count().exec();
 
     if (req.query._page && req.query._limit) {

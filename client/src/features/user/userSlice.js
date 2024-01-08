@@ -3,7 +3,6 @@ import { fetchLoggedInUserOrders, fetchLoggedInUserInfo } from "./userApi";
 
 const initialState = {
   userOrders: [],
-  totalOrders: 0,
   userInfo: null, //this will have more info about the user
   loading: false,
   error: false,
@@ -11,8 +10,8 @@ const initialState = {
 
 export const fetchLoggedInUserOrdersAsync = createAsyncThunk(
   "user/fetchLoggedInUserOrders",
-  async ({ userId, pagination }) => {
-    const response = await fetchLoggedInUserOrders(userId, pagination);
+  async (userId) => {
+    const response = await fetchLoggedInUserOrders(userId);
     return response.data;
   }
 );
@@ -36,7 +35,6 @@ export const userSlice = createSlice({
       .addCase(fetchLoggedInUserOrdersAsync.fulfilled, (state, action) => {
         state.loading = false;
         state.userOrders = action.payload;
-        // state.totalOrders = action.payload;
       })
       .addCase(fetchLoggedInUserOrdersAsync.rejected, (state, action) => {
         state.loading = false;
@@ -56,6 +54,5 @@ export const userSlice = createSlice({
 export const selectUserOrders = (state) => state.user.userOrders;
 export const selectUserInfo = (state) => state.user.userInfo;
 export const selectUserOrderLoading = (state) => state.user.loading;
-export const selectTotalUserOrders = (state) => state.user.totalOrders;
 
 export default userSlice.reducer;

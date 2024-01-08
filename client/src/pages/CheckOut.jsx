@@ -1,5 +1,5 @@
 import Layout from "../components/Layout";
-import { LuArrowRight } from "../icons";
+import { LuArrowRight, LuTrash2 } from "../icons";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Navigate } from "react-router-dom";
 import {
@@ -144,12 +144,8 @@ function CheckOut() {
                   <h1 className="text-4xl font-primary leading-7 text-gray-900">
                     Personal Information
                   </h1>
-                  <p className="mt-1 text-sm leading-6 text-gray-600">
-                    Use a permanent address where you can receive mail.
-                  </p>
-
                   <div className="mt-10 font-secondary grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                    <div className="sm:col-span-3">
+                    <div className="sm:col-span-4">
                       <label
                         htmlFor="name"
                         className="block text-sm font-medium leading-6 text-gray-900"
@@ -163,7 +159,7 @@ function CheckOut() {
                           id="name"
                           onChange={handleChange}
                           autoComplete="given-name"
-                          className="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                          className="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-pink-600 focus:outline-none sm:text-sm sm:leading-6"
                         />
                       </div>
                     </div>
@@ -182,12 +178,12 @@ function CheckOut() {
                           type="email"
                           onChange={handleChange}
                           autoComplete="email"
-                          className="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                          className="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-pink-600 focus:outline-none sm:text-sm sm:leading-6"
                         />
                       </div>
                     </div>
 
-                    <div className="col-span-full">
+                    <div className="sm:col-span-4">
                       <label
                         htmlFor="street"
                         className="block text-sm font-medium leading-6 text-gray-900"
@@ -201,7 +197,7 @@ function CheckOut() {
                           id="street"
                           onChange={handleChange}
                           autoComplete="street"
-                          className="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                          className="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-pink-600 focus:outline-none sm:text-sm sm:leading-6"
                         />
                       </div>
                     </div>
@@ -220,7 +216,7 @@ function CheckOut() {
                           id="city"
                           onChange={handleChange}
                           autoComplete="city"
-                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-pink-600 focus:outline-none sm:text-sm sm:leading-6"
                         />
                       </div>
                     </div>
@@ -239,7 +235,7 @@ function CheckOut() {
                           id="state"
                           onChange={handleChange}
                           autoComplete="state"
-                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-pink-600 focus:outline-none sm:text-sm sm:leading-6"
                         />
                       </div>
                     </div>
@@ -258,7 +254,7 @@ function CheckOut() {
                           id="pinCode"
                           onChange={handleChange}
                           autoComplete="pinCode"
-                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-pink-600 focus:outline-none sm:text-sm sm:leading-6"
                         />
                       </div>
                     </div>
@@ -346,7 +342,7 @@ function CheckOut() {
                             id="card"
                             name="payments"
                             type="radio"
-                            className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                            className="h-4 w-4 border-gray-300 text-pink-600 focus:ring-pink-600"
                           />
                           <label
                             htmlFor="card"
@@ -367,7 +363,7 @@ function CheckOut() {
             <div className="mt-7">
               <h1 className="text-4xl mb-3 font-primary">Cart</h1>
               <div className="flow-root font-secondary">
-                <ul role="list" className="-my-6 divide-y divide-gray-200">
+                <ul role="list" className="-my-6 divide-y p-3 divide-gray-200">
                   {items.map((item) => (
                     <li key={item.id} className="flex py-6">
                       <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
@@ -398,26 +394,21 @@ function CheckOut() {
                           <div className=" flex gap-1 items-center font-secondary">
                             <label htmlFor="quantity">Qty</label>
 
-                            <select
+                            <input
+                              className="w-10 border"
+                              type="number"
                               onChange={(e) => handleQuantity(e, item)}
                               value={item.quantity}
-                            >
-                              <option value="1">1</option>
-                              <option value="2">2</option>
-                              <option value="3">3</option>
-                              <option value="4">4</option>
-                              <option value="5">5</option>
-                              <option value="6">6</option>
-                            </select>
+                              max={item.product.stock}
+                            />
                           </div>
 
                           <div className="flex">
                             <button
                               onClick={(e) => handleDeleteItem(e, item.id)}
                               type="button"
-                              className="font-medium text-indigo-600 hover:text-indigo-500"
                             >
-                              Remove
+                              <LuTrash2 className="w-5 h-5" />
                             </button>
                           </div>
                         </div>

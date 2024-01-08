@@ -6,15 +6,10 @@ import {
   selectUserOrders,
 } from "../userSlice";
 import Loader from "../../../components/Loader";
-import Pagination from "../../../components/Pagination";
 import { ITEMS_PER_PAGE } from "../../../constants/constants";
+import { Link } from "react-router-dom";
 
 const UserOrders = () => {
-  const [page, setPage] = useState(1);
-  const handlePage = (page) => {
-    setPage(page);
-  };
-
   const dispatch = useDispatch();
 
   //selectors
@@ -25,9 +20,8 @@ const UserOrders = () => {
   const userOrderLoading = useSelector(selectUserOrderLoading);
 
   useEffect(() => {
-    const pagination = { _page: page, _limit: ITEMS_PER_PAGE };
-    dispatch(fetchLoggedInUserOrdersAsync({ userId, pagination }));
-  }, [dispatch, page, userId]);
+    dispatch(fetchLoggedInUserOrdersAsync(userId));
+  }, [dispatch, userId]);
 
   return (
     <>
@@ -48,44 +42,46 @@ const UserOrders = () => {
                     <span className="font-bold">{order.status} </span>
                   </h3>
                   <div className="flow-root font-secondary">
-                    <ul role="list" className="-my-6 divide-y divide-gray-200">
-                      {/* {order.items.map((item) => (
-                    <li key={item.product.id} className="flex py-6">
-                      <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                        <img
-                          src={item.product.images[0]}
-                          alt={item.product.title}
-                          className="h-full w-full object-cover object-center"
-                        />
-                      </div>
+                    {/* <ul role="list" className="-my-6 divide-y divide-gray-200">
+      {order.items.map((item) => (
+                        <li key={item.product.id} className="flex py-6">
+                          <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
+                            <img
+                              src={item.product.images[0]}
+                              alt={item.product.title}
+                              className="h-full w-full object-cover object-center"
+                            />
+                          </div>
 
-                      <div className="ml-4 flex flex-1 flex-col">
-                        <div>
-                          <div className="flex justify-between text-base font-medium text-gray-900">
-                            <h3>
-                              <Link to={`/product-detail/${item.product.id}`}>
-                                {item.product.title}
-                              </Link>
-                            </h3>
-                            <p className="ml-4">
-                              ${item.product.discountPrice}
-                            </p>
+                          <div className="ml-4 flex flex-1 flex-col">
+                            <div>
+                              <div className="flex justify-between text-base font-medium text-gray-900">
+                                <h3>
+                                  <Link
+                                    to={`/product-detail/${item.product.id}`}
+                                  >
+                                    {item.product.title}
+                                  </Link>
+                                </h3>
+                                <p className="ml-4">
+                                  ${item.product.discountPrice}
+                                </p>
+                              </div>
+                              <p className="mt-1 text-sm text-gray-500">
+                                {item.product.brand}
+                              </p>
+                            </div>
+                            <div className="flex flex-1 items-end justify-between text-sm">
+                              <div className=" flex gap-1 items-center font-secondary">
+                                <label htmlFor="quantity">
+                                  Qty: {item.quantity}
+                                </label>
+                              </div>
+                            </div>
                           </div>
-                          <p className="mt-1 text-sm text-gray-500">
-                            {item.product.brand}
-                          </p>
-                        </div>
-                        <div className="flex flex-1 items-end justify-between text-sm">
-                          <div className=" flex gap-1 items-center font-secondary">
-                            <label htmlFor="quantity">
-                              Qty: {item.quantity}
-                            </label>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                  ))} */}
-                    </ul>
+                        </li>
+                      ))}
+      </ul> */}
                   </div>
                 </div>
                 <div className="border-t border-gray-200 px-4 py-6 sm:px-6 font-secondary">
@@ -132,12 +128,6 @@ const UserOrders = () => {
                 </div>
               </div>
             ))}
-          <Pagination
-            page={page}
-            setPage={setPage}
-            handlePage={handlePage}
-            totalItems={orders.length}
-          />
         </>
       )}
     </>
