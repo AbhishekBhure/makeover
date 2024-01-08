@@ -14,6 +14,7 @@ import {
   deleteAddressAsync,
   fetchAddressByUserIdAsync,
   selectAddress,
+  selectAddressLoading,
 } from "../../address/addressSlice";
 import { LuPencilLine, LuTrash2 } from "../../../icons";
 import EditAddress from "./EditAddress";
@@ -27,6 +28,7 @@ const UserProfile = () => {
   const { loading } = useSelector((state) => state.auth);
   const user = useSelector(selectUser);
   const addressess = useSelector(selectAddress);
+  const addressLoading = useSelector(selectAddressLoading);
   const userId = currentUser.user._id;
 
   useEffect(() => {
@@ -73,16 +75,15 @@ const UserProfile = () => {
     setUserAddress({ ...userAddress, [e.target.id]: e.target.value });
   };
 
-  const handleAddNewAddress = (e) => {
+  const handleAddNewAddress = async (e) => {
     e.preventDefault();
     try {
-      dispatch(
+      await dispatch(
         addAddressAsync({
           ...userAddress,
           user: userId,
         })
       );
-      dispatch(fetchAddressByUserIdAsync(userId));
       setUserAddress({
         name: "",
         email: "",
@@ -92,7 +93,7 @@ const UserProfile = () => {
         pinCode: "",
       });
       setShowAddAddressForm(false);
-      // enqueueSnackbar("Address added Successfully", { variant: "success" });
+      await dispatch(fetchAddressByUserIdAsync(userId));
     } catch (error) {
       dispatch(addAddressAsync(error.message));
       enqueueSnackbar(error.message, { variant: "error" });
@@ -107,10 +108,12 @@ const UserProfile = () => {
     setShowEditAddressModal(true);
   };
 
-  const handleDeleteAddress = (itemId) => {
-    dispatch(deleteAddressAsync({ addressId: itemId, alert: enqueueSnackbar }));
-    dispatch(fetchAddressByUserIdAsync(userId));
+  const handleDeleteAddress = async (itemId) => {
+    await dispatch(
+      deleteAddressAsync({ addressId: itemId, alert: enqueueSnackbar })
+    );
     setShowModal(false);
+    await dispatch(fetchAddressByUserIdAsync(userId));
   };
 
   const showConfirmationModal = (itemId) => {
@@ -196,7 +199,7 @@ const UserProfile = () => {
                       <div className="border-b border-gray-900/10 pb-12">
                         <h1 className="text-xl">New Address</h1>
                         <div className="mt-7 font-secondary grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                          <div className="sm:col-span-3">
+                          <div className="col-span-full sm:col-span-4">
                             <label
                               htmlFor="name"
                               className="block text-sm font-medium leading-6 text-gray-900"
@@ -210,12 +213,12 @@ const UserProfile = () => {
                                 id="name"
                                 onChange={handleChange}
                                 autoComplete="given-name"
-                                className="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                className="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:outline-none focus:ring-pink-600 sm:text-sm sm:leading-6"
                               />
                             </div>
                           </div>
 
-                          <div className="sm:col-span-4">
+                          <div className="col-span-full sm:col-span-4">
                             <label
                               htmlFor="email"
                               className="block text-sm font-medium leading-6 text-gray-900"
@@ -229,12 +232,12 @@ const UserProfile = () => {
                                 type="email"
                                 onChange={handleChange}
                                 autoComplete="email"
-                                className="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                className="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:outline-none focus:ring-pink-600 sm:text-sm sm:leading-6"
                               />
                             </div>
                           </div>
 
-                          <div className="col-span-full">
+                          <div className="col-span-full sm:col-span-4">
                             <label
                               htmlFor="street-address"
                               className="block text-sm font-medium leading-6 text-gray-900"
@@ -248,7 +251,7 @@ const UserProfile = () => {
                                 id="street"
                                 onChange={handleChange}
                                 autoComplete="street-address"
-                                className="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                className="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:outline-none focus:ring-pink-600 sm:text-sm sm:leading-6"
                               />
                             </div>
                           </div>
@@ -267,7 +270,7 @@ const UserProfile = () => {
                                 id="city"
                                 onChange={handleChange}
                                 autoComplete="address-level2"
-                                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                className="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:outline-none focus:ring-pink-600 sm:text-sm sm:leading-6"
                               />
                             </div>
                           </div>
@@ -286,7 +289,7 @@ const UserProfile = () => {
                                 id="state"
                                 onChange={handleChange}
                                 autoComplete="address-level1"
-                                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                className="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:outline-none focus:ring-pink-600 sm:text-sm sm:leading-6"
                               />
                             </div>
                           </div>
@@ -305,7 +308,7 @@ const UserProfile = () => {
                                 id="pinCode"
                                 onChange={handleChange}
                                 autoComplete="postal-code"
-                                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                className="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:outline-none focus:ring-pink-600 sm:text-sm sm:leading-6"
                               />
                             </div>
                           </div>
@@ -339,8 +342,9 @@ const UserProfile = () => {
               )}
 
               <h4 className="text-md font-medium leading-3">Your Addresses</h4>
-
-              {Array.isArray(addressess) && addressess.length > 0 ? (
+              {addressLoading ? (
+                <Loader />
+              ) : Array.isArray(addressess) && addressess.length > 0 ? (
                 addressess.map((add, index) => (
                   <div
                     key={index}

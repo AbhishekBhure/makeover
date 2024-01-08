@@ -16,8 +16,11 @@ export default function EditAddress({
 }) {
   const { enqueueSnackbar } = useSnackbar();
   const dispatch = useDispatch();
+
+  //states
   const [userEditAddress, setUserEditAddress] = useState({});
 
+  //selectors
   const { currentUser } = useSelector((state) => state.auth);
   const userId = currentUser.user._id;
 
@@ -30,14 +33,15 @@ export default function EditAddress({
   useEffect(() => {
     setUserEditAddress(address);
   }, [address]);
-  const handleEditAddress = (e) => {
+
+  const handleEditAddress = async (e) => {
     e.preventDefault();
     try {
-      dispatch(
+      await dispatch(
         editAddressAsync({ address: userEditAddress, alert: enqueueSnackbar })
       );
-      dispatch(fetchAddressByUserIdAsync(userId));
       handleCancel();
+      await dispatch(fetchAddressByUserIdAsync(userId));
     } catch (error) {
       enqueueSnackbar(error, { variant: "error" });
     }
@@ -84,7 +88,7 @@ export default function EditAddress({
                             Edit Address
                           </Dialog.Title>
                           <div className="mt-7 font-secondary grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                            <div className="sm:col-span-3">
+                            <div className="col-span-full">
                               <label
                                 htmlFor="name"
                                 className="block text-sm font-medium leading-6 text-gray-900"
@@ -99,12 +103,12 @@ export default function EditAddress({
                                   defaultValue={address.name}
                                   onChange={handleChange}
                                   autoComplete="given-name"
-                                  className="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                  className="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-pink-600 sm:text-sm sm:leading-6 focus:outline-none"
                                 />
                               </div>
                             </div>
 
-                            <div className="sm:col-span-4">
+                            <div className="col-span-full">
                               <label
                                 htmlFor="email"
                                 className="block text-sm font-medium leading-6 text-gray-900"
@@ -119,7 +123,7 @@ export default function EditAddress({
                                   defaultValue={address.email}
                                   onChange={handleChange}
                                   autoComplete="email"
-                                  className="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                  className="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:outline-none focus:ring-pink-600 sm:text-sm sm:leading-6"
                                 />
                               </div>
                             </div>
@@ -139,7 +143,7 @@ export default function EditAddress({
                                   defaultValue={address.street}
                                   onChange={handleChange}
                                   autoComplete="street-address"
-                                  className="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                  className="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:outline-none focus:ring-pink-600 sm:text-sm sm:leading-6"
                                 />
                               </div>
                             </div>
@@ -159,7 +163,7 @@ export default function EditAddress({
                                   defaultValue={address.city}
                                   onChange={handleChange}
                                   autoComplete="address-level2"
-                                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                  className="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:outline-none focus:ring-pink-600 sm:text-sm sm:leading-6"
                                 />
                               </div>
                             </div>
@@ -179,7 +183,7 @@ export default function EditAddress({
                                   defaultValue={address.state}
                                   onChange={handleChange}
                                   autoComplete="address-level1"
-                                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                  className="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:outline-none focus:ring-pink-600 sm:text-sm sm:leading-6"
                                 />
                               </div>
                             </div>
@@ -199,7 +203,7 @@ export default function EditAddress({
                                   id="pinCode"
                                   onChange={handleChange}
                                   autoComplete="postal-code"
-                                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                  className="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:outline-none focus:ring-pink-600 sm:text-sm sm:leading-6"
                                 />
                               </div>
                             </div>
