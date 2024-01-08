@@ -11,11 +11,13 @@ import Loader from "../../../components/Loader";
 import { useEffect, useState } from "react";
 import {
   addAddressAsync,
+  deleteAddressAsync,
   fetchAddressByUserIdAsync,
   selectAddress,
 } from "../../address/addressSlice";
 import { LuPencilLine, LuTrash2 } from "../../../icons";
 import EditAddress from "./EditAddress";
+import ConfirmationModal from "../../../components/ConfirmationModal";
 
 const UserProfile = () => {
   const dispatch = useDispatch();
@@ -45,6 +47,8 @@ const UserProfile = () => {
     pinCode: "",
   });
   const [showEditAddressModal, setShowEditAddressModal] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [deleteId, setDeleteId] = useState(null);
 
   const { enqueueSnackbar } = useSnackbar();
   const handleSignOut = async () => {
@@ -72,7 +76,12 @@ const UserProfile = () => {
   const handleAddNewAddress = (e) => {
     e.preventDefault();
     try {
-      dispatch(addAddressAsync({ ...userAddress, user: userId }));
+      dispatch(
+        addAddressAsync({
+          ...userAddress,
+          user: userId,
+        })
+      );
       dispatch(fetchAddressByUserIdAsync(userId));
       setUserAddress({
         name: "",
@@ -83,7 +92,7 @@ const UserProfile = () => {
         pinCode: "",
       });
       setShowAddAddressForm(false);
-      enqueueSnackbar("Address added Successfully", { variant: "success" });
+      // enqueueSnackbar("Address added Successfully", { variant: "success" });
     } catch (error) {
       dispatch(addAddressAsync(error.message));
       enqueueSnackbar(error.message, { variant: "error" });
@@ -98,12 +107,32 @@ const UserProfile = () => {
     setShowEditAddressModal(true);
   };
 
+  const handleDeleteAddress = (itemId) => {
+    dispatch(deleteAddressAsync({ addressId: itemId, alert: enqueueSnackbar }));
+    dispatch(fetchAddressByUserIdAsync(userId));
+    setShowModal(false);
+  };
+
+  const showConfirmationModal = (itemId) => {
+    setShowModal(true);
+    setDeleteId(itemId);
+  };
+
   return (
     <>
       {loading ? (
         <Loader />
       ) : (
         <>
+          <ConfirmationModal
+            title="Delete Address"
+            message="Are you sure you want to delete this Address?"
+            dangerTag="Delete"
+            cancelTag="Cancel"
+            dangerAction={() => handleDeleteAddress(deleteId)}
+            cancelAction={() => setShowModal(false)}
+            showModal={showModal}
+          />
           <EditAddress
             showModal={showEditAddressModal}
             handleCancel={() => setShowEditAddressModal(false)}
@@ -339,7 +368,10 @@ const UserProfile = () => {
                         >
                           <LuPencilLine className="w-5 h-5" />
                         </button>
-                        <button type="button">
+                        <button
+                          onClick={() => showConfirmationModal(add._id)}
+                          type="button"
+                        >
                           <LuTrash2 className="w-5 h-5" />
                         </button>
                       </div>

@@ -1,5 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { addAddress, editAddress, fetchAddressByUserId } from "./addressApi";
+import {
+  addAddress,
+  deleteAddress,
+  editAddress,
+  fetchAddressByUserId,
+} from "./addressApi";
 
 const initialState = {
   addressess: [],
@@ -28,6 +33,15 @@ export const editAddressAsync = createAsyncThunk(
   async ({ address, alert }) => {
     const response = await editAddress(address);
     alert("Address Updated Successfully ✅", { variant: "success" });
+    return response.data;
+  }
+);
+
+export const deleteAddressAsync = createAsyncThunk(
+  "address/deleteAddress",
+  async ({ addressId, alert }) => {
+    const response = await deleteAddress(addressId);
+    alert("Address Deleted Successfully ✅", { variant: "success" });
     return response.data;
   }
 );
@@ -64,12 +78,26 @@ export const addressSlice = createSlice({
       })
       .addCase(editAddressAsync.fulfilled, (state, action) => {
         state.loading = false;
-        const index = state.addressess.findIndex(
-          (address) => address._id === action.payload._id
+        state.error = null;
+        state.addressess = state.addressess.filter(
+          (address) => address._id !== action.payload._id
         );
-        state.addressess[index] = action.payload;
       })
       .addCase(editAddressAsync.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(deleteAddressAsync.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(deleteAddressAsync.fulfilled, (state, action) => {
+        state.loading = false;
+        const index = state.addressess.findIndex(
+          (address) => address.id === action.payload.id
+        );
+        state.addressess.splice(index, 1);
+      })
+      .addCase(deleteAddressAsync.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });

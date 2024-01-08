@@ -18,6 +18,7 @@ export function addAddress(address) {
   });
 }
 
+//Edit Address
 export function editAddress(address) {
   return new Promise(async (resolve) => {
     const response = await fetch("/api/v1/address/editAddress/" + address._id, {
@@ -29,5 +30,17 @@ export function editAddress(address) {
     });
     const data = await response.json();
     resolve({ data });
+  });
+}
+
+//Delete Address
+export function deleteAddress(addressId) {
+  return new Promise(async (resolve) => {
+    const response = await fetch("/api/v1/address/deleteAddress/" + addressId, {
+      method: "DELETE",
+      headers: { "content-type": "application/json" },
+    });
+    const data = await response.json();
+    resolve({ data: { _id: addressId } });
   });
 }
