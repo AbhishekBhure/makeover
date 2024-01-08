@@ -20,3 +20,16 @@ export const getAddressByUser = async (req, res, next) => {
     next(error);
   }
 };
+
+//Update Address
+export const updateAddress = async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const updatedAddress = await Address.findByIdAndUpdate(id, req.body, {
+      new: true,
+    });
+    res.status(201).json(updatedAddress);
+  } catch (error) {
+    next(error);
+  }
+};

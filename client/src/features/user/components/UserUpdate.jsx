@@ -31,6 +31,7 @@ const UserUpdate = () => {
 
   //states
   const [userDetails, setUserDetails] = useState(currentUser);
+  console.log("userDetails", userDetails);
   const [file, setFile] = useState(undefined);
   const [filePercentage, setFilePercentage] = useState(0);
   const [fileUploadError, setFileUploadError] = useState(false);

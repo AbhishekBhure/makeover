@@ -78,7 +78,6 @@ const AdminOrders = () => {
   const handleSort = (sortOption) => {
     const sort = { _sort: sortOption.sort, _order: sortOption.order };
     setSort(sort);
-    console.log({ sort });
   };
 
   return (
@@ -88,18 +87,18 @@ const AdminOrders = () => {
         <Loader />
       ) : (
         <div className="overflow-x-auto">
-          <div className="font-secondary flex items-center justify-center  ">
-            <div className="w-full ">
+          <div className="font-secondary flex items-center justify-center">
+            <div className="w-full">
               <div className="bg-white rounded my-6">
                 <table className="min-w-max w-full table-auto">
                   <thead>
                     <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                      <th className="py-3 px-4 text-left">Order No.</th>
-                      <th className="py-3 px-4 text-left">Items</th>
-                      <th className="py-3 px-4 text-left">Total Qantity</th>
-                      <th className="py-3 px-4 text-left">Price</th>
+                      <th className="p-3 text-left">Order No.</th>
+                      <th className="p-3 text-left">Items</th>
+                      <th className="p-3 text-left">Total Qantity</th>
+                      <th className="p-3 text-left">Price</th>
                       <th
-                        className="py-3 px-4 inline-flex gap-1 items-center text-left cursor-pointer"
+                        className="py-3 px-2 inline-flex gap-1 items-center text-left cursor-pointer"
                         onClick={(e) =>
                           handleSort({
                             sort: "totalAmount",
@@ -119,10 +118,10 @@ const AdminOrders = () => {
                         )}
                       </th>
                       {/* <th className="py-3 px-4 text-center">Shipping Address</th> */}
-                      <th className="py-3 px-4 text-center">Order Status</th>
-                      <th className="py-3 px-4 text-center">Payment Status</th>
+                      <th className="p-3 text-center">Order Status</th>
+                      <th className="p-3 text-center">Payment Status</th>
                       <th
-                        className="py-3 px-4 inline-flex gap-1 items-center text-left cursor-pointer"
+                        className="p-3 inline-flex gap-1 items-center text-left cursor-pointer"
                         onClick={(e) =>
                           handleSort({
                             sort: "createdAt",
@@ -141,8 +140,8 @@ const AdminOrders = () => {
                           </span>
                         )}
                       </th>
-                      <th className="py-3 px-4 ">Last Updated</th>
-                      <th className="py-3 px-4 text-center">Actions</th>
+                      <th className="p-3 ">Last Updated</th>
+                      <th className="p-3 text-center">Actions</th>
                     </tr>
                   </thead>
                   <tbody className=" text-sm font-light">
@@ -188,7 +187,7 @@ const AdminOrders = () => {
                                 key={order.id}
                                 className="flex items-center justify-center"
                               >
-                                <span> ₹{item.discountPrice}</span>
+                                <span> ₹{item.product.discountPrice}</span>
                               </div>
                             ))}
                           </td>

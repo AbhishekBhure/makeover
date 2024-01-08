@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchLoggedInUserOrdersAsync,
@@ -6,19 +6,28 @@ import {
   selectUserOrders,
 } from "../userSlice";
 import Loader from "../../../components/Loader";
+import Pagination from "../../../components/Pagination";
+import { ITEMS_PER_PAGE } from "../../../constants/constants";
 
 const UserOrders = () => {
+  const [page, setPage] = useState(1);
+  const handlePage = (page) => {
+    setPage(page);
+  };
+
   const dispatch = useDispatch();
 
   //selectors
   const orders = useSelector(selectUserOrders);
+  console.log("userOrders", orders);
   const { currentUser } = useSelector((state) => state.auth);
   const userId = currentUser.user._id;
   const userOrderLoading = useSelector(selectUserOrderLoading);
 
   useEffect(() => {
-    dispatch(fetchLoggedInUserOrdersAsync(userId));
-  }, [dispatch, userId]);
+    const pagination = { _page: page, _limit: ITEMS_PER_PAGE };
+    dispatch(fetchLoggedInUserOrdersAsync({ userId, pagination }));
+  }, [dispatch, page, userId]);
 
   return (
     <>
@@ -27,6 +36,7 @@ const UserOrders = () => {
       ) : (
         <>
           {orders &&
+            orders.length > 0 &&
             orders.map((order) => (
               <div key={order.id} className="mb-6 border px-4">
                 <div className="mt-2">
@@ -122,6 +132,12 @@ const UserOrders = () => {
                 </div>
               </div>
             ))}
+          <Pagination
+            page={page}
+            setPage={setPage}
+            handlePage={handlePage}
+            totalItems={orders.length}
+          />
         </>
       )}
     </>

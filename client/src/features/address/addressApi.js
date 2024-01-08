@@ -17,3 +17,17 @@ export function addAddress(address) {
     resolve({ data });
   });
 }
+
+export function editAddress(address) {
+  return new Promise(async (resolve) => {
+    const response = await fetch("/api/v1/address/editAddress/" + address._id, {
+      method: "PATCH",
+      body: JSON.stringify(address),
+      headers: {
+        "content-type": "application/json",
+      },
+    });
+    const data = await response.json();
+    resolve({ data });
+  });
+}

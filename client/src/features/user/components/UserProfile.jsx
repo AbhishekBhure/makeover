@@ -14,6 +14,8 @@ import {
   fetchAddressByUserIdAsync,
   selectAddress,
 } from "../../address/addressSlice";
+import { LuPencilLine, LuTrash2 } from "../../../icons";
+import EditAddress from "./EditAddress";
 
 const UserProfile = () => {
   const dispatch = useDispatch();
@@ -33,6 +35,7 @@ const UserProfile = () => {
 
   //states
   const [showAddAddressForm, setShowAddAddressForm] = useState(false);
+  const [filterAddress, setFilterAddress] = useState({});
   const [userAddress, setUserAddress] = useState({
     name: "",
     email: "",
@@ -41,6 +44,7 @@ const UserProfile = () => {
     state: "",
     pinCode: "",
   });
+  const [showEditAddressModal, setShowEditAddressModal] = useState(false);
 
   const { enqueueSnackbar } = useSnackbar();
   const handleSignOut = async () => {
@@ -86,12 +90,25 @@ const UserProfile = () => {
     }
   };
 
+  const showEditForm = (addressId) => {
+    const selectedAddress = addressess.find(
+      (address) => address._id === addressId
+    );
+    setFilterAddress({ ...selectedAddress });
+    setShowEditAddressModal(true);
+  };
+
   return (
     <>
       {loading ? (
         <Loader />
       ) : (
         <>
+          <EditAddress
+            showModal={showEditAddressModal}
+            handleCancel={() => setShowEditAddressModal(false)}
+            address={filterAddress}
+          />
           <div className="bg-white my-8 md:mx-auto rounded shadow-md w-full  overflow-hidden font-secondary">
             <div className="h-[140px] bg-gradient-to-r from-cyan-500 to-blue-500"></div>
             <div className="px-5 py-2 flex flex-col gap-3 pb-6">
@@ -267,6 +284,13 @@ const UserProfile = () => {
                       </div>
                       <div className="font-secondary flex items-center justify-end gap-x-6">
                         <button
+                          onClick={() => setShowAddAddressForm(false)}
+                          type="button"
+                          className="text-sm leading-6 border px-3 py-1 rounded-full border-black text-gray-900"
+                        >
+                          Cancel
+                        </button>
+                        <button
                           type="reset"
                           className="text-sm leading-6 border px-3 py-1 rounded-full border-black text-gray-900"
                         >
@@ -307,6 +331,17 @@ const UserProfile = () => {
                           {add.city} - {add.pinCode}
                         </p>
                         <p className="text-sm text-slate-600">{add.state}</p>
+                      </div>
+                      <div className="flex gap-2">
+                        <button
+                          type="button"
+                          onClick={() => showEditForm(add._id)}
+                        >
+                          <LuPencilLine className="w-5 h-5" />
+                        </button>
+                        <button type="button">
+                          <LuTrash2 className="w-5 h-5" />
+                        </button>
                       </div>
                     </div>
                   </div>

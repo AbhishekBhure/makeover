@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { addAddress, fetchAddressByUserId } from "./addressApi";
+import { addAddress, editAddress, fetchAddressByUserId } from "./addressApi";
 
 const initialState = {
   addressess: [],
@@ -19,6 +19,15 @@ export const fetchAddressByUserIdAsync = createAsyncThunk(
   "address/fetchAddressByUserId",
   async (userId) => {
     const response = await fetchAddressByUserId(userId);
+    return response.data;
+  }
+);
+
+export const editAddressAsync = createAsyncThunk(
+  "address/editAddress",
+  async ({ address, alert }) => {
+    const response = await editAddress(address);
+    alert("Address Updated Successfully ✅", { variant: "success" });
     return response.data;
   }
 );
@@ -49,11 +58,25 @@ export const addressSlice = createSlice({
       .addCase(addAddressAsync.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
+      })
+      .addCase(editAddressAsync.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(editAddressAsync.fulfilled, (state, action) => {
+        state.loading = false;
+        const index = state.addressess.findIndex(
+          (address) => address._id === action.payload._id
+        );
+        state.addressess[index] = action.payload;
+      })
+      .addCase(editAddressAsync.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
       });
   },
 });
 
 export const selectAddress = (state) => state.addressess.addressess;
-export const selectLoading = (state) => state.loading;
+export const selectAddressLoading = (state) => state.addressess.loading;
 
 export default addressSlice.reducer;
