@@ -33,3 +33,15 @@ export const updateAddress = async (req, res, next) => {
     next(error);
   }
 };
+
+//Delete Address
+export const deleteAddress = async (req, res, next) => {
+  const { id } = req.params;
+
+  try {
+    const deleteAddress = await Address.findByIdAndDelete(id);
+    res.status(200).json(deleteAddress);
+  } catch (error) {
+    next(error);
+  }
+};
