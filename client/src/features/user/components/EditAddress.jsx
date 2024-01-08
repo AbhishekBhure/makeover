@@ -1,8 +1,12 @@
 import { Fragment, useEffect, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { useSnackbar } from "notistack";
-import { editAddressAsync } from "../../address/addressSlice";
-import { useDispatch } from "react-redux";
+import {
+  editAddressAsync,
+  fetchAddressByUserIdAsync,
+} from "../../address/addressSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { selectUser } from "../../auth/authSlice";
 
 export default function EditAddress({
   showModal,
@@ -13,6 +17,10 @@ export default function EditAddress({
   const { enqueueSnackbar } = useSnackbar();
   const dispatch = useDispatch();
   const [userEditAddress, setUserEditAddress] = useState({});
+
+  const { currentUser } = useSelector((state) => state.auth);
+  const userId = currentUser.user._id;
+
   const handleChange = (e) => {
     setUserEditAddress({ ...userEditAddress, [e.target.id]: e.target.value });
   };
@@ -28,6 +36,7 @@ export default function EditAddress({
       dispatch(
         editAddressAsync({ address: userEditAddress, alert: enqueueSnackbar })
       );
+      dispatch(fetchAddressByUserIdAsync(userId));
       handleCancel();
     } catch (error) {
       enqueueSnackbar(error, { variant: "error" });
