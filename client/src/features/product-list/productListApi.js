@@ -49,8 +49,6 @@ export function fetchProductsByFilters(
 
   let queryStr = "";
 
-  console.log(searchTerm);
-
   if (searchTerm) {
     queryStr += `searchTerm=${searchTerm}&`;
   }

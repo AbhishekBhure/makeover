@@ -12,8 +12,14 @@ const router = express.Router();
 
 router
   .post("/", createProduct)
-  .get("/", searchProducts)
-  .get("/", getAllProducts)
+  .get("/", (req, res, next) => {
+    // Checking if there are search parameters in the query string
+    if (req.query.searchTerm) {
+      return searchProducts(req, res, next);
+    } else {
+      return getAllProducts(req, res, next);
+    }
+  })
   .get("/:id", getProductById)
   .patch("/:id", requireSignIn, isAdmin, updateProduct);
 
