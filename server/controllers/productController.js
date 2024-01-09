@@ -91,32 +91,30 @@ export const searchProducts = async (req, res, next) => {
   try {
     let condition = {};
 
-    // Handle deleted condition based on query parameter
+    // Handling deleted condition based on query parameter
     if (!req.query.admin) {
       condition.deleted = { $ne: true };
     }
 
-    // Create a base query without the search term
+    // Creating a base query without the search term
     let query = Product.find(condition);
 
-    // Handle pagination if provided
+    // Handling pagination if provided
     if (req.query._page && req.query._limit) {
       const pageSize = req.query._limit;
       const page = req.query._page;
       query = query.skip(pageSize * (page - 1)).limit(pageSize);
     }
 
-    // Extract the search term from the query parameters
+    // Extracting the search term from the query parameters
     const searchTerm = req.query.searchTerm || "";
     console.log(searchTerm);
 
-    // Add the search condition for the title
+    // Adding the search condition for the title
     query = query.find({ title: { $regex: searchTerm, $options: "i" } });
 
-    // Execute the query and retrieve the data
     const data = await query.exec();
 
-    // Set the "X-Total-Count" header based on the total number of documents matching the search criteria
     res.set(
       "X-Total-Count",
       await Product.countDocuments({
@@ -125,10 +123,8 @@ export const searchProducts = async (req, res, next) => {
       })
     );
 
-    // Send the data as a JSON response
     res.status(200).json(data);
   } catch (error) {
-    // Pass any errors to the error handling middleware
     next(error);
   }
 };
