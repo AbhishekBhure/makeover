@@ -18,6 +18,7 @@ const initialState = {
   error: null,
   totalItems: 0,
   selectedProduct: null,
+  searchTerm: "",
 };
 
 export const fetchAllProductsAsync = createAsyncThunk(
@@ -54,12 +55,13 @@ export const fetchProductByIdAsync = createAsyncThunk(
 
 export const fetchProductsByFiltersAsync = createAsyncThunk(
   "product/fetchProductsByFilters",
-  async ({ filter, sort, pagination, admin }) => {
+  async ({ filter, sort, pagination, admin, searchTerm }) => {
     const response = await fetchProductsByFilters(
       filter,
       sort,
       pagination,
-      admin
+      admin,
+      searchTerm
     );
     return response.data;
   }
@@ -106,6 +108,7 @@ export const productSlice = createSlice({
         state.error = null;
         state.products = action.payload.products;
         state.totalItems = action.payload.totalItems;
+        state.searchTerm = action.meta.arg.searchTerm;
       })
       .addCase(fetchProductsByFiltersAsync.rejected, (state, action) => {
         state.loading = false;
@@ -179,5 +182,6 @@ export const selectBrands = (state) => state.product.brands;
 export const selectTotalItems = (state) => state.product.totalItems;
 export const selectProductById = (state) => state.product.selectedProduct;
 export const selectProductLoading = (state) => state.product.loading;
+export const selectSearchTerm = (state) => state.product.searchTerm;
 
 export default productSlice.reducer;

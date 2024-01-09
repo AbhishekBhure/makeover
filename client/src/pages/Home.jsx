@@ -11,7 +11,6 @@ const Home = () => {
         esse, ullam recusandae fugit quis non. Corrupti sapiente ipsa distinctio
         unde?.
       </p>
-      <ProductList />
     </Layout>
   );
 };

@@ -1,20 +1,34 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { LuHeart, LuShoppingBag, LuSearch, LuText } from "../icons";
 import { useState } from "react";
 import MobileNav from "./MobileNav";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectItems } from "../features/cart/cartSlice";
 import { selectUser } from "../features/auth/authSlice";
+import { fetchProductsByFiltersAsync } from "../features/product-list/productListSlice";
 
 const Navbar = () => {
-  const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
+  //states
+  const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  //selectors
   const items = useSelector(selectItems);
   // const { currentUser } = useSelector((state) => state.auth);
   const currentUser = useSelector(selectUser);
   console.log("currentUser", currentUser);
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  const handleSearch = (e, category) => {
+    e.preventDefault();
+    navigate("/product-listing");
+    dispatch(fetchProductsByFiltersAsync({ searchTerm, category }));
+    setSearchTerm("");
   };
 
   return (
@@ -31,6 +45,7 @@ const Navbar = () => {
             <ul className="flex gap-4">
               <NavLink
                 to="/face"
+                onClick={(e) => handleSearch(e, "face")}
                 className={({ isActive }) =>
                   isActive ? " font-bold text-pink-500" : ""
                 }
@@ -79,13 +94,20 @@ const Navbar = () => {
               </NavLink>
             </ul>
           </div>
-          <form className=" p-2 md:p-3 rounded-full flex items-center border  focus-within:border-slate-500 transition-border duration-300">
+          <form
+            onSubmit={handleSearch}
+            className=" p-2 md:p-3 rounded-full flex items-center border  focus-within:border-slate-500 transition-border duration-300"
+          >
             <input
               type="text"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="Search products..."
               className="bg-transparent focus:outline-none w-32 sm:w-64"
             />
-            <LuSearch className="text-xl" />
+            <button>
+              <LuSearch className="text-xl" />
+            </button>
           </form>
           <div className="flex gap-4 items-center">
             <div className="relative">

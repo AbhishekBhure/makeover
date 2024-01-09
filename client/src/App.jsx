@@ -28,6 +28,8 @@ import AdminUpdateProductPage from "./pages/Admin/AdminUpdateProductPage";
 import AdminOrdersPage from "./pages/Admin/AdminOrdersPage";
 import UserUpdate from "./features/user/components/UserUpdate";
 import StripeCheckout from "./pages/Payment/StripeCheckout";
+import BreadCrumbs from "./components/BreadCrumbs";
+import ProductList from "./features/product-list/components/ProductList";
 
 function App() {
   const dispatch = useDispatch();
@@ -45,8 +47,10 @@ function App() {
       <Navbar />
 
       <Layout>
+        {/* <BreadCrumbs /> */}
         <Routes>
           <Route exact path="/" element={<Home />} />
+          <Route exact path="/product-listing" element={<ProductList />} />
           <Route path="/profile" element={<ProtectedRoute />}>
             <Route exact path="user" element={<UserProfilePage />} />
             <Route path="user/orders" element={<UserOrdersPage />} />
