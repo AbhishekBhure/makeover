@@ -25,7 +25,6 @@ export const getAllProducts = async (req, res) => {
       });
     }
 
-    //TODO: How to get sort on discounted Price not on Actual Price
     if (req.query._sort && req.query._order) {
       query = query.sort({ [req.query._sort]: req.query._order });
     }
@@ -84,5 +83,52 @@ export const updateProduct = async (req, res) => {
     res.status(201).json(updatedProduct);
   } catch (error) {
     res.status(400).json(error.message);
+  }
+};
+
+//Search products
+export const searchProducts = async (req, res, next) => {
+  try {
+    let condition = {};
+
+    // Handle deleted condition based on query parameter
+    if (!req.query.admin) {
+      condition.deleted = { $ne: true };
+    }
+
+    // Create a base query without the search term
+    let query = Product.find(condition);
+
+    // Handle pagination if provided
+    if (req.query._page && req.query._limit) {
+      const pageSize = req.query._limit;
+      const page = req.query._page;
+      query = query.skip(pageSize * (page - 1)).limit(pageSize);
+    }
+
+    // Extract the search term from the query parameters
+    const searchTerm = req.query.searchTerm || "";
+    console.log(searchTerm);
+
+    // Add the search condition for the title
+    query = query.find({ title: { $regex: searchTerm, $options: "i" } });
+
+    // Execute the query and retrieve the data
+    const data = await query.exec();
+
+    // Set the "X-Total-Count" header based on the total number of documents matching the search criteria
+    res.set(
+      "X-Total-Count",
+      await Product.countDocuments({
+        title: { $regex: searchTerm, $options: "i" },
+        ...condition,
+      })
+    );
+
+    // Send the data as a JSON response
+    res.status(200).json(data);
+  } catch (error) {
+    // Pass any errors to the error handling middleware
+    next(error);
   }
 };
