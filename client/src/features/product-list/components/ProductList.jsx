@@ -92,7 +92,6 @@ export default function ProductList() {
 
   const handleFilter = (e, section, option) => {
     const newFilter = { ...filter };
-    //TODO: on server it will support multiple categories
 
     if (e.target.checked) {
       if (newFilter[section.id]) {
@@ -106,7 +105,6 @@ export default function ProductList() {
       );
       newFilter[section.id].splice(index, 1);
     }
-    console.log({ newFilter });
     setFilter(newFilter);
   };
 
@@ -131,7 +129,7 @@ export default function ProductList() {
           />
 
           <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-24">
+            <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-20">
               <h1 className="text-4xl tracking-tight text-gray-900 font-primary">
                 All Products
               </h1>

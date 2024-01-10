@@ -23,6 +23,8 @@ import {
 } from "react-icons/lu";
 import loader from "./loader.svg";
 import google from "./google.png";
+import lipstick from "./lipstick.png";
+import mascara from "./mascara-brush.png";
 
 export {
   LuAlertTriangle,
@@ -48,4 +50,6 @@ export {
   LuArrowRight,
   google,
   loader,
+  lipstick,
+  mascara,
 };

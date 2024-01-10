@@ -13,7 +13,7 @@ const MobileNav = ({ isMobileMenuOpen, toggleMobileMenu }) => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    navigate("/");
+    navigate("/product-listing");
     dispatch(fetchProductsByFiltersAsync({ searchTerm }));
     setSearchTerm("");
   };

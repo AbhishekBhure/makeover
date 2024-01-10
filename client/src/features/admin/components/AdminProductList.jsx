@@ -56,10 +56,6 @@ export default function AdminProductList() {
   const products = useSelector(selectAllProduct);
   const totalItems = useSelector(selectTotalItems);
   const productLoading = useSelector(selectProductLoading);
-  const categories = useSelector(selectCategories);
-  const brands = useSelector(selectBrands);
-
-  const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
 
   useEffect(() => {
     const pagination = { _page: page, _limit: ITEMS_PER_PAGE };
@@ -79,7 +75,6 @@ export default function AdminProductList() {
 
   const handleFilter = (e, section, option) => {
     const newFilter = { ...filter };
-    //TODO: on server it will support multiple categories
 
     if (e.target.checked) {
       if (newFilter[section.id]) {
@@ -93,7 +88,6 @@ export default function AdminProductList() {
       );
       newFilter[section.id].splice(index, 1);
     }
-    console.log({ newFilter });
     setFilter(newFilter);
   };
 
@@ -359,6 +353,7 @@ function MobileFilter({
     </>
   );
 }
+
 function DesktopFilter({ handleFilter }) {
   const categories = useSelector(selectCategories);
   const brands = useSelector(selectBrands);
@@ -471,6 +466,7 @@ function ProductGrid({ products }) {
                                 className="absolute inset-0"
                               />
                               {product.title}
+                              <span className="text-xs">({product.brand})</span>
                             </h3>
                             <div className="mt-1 items-center gap-1 flex text-gray-600">
                               <LuStar className="w-4 h-4" />

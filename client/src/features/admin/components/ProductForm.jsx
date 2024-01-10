@@ -50,7 +50,12 @@ const ProductForm = () => {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const handleDeleteImage = () => {};
+  const handleDeleteImage = (index) => {
+    setProductDetails({
+      ...productDetails,
+      images: productDetails.images.filter((_, i) => i !== index),
+    });
+  };
 
   const storeImage = async (file) => {
     return new Promise((resolve, reject) => {
@@ -305,7 +310,7 @@ const ProductForm = () => {
                       className="rounded-lg object-contain w-20 h-20"
                     />
                     <LuTrash2
-                      className="hover:opacity-95 cursor-pointer mx-2"
+                      className="hover:opacity-95 w-5 h-5 cursor-pointer mx-2"
                       onClick={() => handleDeleteImage(index)}
                     />
                   </div>
