@@ -143,7 +143,7 @@ const ProductForm = () => {
       stock: +productDetails.stock,
     };
 
-    dispatch(createProductAsync(product));
+    dispatch(createProductAsync({ product: product, alert: enqueueSnackbar }));
     setError(false);
     setLoading(false);
     setProductDetails({
@@ -156,7 +156,7 @@ const ProductForm = () => {
       category: "",
       images: [],
     });
-    enqueueSnackbar("Product Created Successfully", { variant: "success" });
+    // enqueueSnackbar("Product Created Successfully", { variant: "success" });
   };
 
   return (

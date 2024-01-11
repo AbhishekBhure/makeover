@@ -27,8 +27,9 @@ export const fetchAllOrdersAsync = createAsyncThunk(
 
 export const updateOrderStatusAsync = createAsyncThunk(
   "order/updateOrderStatus",
-  async (order) => {
+  async ({ order, alert }) => {
     const response = await updateOrderStatus(order);
+    alert("Order status updated successfully ✅", { variant: "success" });
     return response.data;
   }
 );

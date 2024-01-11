@@ -69,7 +69,6 @@ export default function ProductDetail() {
         user: user.user._id,
       };
       dispatch(addToCartAsync({ item: newItem, alert: enqueueSnackbar }));
-      // enqueueSnackbar("Item Added to cart", { variant: "success" });
     } else {
       enqueueSnackbar("Item Alredy Added in the cart", { variant: "warning" });
     }

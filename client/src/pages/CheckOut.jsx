@@ -121,9 +121,6 @@ function CheckOut() {
     } else {
       enqueueSnackbar("Enter Address and Payment Method", { variant: "error" });
     }
-    //TODO: redirect to order-success page
-    //TODO: clear cart after order
-    //TODO: on server change the stock of itmes
   };
 
   return (

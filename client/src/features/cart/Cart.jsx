@@ -36,9 +36,11 @@ export default function Cart() {
   };
 
   const handleDeleteItem = (itemId) => {
-    dispatch(deleteItemsFromCartAsync(itemId));
+    dispatch(
+      deleteItemsFromCartAsync({ itemId: itemId, alert: enqueueSnackbar })
+    );
     setShowModal(false);
-    enqueueSnackbar("Item Removed", { variant: "success" });
+    // enqueueSnackbar("Item Removed", { variant: "success" });
   };
 
   const showConfirmationModal = (itemId) => {

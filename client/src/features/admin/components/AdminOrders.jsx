@@ -48,15 +48,23 @@ const AdminOrders = () => {
 
   const handleUpdateStatus = (e, order) => {
     const updatedOrderStatus = { ...order, status: e.target.value };
-    dispatch(updateOrderStatusAsync(updatedOrderStatus));
-    enqueueSnackbar("Order Updated Successfully", { variant: "success" });
+    dispatch(
+      updateOrderStatusAsync({
+        order: updatedOrderStatus,
+        alert: enqueueSnackbar,
+      })
+    );
     setEditOrderId(-1);
   };
 
   const handlePaymentStatus = (e, order) => {
     const updatedOrderStatus = { ...order, paymentStatus: e.target.value };
-    dispatch(updateOrderStatusAsync(updatedOrderStatus));
-    enqueueSnackbar("Order Updated Successfully", { variant: "success" });
+    dispatch(
+      updateOrderStatusAsync({
+        order: updatedOrderStatus,
+        alert: enqueueSnackbar,
+      })
+    );
     setEditOrderId(-1);
   };
 

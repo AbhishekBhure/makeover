@@ -10,6 +10,7 @@ import { useParams } from "react-router-dom";
 import { addToCartAsync } from "../../cart/cartSlice";
 import { selectUser } from "../../auth/authSlice";
 import Loader from "../../../components/Loader";
+import { useSnackbar } from "notistack";
 
 const colors = [
   { name: "White", class: "bg-white", selectedClass: "ring-gray-400" },
@@ -29,6 +30,7 @@ function classNames(...classes) {
 }
 
 export default function AdminProductDetail() {
+  const { enqueueSnackbar } = useSnackbar();
   const dispatch = useDispatch();
   const params = useParams();
 
@@ -52,7 +54,7 @@ export default function AdminProductDetail() {
       user: user.user._id,
     };
     delete newItem["id"];
-    dispatch(addToCartAsync(newItem));
+    dispatch(addToCartAsync({ item: newItem, alert: enqueueSnackbar }));
   };
 
   return (
