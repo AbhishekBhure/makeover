@@ -1,13 +1,16 @@
-import { LuX, LuSearch } from "../icons";
-import { NavLink, useNavigate } from "react-router-dom";
+import { LuX, LuSearch, LuLogOut, LuListOrdered, LuPlus } from "../icons";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProductsByFiltersAsync } from "../features/product-list/productListSlice";
 import { Fragment, useState } from "react";
 import { Dialog, Disclosure, Transition } from "@headlessui/react";
+import { selectUser } from "../features/auth/authSlice";
 
 const MobileNav = ({ isMobileMenuOpen, toggleMobileMenu }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const user = useSelector(selectUser);
+  console.log("user", user.user.role);
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleSearch = (e) => {
@@ -72,6 +75,37 @@ const MobileNav = ({ isMobileMenuOpen, toggleMobileMenu }) => {
                       </button>
                     </form>
                     <ul className="flex flex-col gap-4">
+                      {user && user.user.role === "admin" && (
+                        <>
+                          <Link to="/profile/admin/product-form">
+                            <button className="flex gap-2 items-center justify-center">
+                              Add New Product
+                              <span>
+                                <LuPlus className="w-5 h-5" />
+                              </span>
+                            </button>
+                          </Link>
+                          <Link to={"/profile/admin/orders"}>
+                            <button className="flex gap-2 items-center justify-center">
+                              Orders
+                              <span>
+                                <LuListOrdered className="w-5 h-5" />
+                              </span>
+                            </button>
+                          </Link>
+                          <Link to={"/"}>
+                            <button
+                              // onClick={handleSignOut}
+                              className="flex gap-2 items-center justify-center"
+                            >
+                              Sign Out
+                              <span>
+                                <LuLogOut className="w-5 h-5" />
+                              </span>
+                            </button>
+                          </Link>
+                        </>
+                      )}
                       <NavLink
                         to="/face"
                         className={({ isActive }) =>

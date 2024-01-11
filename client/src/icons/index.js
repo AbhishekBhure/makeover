@@ -20,6 +20,8 @@ import {
   LuStar,
   LuPlus,
   LuAlertTriangle,
+  LuLogOut,
+  LuListOrdered,
 } from "react-icons/lu";
 import loader from "./loader.svg";
 import google from "./google.png";
@@ -48,6 +50,8 @@ export {
   LuPlus,
   LuStar,
   LuArrowRight,
+  LuLogOut,
+  LuListOrdered,
   google,
   loader,
   lipstick,
