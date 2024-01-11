@@ -12,51 +12,51 @@ import { Link } from "react-router-dom";
 import { LuStar } from "../icons";
 import Pagination from "../components/Pagination";
 
-const Eyes = () => {
+const Lips = () => {
   const dispatch = useDispatch();
 
   const products = useSelector(selectAllProduct);
   console.log(products);
   const productLoading = useSelector(selectProductLoading);
 
-  const [totalEyes, setTotalEyes] = useState(0);
+  const [totalLips, setTotalLips] = useState(0);
   const [page, setPage] = useState(1);
-  const [eyes, setEyes] = useState([]);
+  const [lips, setLips] = useState([]);
 
   useEffect(() => {
-    const eyesCategories = products.filter(
-      (product) => product.category === "eyes"
+    const lipsCategories = products.filter(
+      (product) => product.category === "lips"
     );
-    setEyes(eyesCategories);
-    setTotalEyes(eyesCategories.length);
+    setLips(lipsCategories);
+    setTotalLips(lipsCategories.length);
   }, [products]);
 
   useEffect(() => {
-    const fetchEyesProducts = async () => {
+    const fetchLipsProducts = async () => {
       try {
-        const pagination = { _page: page, _limit: 10 };
+        const pagination = { _page: page, _limit: totalLips };
         await dispatch(fetchProductsByFiltersAsync({ pagination }));
       } catch (error) {
         console.log(error);
       }
     };
-    fetchEyesProducts();
+    fetchLipsProducts();
   }, [page]);
 
   const handlePage = (page) => {
     setPage(page);
   };
   return (
-    <Layout title={"MakeOver- Eyes"}>
-      {eyes.length === 0 ? (
+    <Layout title={"MakeOver- Lips"}>
+      {lips.length === 0 ? (
         <Loader />
       ) : (
         <div className="bg-white font-secondary">
           <div className="mx-auto max-w-2xl px-4 py-0 sm:px-6 sm:py-0 lg:max-w-7xl lg:px-8">
             <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-              {eyes &&
-                eyes.length > 0 &&
-                eyes.map((product) => (
+              {lips &&
+                lips.length > 0 &&
+                lips.map((product) => (
                   <div key={product.id}>
                     <div className="group relative shadow-md  p-3">
                       <Link to={`/profile/admin/product-detail/${product.id}`}>
@@ -117,10 +117,10 @@ const Eyes = () => {
         page={page}
         setPage={setPage}
         handlePage={handlePage}
-        totalItems={totalEyes}
+        totalItems={totalLips}
       />
     </Layout>
   );
 };
 
-export default Eyes;
+export default Lips;

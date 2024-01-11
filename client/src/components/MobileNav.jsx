@@ -163,20 +163,12 @@ const MobileNav = ({ isMobileMenuOpen, toggleMobileMenu }) => {
                         <li>Nails</li>
                       </NavLink>
                       <NavLink
-                        to="/tools-brushes"
+                        to="/product-listing"
                         className={({ isActive }) =>
                           isActive ? " font-bold text-pink-500" : ""
                         }
                       >
-                        <li>Tools & Brushes</li>
-                      </NavLink>
-                      <NavLink
-                        to="/makeup-palettes"
-                        className={({ isActive }) =>
-                          isActive ? " font-bold text-pink-500" : ""
-                        }
-                      >
-                        <li> Makeup Palettes </li>
+                        <li>Others</li>
                       </NavLink>
                     </ul>
                   </div>
@@ -191,83 +183,3 @@ const MobileNav = ({ isMobileMenuOpen, toggleMobileMenu }) => {
 };
 
 export default MobileNav;
-
-{
-  /* <div className="flex items-center justify-between px-4">
-<div className="w-3/4 bg-white p-4 overflow-y-auto">
-  <button
-    onClick={toggleMobileMenu}
-    className="focus:outline-none absolute top-3.5 right-4"
-  >
-    <LuX className="text-2xl" />
-  </button>
-  <div className="categories flex flex-col gap-3 ">
-    <form
-      onSubmit={handleSearch}
-      className=" p-2 md:p-3 rounded-full flex justify-between items-center border  focus-within:border-slate-500 transition-border duration-300"
-    >
-      <input
-        type="text"
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        placeholder="Search products..."
-        className="bg-transparent focus:outline-none w-40 sm:w-64 "
-      />
-      <button>
-        <LuSearch className="text-xl" />
-      </button>
-    </form>
-    <ul className="flex flex-col gap-4">
-      <NavLink
-        to="/face"
-        className={({ isActive }) =>
-          isActive ? " font-bold text-pink-500" : ""
-        }
-      >
-        <li>Face</li>
-      </NavLink>
-      <NavLink
-        to="/eyes"
-        className={({ isActive }) =>
-          isActive ? " font-bold text-pink-500" : ""
-        }
-      >
-        <li>Eyes</li>
-      </NavLink>
-      <NavLink
-        to="/lips"
-        className={({ isActive }) =>
-          isActive ? " font-bold text-pink-500" : ""
-        }
-      >
-        <li>Lips</li>
-      </NavLink>
-      <NavLink
-        to="/nails"
-        className={({ isActive }) =>
-          isActive ? " font-bold text-pink-500" : ""
-        }
-      >
-        <li>Nails</li>
-      </NavLink>
-      <NavLink
-        to="/tools-brushes"
-        className={({ isActive }) =>
-          isActive ? " font-bold text-pink-500" : ""
-        }
-      >
-        <li>Tools & Brushes</li>
-      </NavLink>
-      <NavLink
-        to="/makeup-palettes"
-        className={({ isActive }) =>
-          isActive ? " font-bold text-pink-500" : ""
-        }
-      >
-        <li> Makeup Palettes </li>
-      </NavLink>
-    </ul>
-  </div>
-</div>
-</div> */
-}

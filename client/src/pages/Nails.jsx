@@ -12,51 +12,51 @@ import { Link } from "react-router-dom";
 import { LuStar } from "../icons";
 import Pagination from "../components/Pagination";
 
-const Eyes = () => {
+const Nails = () => {
   const dispatch = useDispatch();
 
   const products = useSelector(selectAllProduct);
-  console.log(products);
   const productLoading = useSelector(selectProductLoading);
+  console.log(products);
 
-  const [totalEyes, setTotalEyes] = useState(0);
+  const [totalNails, setTotalNails] = useState(0);
   const [page, setPage] = useState(1);
-  const [eyes, setEyes] = useState([]);
+  const [nails, setNails] = useState([]);
 
   useEffect(() => {
-    const eyesCategories = products.filter(
-      (product) => product.category === "eyes"
+    const nailsCategories = products.filter(
+      (product) => product.category === "nails"
     );
-    setEyes(eyesCategories);
-    setTotalEyes(eyesCategories.length);
+    setNails(nailsCategories);
+    setTotalNails(nailsCategories.length);
   }, [products]);
 
   useEffect(() => {
-    const fetchEyesProducts = async () => {
+    const fetchNailsProducts = async () => {
       try {
-        const pagination = { _page: page, _limit: 10 };
+        const pagination = { _page: page, _limit: totalNails };
         await dispatch(fetchProductsByFiltersAsync({ pagination }));
       } catch (error) {
         console.log(error);
       }
     };
-    fetchEyesProducts();
+    fetchNailsProducts();
   }, [page]);
 
   const handlePage = (page) => {
     setPage(page);
   };
   return (
-    <Layout title={"MakeOver- Eyes"}>
-      {eyes.length === 0 ? (
+    <Layout title={"MakeOver- Nails"}>
+      {nails.length === 0 ? (
         <Loader />
       ) : (
         <div className="bg-white font-secondary">
           <div className="mx-auto max-w-2xl px-4 py-0 sm:px-6 sm:py-0 lg:max-w-7xl lg:px-8">
             <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-              {eyes &&
-                eyes.length > 0 &&
-                eyes.map((product) => (
+              {nails &&
+                nails.length > 0 &&
+                nails.map((product) => (
                   <div key={product.id}>
                     <div className="group relative shadow-md  p-3">
                       <Link to={`/profile/admin/product-detail/${product.id}`}>
@@ -117,10 +117,10 @@ const Eyes = () => {
         page={page}
         setPage={setPage}
         handlePage={handlePage}
-        totalItems={totalEyes}
+        totalItems={totalNails}
       />
     </Layout>
   );
 };
 
-export default Eyes;
+export default Nails;

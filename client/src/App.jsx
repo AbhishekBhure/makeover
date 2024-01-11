@@ -31,6 +31,8 @@ import BreadCrumbs from "./components/BreadCrumbs";
 import ProductList from "./features/product-list/components/ProductList";
 import Face from "./pages/Face";
 import Eyes from "./pages/Eyes";
+import Lips from "./pages/Lips";
+import Nails from "./pages/Nails";
 
 function App() {
   const dispatch = useDispatch();
@@ -101,6 +103,8 @@ function App() {
           </Route>
           <Route exact path="/face" element={<Face />} />
           <Route exact path="/eyes" element={<Eyes />} />
+          <Route exact path="/lips" element={<Lips />} />
+          <Route exact path="/nails" element={<Nails />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </Layout>

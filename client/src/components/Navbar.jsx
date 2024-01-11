@@ -40,10 +40,9 @@ const Navbar = () => {
         </Link>
         <div className="hidden md:flex gap-5 items-center">
           <div className="categories flex items-center">
-            <ul className="flex gap-4">
+            <ul className="flex gap-8">
               <NavLink
                 to="/face"
-                onClick={(e) => handleSearch(e, "face")}
                 className={({ isActive }) =>
                   isActive ? " font-bold text-pink-500" : ""
                 }
@@ -75,20 +74,12 @@ const Navbar = () => {
                 <li>Nails</li>
               </NavLink>
               <NavLink
-                to="/tools-brushes"
+                to="/product-listing"
                 className={({ isActive }) =>
                   isActive ? " font-bold text-pink-500" : ""
                 }
               >
-                <li>Tools & Brushes</li>
-              </NavLink>
-              <NavLink
-                to="/makeup-palettes"
-                className={({ isActive }) =>
-                  isActive ? " font-bold text-pink-500" : ""
-                }
-              >
-                <li> Makeup Palettes </li>
+                <li>Others</li>
               </NavLink>
             </ul>
           </div>
