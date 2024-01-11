@@ -451,7 +451,7 @@ function ProductGrid({ products }) {
                   <div key={product.id}>
                     <div className="group relative shadow-md  p-3">
                       <Link to={`/profile/admin/product-detail/${product.id}`}>
-                        <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-60 ">
+                        <div className="aspect-w-1 w-full h-[340px] overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 transition-opacity duration-500">
                           <img
                             src={product.images[0]}
                             alt={product.title}
@@ -466,7 +466,9 @@ function ProductGrid({ products }) {
                                 className="absolute inset-0"
                               />
                               {product.title}
-                              <span className="text-xs">({product.brand})</span>
+                              <span className="text-xs ml-2 bg-pink-500 rounded-full px-2 text-white">
+                                {product.brand}
+                              </span>
                             </h3>
                             <div className="mt-1 items-center gap-1 flex text-gray-600">
                               <LuStar className="w-4 h-4" />
@@ -484,14 +486,14 @@ function ProductGrid({ products }) {
                         </div>
                         {product.deleted && (
                           <div>
-                            <p className="text-red-500 text-xs">
+                            <p className="text-red-500 text-sm">
                               product deleted
                             </p>
                           </div>
                         )}
                         {product.stock <= 0 && (
                           <div>
-                            <p className="text-red-500 text-xs">Out of stock</p>
+                            <p className="text-red-500 text-sm">Out of stock</p>
                           </div>
                         )}
                       </Link>

@@ -17,9 +17,7 @@ const Navbar = () => {
 
   //selectors
   const items = useSelector(selectItems);
-  // const { currentUser } = useSelector((state) => state.auth);
   const currentUser = useSelector(selectUser);
-  console.log("currentUser", currentUser);
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
   };

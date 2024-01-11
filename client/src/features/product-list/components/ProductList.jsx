@@ -119,7 +119,7 @@ export default function ProductList() {
 
   return (
     <>
-      <div className="bg-white">
+      <div className="bg-white mt-4">
         <div>
           {/* Mobile filter dialog */}
           <MobileFilter
@@ -129,7 +129,7 @@ export default function ProductList() {
           />
 
           <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-20">
+            <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-12">
               <h1 className="text-4xl tracking-tight text-gray-900 font-primary">
                 All Products
               </h1>
@@ -537,7 +537,7 @@ function ProductGrid({ products }) {
                 products.map((product) => (
                   <div key={product.id} className="group relative shadow p-3">
                     <Link to={`/product-detail/${product.id}`}>
-                      <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-60">
+                      <div className="aspect-w-1 h-[340px] w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none transition-opacity duration-500 group-hover:opacity-75">
                         <img
                           src={product.images[0]}
                           alt={product.title}
@@ -552,7 +552,9 @@ function ProductGrid({ products }) {
                               className="absolute inset-0"
                             />
                             {product.title}
-                            <span className="text-xs">({product.brand})</span>
+                            <span className="text-xs ml-2 bg-pink-500 rounded-full px-2 text-white">
+                              {product.brand}
+                            </span>
                           </h3>
                           <div className="mt-1 items-center gap-1 flex text-gray-600">
                             <LuStar className="w-4 h-4" />
@@ -563,7 +565,7 @@ function ProductGrid({ products }) {
                           <p className="text-sm font-medium text-gray-700">
                             ₹{product.discountPrice}
                           </p>
-                          <p className="text-sm mt-1 line-through font-medium ">
+                          <p className="text-sm text-gray-400 mt-1 line-through font-medium ">
                             ₹{product.price}
                           </p>
                         </div>
@@ -577,7 +579,7 @@ function ProductGrid({ products }) {
                       )}
                       {product.stock <= 0 && (
                         <div>
-                          <p className="text-red-500 text-xs">Out of stock</p>
+                          <p className="text-red-500 text-sm">Out of stock</p>
                         </div>
                       )}
                     </Link>
