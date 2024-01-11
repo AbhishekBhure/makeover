@@ -425,7 +425,7 @@ function ProductGrid({ products }) {
       {productLoading ? (
         <Loader />
       ) : (
-        <div className="bg-white font-secondary">
+        <div className="bg-white ">
           <div className="mx-auto max-w-2xl px-4 py-0 sm:px-6 sm:py-0 lg:max-w-7xl lg:px-8">
             <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
               {products &&
@@ -443,46 +443,50 @@ function ProductGrid({ products }) {
                         </div>
                         <div className="mt-4 flex justify-between">
                           <div>
-                            <h3 className="text-sm ">
+                            <h3 className="text-sm font-secondary">
                               <span
                                 aria-hidden="true"
                                 className="absolute inset-0"
                               />
                               {product.title}
-                              <span className="text-xs ml-2 bg-pink-500 rounded-full px-2 text-white">
+                              <span className="text-xs ml-2 bg-pink-500 rounded-full px-2 text-white font-secondary ">
                                 {product.brand}
                               </span>
                             </h3>
                             <div className="mt-1 items-center gap-1 flex text-gray-600">
                               <LuStar className="w-4 h-4" />
-                              <span className=" text-sm">{product.rating}</span>
+                              <span className=" text-sm font-secondary">
+                                {product.rating}
+                              </span>
                             </div>
                           </div>
                           <div className="">
                             <p className="text-sm font-medium ">
                               ₹{product.discountPrice}
                             </p>
-                            <p className="text-sm mt-1 line-through font-medium ">
+                            <p className="text-sm text-gray-500 mt-1 line-through font-medium ">
                               ₹{product.price}
                             </p>
                           </div>
                         </div>
                         {product.deleted && (
                           <div>
-                            <p className="text-red-500 text-sm">
+                            <p className="text-red-500 text-sm font-secondary">
                               product deleted
                             </p>
                           </div>
                         )}
                         {product.stock <= 0 && (
                           <div>
-                            <p className="text-red-500 text-sm">Out of stock</p>
+                            <p className="text-red-500 text-sm font-secondary">
+                              Out of stock
+                            </p>
                           </div>
                         )}
                       </Link>
                     </div>
                     <Link to={`/profile/admin/product-form/edit/${product.id}`}>
-                      <button className="bg-pink-500 px-3 py-1 shadow-md text-white rounded mt-3">
+                      <button className="bg-pink-500 px-3 py-1 shadow-md text-white rounded mt-3 font-secondary">
                         Edit Product
                       </button>
                     </Link>

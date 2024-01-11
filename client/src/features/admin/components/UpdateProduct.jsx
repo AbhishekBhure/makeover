@@ -163,7 +163,7 @@ const UpdateProduct = () => {
       stock: +productDetails.stock,
     };
     product.id = params.id;
-    dispatch(updateProductAsync(product));
+    dispatch(updateProductAsync({ update: product, alert: enqueueSnackbar }));
     setError(false);
     setProductDetails({
       title: "",
@@ -177,7 +177,6 @@ const UpdateProduct = () => {
     });
     setLoading(false);
     navigate();
-    enqueueSnackbar("Product Updated Successfully", { variant: "success" });
   };
 
   const handleDelete = () => {
@@ -319,7 +318,7 @@ const UpdateProduct = () => {
                   The first image will be the cover (max 4)
                 </span>
               </p>
-              <div className="flex gap-4">
+              <div className="flex gap-4 flex-col md:flex-row">
                 <input
                   type="file"
                   id="images"
