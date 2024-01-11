@@ -4,13 +4,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchProductsByFiltersAsync } from "../features/product-list/productListSlice";
 import { Fragment, useState } from "react";
 import { Dialog, Disclosure, Transition } from "@headlessui/react";
-import { selectUser } from "../features/auth/authSlice";
+import {
+  selectUser,
+  signOutUserFail,
+  signOutUserStart,
+  signOutUserSuccess,
+} from "../features/auth/authSlice";
+import { useSnackbar } from "notistack";
 
 const MobileNav = ({ isMobileMenuOpen, toggleMobileMenu }) => {
+  const { enqueueSnackbar } = useSnackbar();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector(selectUser);
-  console.log("user", user.user.role);
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleSearch = (e) => {
@@ -18,6 +24,24 @@ const MobileNav = ({ isMobileMenuOpen, toggleMobileMenu }) => {
     navigate("/product-listing");
     dispatch(fetchProductsByFiltersAsync({ searchTerm }));
     setSearchTerm("");
+  };
+
+  const handleSignOut = async () => {
+    try {
+      dispatch(signOutUserStart());
+      const res = await fetch("/api/v1/auth/signout");
+      const data = await res.json();
+      if (data.success === false) {
+        dispatch(signOutUserFail(data.message));
+        enqueueSnackbar(data.message, { variant: "error" });
+        return;
+      }
+      dispatch(signOutUserSuccess(data));
+      enqueueSnackbar("Logged Out Successfully", { variant: "success" });
+    } catch (error) {
+      dispatch(signOutUserFail(error.message));
+      enqueueSnackbar(error.message, { variant: "error" });
+    }
   };
 
   return (
@@ -95,7 +119,7 @@ const MobileNav = ({ isMobileMenuOpen, toggleMobileMenu }) => {
                           </Link>
                           <Link to={"/"}>
                             <button
-                              // onClick={handleSignOut}
+                              onClick={handleSignOut}
                               className="flex gap-2 items-center justify-center"
                             >
                               Sign Out

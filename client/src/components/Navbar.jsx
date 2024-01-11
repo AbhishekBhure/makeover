@@ -42,7 +42,7 @@ const Navbar = () => {
           <div className="categories flex items-center">
             <ul className="flex gap-4">
               <NavLink
-                // to={`/product-listing/products?category=face`}
+                to="/face"
                 onClick={(e) => handleSearch(e, "face")}
                 className={({ isActive }) =>
                   isActive ? " font-bold text-pink-500" : ""

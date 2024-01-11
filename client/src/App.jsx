@@ -5,7 +5,6 @@ import SignIn from "./pages/Auth/SignIn";
 import SignUp from "./pages/Auth/SignUp";
 import UserProfilePage from "./pages/UserProfilePage";
 import Navbar from "./components/Navbar";
-import Face from "./pages/Face";
 import Footer from "./components/Footer";
 import Layout from "./components/Layout";
 import PageNotFound from "./pages/PageNotFound";
@@ -30,6 +29,8 @@ import UserUpdate from "./features/user/components/UserUpdate";
 import StripeCheckout from "./pages/Payment/StripeCheckout";
 import BreadCrumbs from "./components/BreadCrumbs";
 import ProductList from "./features/product-list/components/ProductList";
+import Face from "./pages/Face";
+import Eyes from "./pages/Eyes";
 
 function App() {
   const dispatch = useDispatch();
@@ -79,7 +80,6 @@ function App() {
           <Route exact path="/about" element={<About />} />
           <Route exact path="/sign-in" element={<SignIn />} />
           <Route exact path="/sign-up" element={<SignUp />} />
-          <Route exact path="/face" element={<Face />} />
           <Route element={<ProtectedRoute />}>
             <Route
               exact
@@ -99,6 +99,8 @@ function App() {
               element={<OrderSuccessPage />}
             />
           </Route>
+          <Route exact path="/face" element={<Face />} />
+          <Route exact path="/eyes" element={<Eyes />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </Layout>

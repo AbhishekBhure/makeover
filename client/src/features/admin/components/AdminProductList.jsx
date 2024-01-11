@@ -113,7 +113,7 @@ export default function AdminProductList() {
       {productLoading ? (
         <Loader />
       ) : (
-        <div className="bg-white">
+        <div className="bg-white mt-4">
           <div>
             {/* Mobile filter dialog */}
             <MobileFilter
@@ -123,7 +123,7 @@ export default function AdminProductList() {
             />
 
             <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-              <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-24">
+              <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-12">
                 <h1 className="text-4xl tracking-tight text-gray-900 font-primary">
                   Admin Panel
                 </h1>

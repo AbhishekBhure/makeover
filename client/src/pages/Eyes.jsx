@@ -12,55 +12,54 @@ import { Link } from "react-router-dom";
 import { LuStar } from "../icons";
 import Pagination from "../components/Pagination";
 
-const Face = () => {
+const Eyes = () => {
   const dispatch = useDispatch();
 
   const products = useSelector(selectAllProduct);
+  console.log(products);
   const productLoading = useSelector(selectProductLoading);
   console.log(products);
 
-  const [totalFace, setTotalFace] = useState(0);
+  const [totalEyes, setTotalEyes] = useState(0);
   const [page, setPage] = useState(1);
-  const [face, setFace] = useState([]);
+  const [eyes, setEyes] = useState([]);
 
   useEffect(() => {
-    const faceCategories = products.filter(
-      (product) => product.category === "face"
+    const eyesCategories = products.filter(
+      (product) => product.category === "eyes"
     );
-    setFace(faceCategories);
-    setTotalFace(faceCategories.length);
+    setEyes(eyesCategories);
+    setTotalEyes(eyesCategories.length);
   }, [products]);
 
+  console.log(eyes);
+
   useEffect(() => {
-    const fetchFaceProducts = async () => {
+    const fetchEyesProducts = async () => {
       try {
-        const pagination = { _page: page, _limit: totalFace };
+        const pagination = { _page: page, _limit: 10 };
         await dispatch(fetchProductsByFiltersAsync({ pagination }));
       } catch (error) {
         console.log(error);
       }
     };
-
-    fetchFaceProducts();
+    fetchEyesProducts();
   }, [page]);
 
   const handlePage = (page) => {
     setPage(page);
   };
-
-  console.log("face", face);
-
   return (
     <Layout title={"MakeOver- Face"}>
-      {face.length === 0 ? (
+      {eyes.length === 0 ? (
         <Loader />
       ) : (
         <div className="bg-white font-secondary">
           <div className="mx-auto max-w-2xl px-4 py-0 sm:px-6 sm:py-0 lg:max-w-7xl lg:px-8">
             <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-              {face &&
-                face.length > 0 &&
-                face.map((product) => (
+              {eyes &&
+                eyes.length > 0 &&
+                eyes.map((product) => (
                   <div key={product.id}>
                     <div className="group relative shadow-md  p-3">
                       <Link to={`/profile/admin/product-detail/${product.id}`}>
@@ -117,8 +116,14 @@ const Face = () => {
           </div>
         </div>
       )}
+      <Pagination
+        page={page}
+        setPage={setPage}
+        handlePage={handlePage}
+        totalItems={totalEyes}
+      />
     </Layout>
   );
 };
 
-export default Face;
+export default Eyes;
