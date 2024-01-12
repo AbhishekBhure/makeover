@@ -69,7 +69,7 @@ const SwipperCards = () => {
                         <span aria-hidden="true" className="absolute inset-0" />
                         <span className="line-clamp-1"> {product.title}</span>
 
-                        <span className="text-xs bg-pink-500 px-1 text-white rounded-full">
+                        <span className="text-xs bg-pink-500 px-2 text-white rounded-full">
                           {product.brand}
                         </span>
                       </h3>
