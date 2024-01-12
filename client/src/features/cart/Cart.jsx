@@ -1,4 +1,4 @@
-import { LuArrowRight, LuTrash2 } from "../../icons";
+import { LuArrowRight, LuMinus, LuPlus, LuTrash2 } from "../../icons";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {
@@ -46,6 +46,20 @@ export default function Cart() {
   const showConfirmationModal = (itemId) => {
     setShowModal(true);
     setDeleteId(itemId);
+  };
+
+  const handleIncreaseQuantity = (item) => {
+    const newQuantity = item.quantity + 1;
+    if (newQuantity <= item.product.stock) {
+      dispatch(updateItemsAsync({ id: item.id, quantity: +newQuantity }));
+    }
+  };
+
+  const handleDecreaseQuantity = (item) => {
+    const newQuantity = item.quantity - 1;
+    if (newQuantity > 0) {
+      dispatch(updateItemsAsync({ id: item.id, quantity: +newQuantity }));
+    }
   };
 
   return (
@@ -101,13 +115,25 @@ export default function Cart() {
                             <div className=" flex gap-3 items-center font-secondary">
                               <label htmlFor="quantity">Qty</label>
 
+                              <button
+                                type="button"
+                                onClick={() => handleDecreaseQuantity(item)}
+                              >
+                                <LuMinus className="w-5 h-5" />
+                              </button>
                               <input
-                                className="w-10 border"
+                                className="w-10 text-center"
                                 type="number"
                                 onChange={(e) => handleQuantity(e, item)}
                                 value={item.quantity}
                                 max={item.product.stock}
                               />
+                              <button
+                                onClick={() => handleIncreaseQuantity(item)}
+                                type="button"
+                              >
+                                <LuPlus className="w-5 h-5" />
+                              </button>
                             </div>
 
                             <div className="flex">
