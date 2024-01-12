@@ -141,7 +141,7 @@ const UserProfile = () => {
             handleCancel={() => setShowEditAddressModal(false)}
             address={filterAddress}
           />
-          <div className="bg-white my-8 md:mx-auto rounded shadow-md w-full  overflow-hidden font-secondary">
+          <div className="bg-white my-8 md:mx-auto rounded shadow-md w-1/2  overflow-hidden font-secondary">
             <div className="h-[140px] bg-gradient-to-r from-cyan-500 to-blue-500"></div>
             <div className="px-5 py-2 flex flex-col gap-3 pb-6">
               <div className="h-[90px] shadow-md w-[90px] rounded-full border-4 overflow-hidden -mt-14 border-white">
@@ -348,7 +348,7 @@ const UserProfile = () => {
                 addressess.map((add, index) => (
                   <div
                     key={index}
-                    className="flex flex-col gap-3 border px-2 py-3 md:w-1/2"
+                    className="flex flex-col gap-3 border px-2 py-3 w-full"
                   >
                     <div className="flex justify-between">
                       <div>
