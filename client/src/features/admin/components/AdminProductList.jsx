@@ -443,7 +443,7 @@ function ProductGrid({ products }) {
                         </div>
                         <div className="mt-4 flex justify-between">
                           <div>
-                            <h3 className="text-sm font-secondary">
+                            <h3 className="text-sm font-secondary line-clamp-2">
                               <span
                                 aria-hidden="true"
                                 className="absolute inset-0"

@@ -182,7 +182,7 @@ const ProductForm = () => {
                   type="text"
                   placeholder="Name"
                   minLength="6"
-                  maxLength="62"
+                  maxLength="100"
                   onChange={handleChange}
                   value={productDetails.title}
                   className="border p-3 focus:outline-none focus:rounded-2xl transition-all focus:border-slate-500 duration-700 rounded-lg"

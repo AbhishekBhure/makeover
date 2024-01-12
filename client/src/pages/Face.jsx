@@ -42,7 +42,7 @@ const Face = () => {
     };
 
     fetchFaceProducts();
-  }, [page]);
+  }, [page, dispatch]);
 
   const handlePage = (page) => {
     setPage(page);
@@ -52,7 +52,7 @@ const Face = () => {
 
   return (
     <Layout title={"MakeOver- Face"}>
-      {face.length === 0 ? (
+      {productLoading ? (
         <Loader />
       ) : (
         <div className="bg-white font-secondary">
@@ -73,13 +73,16 @@ const Face = () => {
                         </div>
                         <div className="mt-4 flex justify-between">
                           <div>
-                            <h3 className="text-sm ">
+                            <h3 className="text-sm">
                               <span
                                 aria-hidden="true"
                                 className="absolute inset-0"
                               />
-                              {product.title}
-                              <span className="text-xs ml-2 bg-pink-500 rounded-full px-2 text-white">
+                              <span className="line-clamp-1">
+                                {product.title}
+                              </span>
+
+                              <span className="text-xs bg-pink-500 rounded-full px-2 text-white">
                                 {product.brand}
                               </span>
                             </h3>

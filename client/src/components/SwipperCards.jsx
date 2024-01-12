@@ -16,13 +16,29 @@ import { ITEMS_PER_PAGE } from "../constants/constants";
 
 const SwipperCards = () => {
   const dispatch = useDispatch();
-  const productsLoading = useSelector(selectProductLoading);
-  const products = useSelector(selectAllProduct);
+  const [recommanded, setRecommanded] = useState([]);
 
+  const products = useSelector(selectAllProduct);
+  const productLoading = useSelector(selectProductLoading);
   useEffect(() => {
-    const pagination = { _page: 1, _limit: ITEMS_PER_PAGE };
-    dispatch(fetchProductsByFiltersAsync({ pagination }));
+    const fetchData = async () => {
+      try {
+        await dispatch(
+          fetchProductsByFiltersAsync({ pagination: { _page: 1, _limit: 6 } })
+        );
+        const eyesCategories = products.filter(
+          (product) => product.category === "eyes"
+        );
+        setRecommanded(eyesCategories);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    };
+
+    fetchData();
   }, [dispatch]);
+
+  console.log(recommanded);
 
   return (
     <div>
@@ -32,11 +48,11 @@ const SwipperCards = () => {
         modules={[EffectCards]}
         className="mySwiper w-[270px] h-[420px]"
       >
-        {productsLoading ? (
+        {productLoading ? (
           <Loader />
         ) : (
-          products &&
-          products.map((product) => (
+          recommanded &&
+          recommanded.map((product) => (
             <SwiperSlide key={product.id} className="bg-gray-100 rounded">
               <div key={product.id} className="group relative p-3">
                 <Link to={`/product-detail/${product.id}`}>
@@ -51,8 +67,11 @@ const SwipperCards = () => {
                     <div>
                       <h3 className="text-sm font-secondary">
                         <span aria-hidden="true" className="absolute inset-0" />
-                        {product.title}
-                        <span className="text-xs">({product.brand})</span>
+                        <span className="line-clamp-1"> {product.title}</span>
+
+                        <span className="text-xs bg-pink-500 px-1 text-white rounded-full">
+                          {product.brand}
+                        </span>
                       </h3>
                     </div>
                     <div className="">
