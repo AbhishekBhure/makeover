@@ -10,7 +10,7 @@ import Layout from "./components/Layout";
 import PageNotFound from "./pages/PageNotFound";
 import ProtectedRoute from "./components/Routes/ProtectedRoute";
 import AdminRoute from "./components/Routes/AdminRoute";
-import Dashboard from "./pages/Admin/dashboard";
+import Dashboard from "./pages/Admin/Dashboard";
 import CartPage from "./pages/CartPage";
 import CheckOut from "./pages/CheckOut";
 import ProductDetailPage from "./pages/ProductDetailPage";
