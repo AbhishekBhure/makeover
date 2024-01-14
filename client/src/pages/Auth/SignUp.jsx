@@ -48,13 +48,16 @@ const SignUp = () => {
       // Hash the password before sending it to the server
       // const hashedPassword = await hashPassword(formData.password);
 
-      const res = await fetch("/api/v1/auth/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const res = await fetch(
+        "https://makeover-backend.onrender.com/api/v1/auth/signup",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
 
       const data = await res.json();
       if (data.success === false) {

@@ -16,17 +16,20 @@ const OAuth = () => {
       const provider = new GoogleAuthProvider();
       const auth = getAuth(app);
       const result = await signInWithPopup(auth, provider);
-      const response = await fetch("/api/v1/auth/google", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify({
-          name: result.user.displayName,
-          email: result.user.email,
-          photo: result.user.photoURL,
-        }),
-      });
+      const response = await fetch(
+        "https://makeover-backend.onrender.com/api/v1/auth/google",
+        {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({
+            name: result.user.displayName,
+            email: result.user.email,
+            photo: result.user.photoURL,
+          }),
+        }
+      );
       const user = await response.json();
       dispatch(signInSuccess({ user }));
       enqueueSnackbar("SignedIn With Google ✅", { variant: "success" });

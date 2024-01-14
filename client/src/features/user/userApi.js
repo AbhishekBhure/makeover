@@ -1,7 +1,9 @@
 export function fetchLoggedInUserOrders(userId) {
   console.log(userId);
   return new Promise(async (resolve) => {
-    const response = await fetch("/api/v1/order/user/" + userId);
+    const response = await fetch(
+      "https://makeover-backend.onrender.com/api/v1/order/user/" + userId
+    );
     const data = await response.json();
     resolve({ data });
   });
@@ -9,7 +11,9 @@ export function fetchLoggedInUserOrders(userId) {
 
 export function fetchLoggedInUserInfo(userId) {
   return new Promise(async (resolve) => {
-    const response = await fetch("/api/v1/users/" + userId);
+    const response = await fetch(
+      "https://makeover-backend.onrender.com/api/v1/users/" + userId
+    );
     const data = response.json();
     resolve({ data });
   });
