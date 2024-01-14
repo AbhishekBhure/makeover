@@ -157,6 +157,9 @@ function CheckOut() {
                     <h1 className="text-4xl font-primary leading-tight text-gray-900">
                       Personal Information
                     </h1>
+                    <p className="text-gray-500">
+                      Add a new address or choose from below
+                    </p>
                     <div className="mt-10 font-secondary grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                       <div className="sm:col-span-4">
                         <label

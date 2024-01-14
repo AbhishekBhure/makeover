@@ -16,7 +16,6 @@ export const requireSignIn = async (req, res, next) => {
     });
   } catch (error) {
     next(error);
-    console.log(error);
   }
 };
 
@@ -24,7 +23,6 @@ export const requireSignIn = async (req, res, next) => {
 export const isAdmin = async (req, res, next) => {
   try {
     const user = await User.findById(req.user.id);
-    console.log(req.user.id);
     if (user.role !== "admin") {
       return next(errorHandler(401, "UnAuthorized"));
     } else {
@@ -32,6 +30,5 @@ export const isAdmin = async (req, res, next) => {
     }
   } catch (error) {
     next(error);
-    console.log(error);
   }
 };

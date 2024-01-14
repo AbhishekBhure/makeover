@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/effect-cards";
@@ -6,30 +6,29 @@ import { EffectCards } from "swiper/modules";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchProductsByFiltersAsync,
-  selectAllProduct,
   selectProductLoading,
 } from "../features/product-list/productListSlice";
 import { useEffect } from "react";
 import Loader from "./Loader";
 import { Link } from "react-router-dom";
-import { ITEMS_PER_PAGE } from "../constants/constants";
 
 const SwipperCards = () => {
   const dispatch = useDispatch();
   const [recommanded, setRecommanded] = useState([]);
 
-  const products = useSelector(selectAllProduct);
   const productLoading = useSelector(selectProductLoading);
   useEffect(() => {
     const fetchData = async () => {
       try {
         await dispatch(
-          fetchProductsByFiltersAsync({ pagination: { _page: 1, _limit: 6 } })
-        );
-        const eyesCategories = products.filter(
-          (product) => product.category === "eyes"
-        );
-        setRecommanded(eyesCategories);
+          fetchProductsByFiltersAsync({
+            filter: { category: ["eyes"] },
+            pagination: { _page: 1, _limit: 6 }, // Fetch only 6 products
+          })
+        ).then((action) => {
+          // Update the state with the fetched face category products
+          setRecommanded(action.payload.products);
+        });
       } catch (error) {
         console.error("Error fetching products:", error);
       }
@@ -37,8 +36,6 @@ const SwipperCards = () => {
 
     fetchData();
   }, [dispatch]);
-
-  console.log(recommanded);
 
   return (
     <div>

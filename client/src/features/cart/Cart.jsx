@@ -120,7 +120,7 @@ export default function Cart() {
                             <LuMinus className="w-5 h-5" />
                           </button>
                           <input
-                            className="w-10 text-center"
+                            className="w-10 text-center border"
                             type="number"
                             onChange={(e) => handleQuantity(e, item)}
                             value={item.quantity}

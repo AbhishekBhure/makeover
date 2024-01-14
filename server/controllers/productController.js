@@ -108,7 +108,6 @@ export const searchProducts = async (req, res, next) => {
 
     // Extracting the search term from the query parameters
     const searchTerm = req.query.searchTerm || "";
-    console.log(searchTerm);
 
     // Adding the search condition for the title
     query = query.find({ title: { $regex: searchTerm, $options: "i" } });

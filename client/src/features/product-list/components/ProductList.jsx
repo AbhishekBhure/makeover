@@ -551,8 +551,11 @@ function ProductGrid({ products }) {
                               aria-hidden="true"
                               className="absolute inset-0"
                             />
-                            {product.title}
-                            <span className="text-xs ml-2 bg-pink-500 rounded-full px-2 text-white">
+                            <span className="line-clamp-2">
+                              {product.title}
+                            </span>
+
+                            <span className="text-xs bg-pink-500 rounded-full px-2 text-white">
                               {product.brand}
                             </span>
                           </h3>
