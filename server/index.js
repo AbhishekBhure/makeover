@@ -23,6 +23,14 @@ connectDB();
 //rest object
 const app = express();
 
+app.use(
+  cors({
+    exposedHeaders: ["X-Total-Count"],
+  })
+);
+app.use(express.json());
+app.use(cookieParser());
+
 //webhook
 //TODO: we will capture actual order after deploying out the server live on public URL
 // This is your Stripe CLI webhook secret for testing your endpoint locally.
@@ -61,14 +69,6 @@ app.post(
     response.send();
   }
 );
-
-app.use(
-  cors({
-    exposedHeaders: ["X-Total-Count"],
-  })
-);
-app.use(express.json());
-app.use(cookieParser());
 
 const PORT = process.env.PORT;
 
