@@ -11,6 +11,6 @@ const router = express.Router();
 router
   .get("/", getAllUsers)
   .get("/:id", singleUser)
-  .patch("/update/:id", requireSignIn, updateUser);
+  .patch("/update/:id", updateUser);
 
 export default router;

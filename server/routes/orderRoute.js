@@ -13,9 +13,9 @@ const router = express.Router();
 
 router
   .get("/user/:userId", getOrdersByUser)
-  .post("/", requireSignIn, createOrder)
-  .patch("/:id", requireSignIn, isAdmin, updateOrder)
+  .post("/", createOrder)
+  .patch("/:id", isAdmin, updateOrder)
   .delete("/:id", deleteOrder)
-  .get("/", requireSignIn, isAdmin, getAllOrdersByAdmin);
+  .get("/", isAdmin, getAllOrdersByAdmin);
 
 export default router;

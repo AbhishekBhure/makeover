@@ -10,9 +10,9 @@ import { requireSignIn } from "../middleware/authMiddleware.js";
 const router = express.Router();
 
 router
-  .post("/", requireSignIn, addAddress)
+  .post("/", addAddress)
   .get("/", getAddressByUser)
-  .patch("/editAddress/:id", requireSignIn, updateAddress)
-  .delete("/deleteAddress/:id", requireSignIn, deleteAddress);
+  .patch("/editAddress/:id", updateAddress)
+  .delete("/deleteAddress/:id", deleteAddress);
 
 export default router;

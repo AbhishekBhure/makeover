@@ -21,6 +21,6 @@ router
     }
   })
   .get("/:id", getProductById)
-  .patch("/:id", requireSignIn, isAdmin, updateProduct);
+  .patch("/:id", isAdmin, updateProduct);
 
 export default router;
