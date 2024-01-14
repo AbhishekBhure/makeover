@@ -62,6 +62,11 @@ app.post(
   }
 );
 
+app.use(
+  cors({
+    exposedHeaders: ["X-Total-Count"],
+  })
+);
 app.use(express.json());
 app.use(cookieParser());
 
@@ -78,11 +83,6 @@ app.use("/api/v1/order", orderRoute);
 app.use("/api/v1/address", addressRoute);
 
 //middleware
-app.use(
-  cors({
-    exposedHeaders: ["X-Total-Count"],
-  })
-);
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
