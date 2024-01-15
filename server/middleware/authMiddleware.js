@@ -20,15 +20,15 @@ export const requireSignIn = async (req, res, next) => {
 };
 
 //Admin
-export const isAdmin = async (req, res, next) => {
-  try {
-    const user = await User.findById(req.user._id);
-    if (user.role !== "admin") {
-      return next(errorHandler(401, "UnAuthorized"));
-    } else {
-      next();
-    }
-  } catch (error) {
-    next(error);
-  }
-};
+// export const isAdmin = async (req, res, next) => {
+//   try {
+//     const user = await User.findById(req.user._id);
+//     if (user.role !== "admin") {
+//       return next(errorHandler(401, "UnAuthorized"));
+//     } else {
+//       next();
+//     }
+//   } catch (error) {
+//     next(error);
+//   }
+// };
