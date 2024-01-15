@@ -16,6 +16,6 @@ router
   .post("/", createOrder)
   .patch("/:id", isAdmin, updateOrder)
   .delete("/:id", deleteOrder)
-  .get("/", isAdmin, getAllOrdersByAdmin);
+  .get("/", getAllOrdersByAdmin);
 
 export default router;
