@@ -56,7 +56,9 @@ const UserProfile = () => {
   const handleSignOut = async () => {
     try {
       dispatch(signOutUserStart());
-      const res = await fetch("/api/v1/auth/signout");
+      const res = await fetch(
+        "https://makeover-backend.onrender.com/api/v1/auth/signout"
+      );
       const data = await res.json();
       if (data.success === false) {
         dispatch(signOutUserFail(data.message));

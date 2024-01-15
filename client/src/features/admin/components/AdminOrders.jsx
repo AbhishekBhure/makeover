@@ -34,8 +34,11 @@ const AdminOrders = () => {
   };
 
   useEffect(() => {
-    const pagination = { _page: page, _limit: ITEMS_PER_PAGE };
-    dispatch(fetchAllOrdersAsync({ sort, pagination }));
+    const fetchAllOrders = async () => {
+      const pagination = { _page: page, _limit: ITEMS_PER_PAGE };
+      await dispatch(fetchAllOrdersAsync({ sort, pagination }));
+    };
+    fetchAllOrders();
   }, [dispatch, page, sort]);
 
   const handleShow = () => {
@@ -158,13 +161,13 @@ const AdminOrders = () => {
                       </tr>
                     </thead>
                     <tbody className=" text-sm font-light">
-                      {orderLoading ? (
+                      {orders.length === 0 ? (
                         <Loader />
                       ) : (
                         orders &&
                         orders.map((order, index) => (
                           <tr
-                            key={order.id}
+                            key={index}
                             className="border-b border-gray-200 hover:bg-gray-100"
                           >
                             <td className="py-3 px-4 text-left whitespace-nowrap">
@@ -213,15 +216,7 @@ const AdminOrders = () => {
                             <td className="py-3 px-4 text-center">
                               <span className="">₹{order.totalAmount}</span>
                             </td>
-                            {/* <td className="py-3 px-4 text-center">
-                          <strong className="">
-                            {order.selectedAddress.name}
-                          </strong>
-                          <p> {order.selectedAddress.street}, </p>
-                          <p> {order.selectedAddress.city}, </p>
-                          <p> {order.selectedAddress.state}, </p>
-                          <p> {order.selectedAddress.pinCode}. </p>
-                        </td> */}
+
                             <td className="py-3 px-4 text-center">
                               {order.id === editOrderId ? (
                                 <select
