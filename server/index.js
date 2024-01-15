@@ -28,8 +28,6 @@ app.use(
     exposedHeaders: ["X-Total-Count"],
   })
 );
-app.use(express.json());
-app.use(cookieParser());
 
 //webhook
 //TODO: we will capture actual order after deploying out the server live on public URL
@@ -71,6 +69,9 @@ app.post(
 );
 
 const PORT = process.env.PORT;
+
+app.use(express.json());
+app.use(cookieParser());
 
 //routes
 app.use("/api/v1/users", userRoute);

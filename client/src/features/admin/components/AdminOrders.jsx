@@ -188,7 +188,9 @@ const AdminOrders = () => {
                                       alt={item.product.title}
                                     />
                                   </div>
-                                  <span>{item.product.title}</span>
+                                  <span className="line-clamp-2">
+                                    {item.product.title}
+                                  </span>
                                 </div>
                               ))}
                             </td>
