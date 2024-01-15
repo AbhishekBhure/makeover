@@ -23,7 +23,6 @@ export const requireSignIn = async (req, res, next) => {
 export const isAdmin = async (req, res, next) => {
   try {
     const user = await User.findById(req.user._id);
-    console.log(user);
     if (user.role !== "admin") {
       return next(errorHandler(401, "UnAuthorized"));
     } else {
