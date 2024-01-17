@@ -20,6 +20,7 @@ import {
   addAddressAsync,
   fetchAddressByUserIdAsync,
   selectAddress,
+  selectAddressLoading,
 } from "../features/address/addressSlice";
 import Loader from "../components/Loader";
 import BackButton from "../components/BackButton";
@@ -48,6 +49,7 @@ function CheckOut() {
   const items = useSelector(selectItems);
   const currentOrder = useSelector(selectCurrentOrder);
   const addressess = useSelector(selectAddress);
+  const addressLoading = useSelector(selectAddressLoading);
   const orderLoading = useSelector(selectOrderLoading);
 
   useEffect(() => {
@@ -78,11 +80,10 @@ function CheckOut() {
     setUserAddress({ ...userAddress, [e.target.id]: e.target.value });
   };
 
-  const handleAddNewAddress = (e) => {
+  const handleAddNewAddress = async (e) => {
     e.preventDefault();
     try {
-      dispatch(addAddressAsync({ ...userAddress, user: userId }));
-      dispatch(fetchAddressByUserIdAsync(userId));
+      await dispatch(addAddressAsync({ ...userAddress, user: userId }));
       setUserAddress({
         name: "",
         email: "",
@@ -92,6 +93,7 @@ function CheckOut() {
         pinCode: "",
       });
       enqueueSnackbar("Address added Successfully", { variant: "success" });
+      await dispatch(fetchAddressByUserIdAsync(userId));
     } catch (error) {
       dispatch(addAddressAsync(error.message));
       enqueueSnackbar(error.message, { variant: "error" });
@@ -299,7 +301,9 @@ function CheckOut() {
                       Choose from existing address
                     </p>
                     <ul role="list" className="divide-y divide-gray-100">
-                      {addressess.length > 0 ? (
+                      {addressLoading ? (
+                        <Loader />
+                      ) : Array.isArray(addressess) && addressess.length > 0 ? (
                         addressess.map((address, index) => (
                           <li
                             key={index}

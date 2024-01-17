@@ -59,7 +59,7 @@ const Nails = () => {
                 nails.map((product) => (
                   <div key={product.id}>
                     <div className="group relative shadow-md  p-3">
-                      <Link to={`/profile/admin/product-detail/${product.id}`}>
+                      <Link to={`/product-detail/${product.id}`}>
                         <div className="aspect-w-1 w-full h-[340px] overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 transition-opacity duration-500">
                           <img
                             src={product.images[0]}

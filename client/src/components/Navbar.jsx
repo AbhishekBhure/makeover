@@ -1,5 +1,5 @@
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { LuHeart, LuShoppingBag, LuSearch, LuText } from "../icons";
+import { LuShoppingBag, LuSearch, LuText } from "../icons";
 import { useState } from "react";
 import MobileNav from "./MobileNav";
 import { useDispatch, useSelector } from "react-redux";
@@ -26,7 +26,6 @@ const Navbar = () => {
     e.preventDefault();
     navigate("/product-listing");
     dispatch(fetchProductsByFiltersAsync({ searchTerm, category }));
-    setSearchTerm("");
   };
 
   return (
@@ -94,7 +93,7 @@ const Navbar = () => {
               placeholder="Search products..."
               className="bg-transparent focus:outline-none w-32 sm:w-64"
             />
-            <button>
+            <button disabled={searchTerm.length === 0}>
               <LuSearch className="text-xl" />
             </button>
           </form>
@@ -107,11 +106,6 @@ const Navbar = () => {
                     {items.length}
                   </span>
                 )}
-              </Link>
-            </div>
-            <div>
-              <Link to="/">
-                <LuHeart className="text-xl" />
               </Link>
             </div>
           </div>
@@ -147,11 +141,6 @@ const Navbar = () => {
                     {items.length}
                   </span>
                 )}
-              </Link>
-            </div>
-            <div>
-              <Link to="/">
-                <LuHeart className="text-xl" />
               </Link>
             </div>
           </div>

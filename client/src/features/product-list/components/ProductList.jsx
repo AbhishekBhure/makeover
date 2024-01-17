@@ -9,6 +9,7 @@ import {
   LuPlus,
   LuStar,
   LuX,
+  noResult,
 } from "../../../icons";
 import { Link, NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -21,6 +22,7 @@ import {
   fetchCategoriesAsync,
   fetchBrandsAsync,
   selectProductLoading,
+  selectSearchTerm,
 } from "../productListSlice";
 import { ITEMS_PER_PAGE } from "../../../constants/constants";
 import Loader from "../../../components/Loader";
@@ -59,6 +61,8 @@ export default function ProductList() {
   const totalItems = useSelector(selectTotalItems);
   const categories = useSelector(selectCategories);
   const brands = useSelector(selectBrands);
+  const searchTerm = useSelector(selectSearchTerm);
+  console.log(searchTerm);
 
   const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
 
@@ -78,7 +82,6 @@ export default function ProductList() {
   useEffect(() => {
     const pagination = { _page: page, _limit: ITEMS_PER_PAGE };
     dispatch(fetchProductsByFiltersAsync({ filter, sort, pagination }));
-    //TODO: Server will filter deleted Products
   }, [dispatch, filter, sort, page]);
 
   useEffect(() => {
@@ -523,6 +526,7 @@ function Pagination({ page, setPage, handlePage }) {
 //Product Grid
 function ProductGrid({ products }) {
   const productLoading = useSelector(selectProductLoading);
+  const searchTerm = useSelector(selectSearchTerm);
 
   return (
     <>
@@ -532,8 +536,7 @@ function ProductGrid({ products }) {
         <div className="bg-white">
           <div className="mx-auto max-w-2xl px-4 py-0 sm:px-6 sm:py-0 lg:max-w-7xl lg:px-8">
             <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
-              {products &&
-                products.length > 0 &&
+              {products && products.length > 0 ? (
                 products.map((product) => (
                   <div key={product.id} className="group relative shadow p-3">
                     <Link to={`/product-detail/${product.id}`}>
@@ -587,7 +590,27 @@ function ProductGrid({ products }) {
                       )}
                     </Link>
                   </div>
-                ))}
+                ))
+              ) : (
+                <div className="col-span-full">
+                  <div className="flex items-center justify-center flex-col gap-2">
+                    <img className="mx-auto" src={noResult} alt="noresult" />
+                    <p className="font-secondary text-xl text-center font-bold">
+                      Thanks for visiting our website!
+                    </p>
+                    <p className="text-sm font-secondary text-center">
+                      {`Unfortunately, we couldn’t find any matches for ${searchTerm}`}
+                      . <br />
+                      {`Please try searching with another term.`}
+                    </p>
+                    <Link className="" to="/">
+                      <button className="p-3 rounded-full bg-pink-500 text-white font-secondary">
+                        Back to Home
+                      </button>
+                    </Link>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
