@@ -12,8 +12,6 @@ const SignUp = () => {
   const [loading, setLoading] = useState(false);
   const [visible, setVisible] = useState(false);
 
-  console.log(formData);
-
   const { enqueueSnackbar } = useSnackbar();
 
   const navigate = useNavigate();
@@ -29,24 +27,10 @@ const SignUp = () => {
     setVisible(!visible);
   };
 
-  // const hashPassword = async (password) => {
-  //   const encoder = new TextEncoder();
-  //   const data = encoder.encode(password);
-  //   const hashBuffer = await crypto.subtle.digest("SHA-256", data);
-  //   const hashArray = Array.from(new Uint8Array(hashBuffer));
-  //   const hashedPassword = hashArray
-  //     .map((byte) => byte.toString(16).padStart(2, "0"))
-  //     .join("");
-  //   return hashedPassword;
-  // };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       setLoading(true);
-
-      // Hash the password before sending it to the server
-      // const hashedPassword = await hashPassword(formData.password);
 
       const res = await fetch(
         "https://makeover-backend.onrender.com/api/v1/auth/signup",
@@ -82,7 +66,7 @@ const SignUp = () => {
     <Layout title={"MakeOver - SignUp"}>
       <div className=" my-4 md:my-11">
         <div className="flex gap-5 justify-center items-center ">
-          <div className="p-3 flex-1 max-w-lg">
+          <div className="p-3  flex-1 max-w-lg">
             <h1 className="py-3 font-primary text-5xl text-center">SignUp</h1>
             <form onSubmit={handleSubmit} className="flex flex-col gap-4 ">
               <div className="p-2 md:p-3 rounded-full flex items-center border  focus-within:border-pink-800 transition-border duration-300">
@@ -117,11 +101,14 @@ const SignUp = () => {
                 />
                 {visible ? (
                   <span className="absolute right-3 cursor-pointer">
-                    <LuEyeOff className="" onClick={handlePasswordtoggle} />
+                    <LuEyeOff
+                      className="text-xl"
+                      onClick={handlePasswordtoggle}
+                    />
                   </span>
                 ) : (
                   <span className="absolute right-3 cursor-pointer">
-                    <LuEye onClick={handlePasswordtoggle} />
+                    <LuEye className="text-xl" onClick={handlePasswordtoggle} />
                   </span>
                 )}
               </div>
@@ -139,7 +126,6 @@ const SignUp = () => {
               </div>
             </form>
           </div>
-          <div className="md:flex bg-black flex-1 hidden">hi</div>
         </div>
       </div>
     </Layout>

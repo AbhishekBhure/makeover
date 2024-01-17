@@ -65,46 +65,6 @@ export default function AdminProductDetail() {
         <div className="bg-white mt-8">
           {product && (
             <div className="pt-6">
-              {/* <nav aria-label="Breadcrumb">
-        <ol
-          role="list"
-          className="mx-auto flex max-w-2xl items-center space-x-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8"
-        >
-          {product.breadcrumbs &&
-            product.breadcrumbs.map((breadcrumb) => (
-              <li key={breadcrumb.id}>
-                <div className="flex items-center">
-                  <a
-                    href={breadcrumb.href}
-                    className="mr-2 text-sm font-medium text-gray-900"
-                  >
-                    {breadcrumb.name}
-                  </a>
-                  <svg
-                    width={16}
-                    height={20}
-                    viewBox="0 0 16 20"
-                    fill="currentColor"
-                    aria-hidden="true"
-                    className="h-5 w-4 text-gray-300"
-                  >
-                    <path d="M5.697 4.34L8.98 16.532h1.327L7.025 4.341H5.697z" />
-                  </svg>
-                </div>
-              </li>
-            ))}
-          <li className="text-sm">
-            <a
-              href={product.href}
-              aria-current="page"
-              className="font-medium text-gray-500 hover:text-gray-600"
-            >
-              {product.title}
-            </a>
-          </li>
-        </ol>
-      </nav> */}
-
               {/* Image gallery */}
               <div className="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
                 <div className="aspect-h-4 aspect-w-3 hidden overflow-hidden rounded-lg lg:block">
@@ -143,7 +103,7 @@ export default function AdminProductDetail() {
               <div className="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16">
                 <div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
                   <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
-                    Hi {product.title}
+                    {product.title}
                   </h1>
                 </div>
 
@@ -180,49 +140,6 @@ export default function AdminProductDetail() {
                   </div>
 
                   <form className="mt-10">
-                    {/* Colors */}
-                    {/* <div>
-                <h3 className="text-sm font-medium text-gray-900">Color</h3>
-
-                <RadioGroup
-                  value={selectedColor}
-                  onChange={setSelectedColor}
-                  className="mt-4"
-                >
-                  <RadioGroup.Label className="sr-only">
-                    Choose a color
-                  </RadioGroup.Label>
-                  <div className="flex items-center space-x-3">
-                    {colors &&
-                      colors.map((color) => (
-                        <RadioGroup.Option
-                          key={color.name}
-                          value={color}
-                          className={({ active, checked }) =>
-                            classNames(
-                              color.selectedClass,
-                              active && checked ? "ring ring-offset-1" : "",
-                              !active && checked ? "ring-2" : "",
-                              "relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none"
-                            )
-                          }
-                        >
-                          <RadioGroup.Label as="span" className="sr-only">
-                            {color.name}
-                          </RadioGroup.Label>
-                          <span
-                            aria-hidden="true"
-                            className={classNames(
-                              color.class,
-                              "h-8 w-8 rounded-full border border-black border-opacity-10"
-                            )}
-                          />
-                        </RadioGroup.Option>
-                      ))}
-                  </div>
-                </RadioGroup>
-              </div> */}
-
                     <button
                       onClick={handleAddToCart}
                       type="submit"
@@ -244,22 +161,6 @@ export default function AdminProductDetail() {
                       </p>
                     </div>
                   </div>
-
-                  {/* <div className="mt-10">
-              <h3 className="text-sm font-medium text-gray-900">
-                Highlights
-              </h3>
-
-              <div className="mt-4">
-                <ul role="list" className="list-disc space-y-2 pl-4 text-sm">
-                  {highlights.map((highlight) => (
-                    <li key={highlight} className="text-gray-400">
-                      <span className="text-gray-600">{highlight}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div> */}
                 </div>
               </div>
             </div>

@@ -18,7 +18,6 @@ export default function StripeCheckout() {
   const [clientSecret, setClientSecret] = useState("");
 
   const currentOrder = useSelector(selectCurrentOrder);
-  console.log(currentOrder);
 
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
@@ -35,7 +34,6 @@ export default function StripeCheckout() {
     )
       .then((res) => res.json())
       .then((data) => {
-        console.log(data, "stripecheck");
         setClientSecret(data.clientSecret);
       });
   }, []);

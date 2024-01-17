@@ -17,7 +17,6 @@ const Nails = () => {
 
   const products = useSelector(selectAllProduct);
   const productLoading = useSelector(selectProductLoading);
-  console.log(products);
 
   const [totalNails, setTotalNails] = useState(0);
   const [page, setPage] = useState(1);

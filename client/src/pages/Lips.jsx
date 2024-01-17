@@ -16,7 +16,6 @@ const Lips = () => {
   const dispatch = useDispatch();
 
   const products = useSelector(selectAllProduct);
-  console.log(products);
   const productLoading = useSelector(selectProductLoading);
 
   const [totalLips, setTotalLips] = useState(0);

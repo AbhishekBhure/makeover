@@ -17,7 +17,6 @@ const Face = () => {
 
   const products = useSelector(selectAllProduct);
   const productLoading = useSelector(selectProductLoading);
-  console.log(products);
 
   const [totalFace, setTotalFace] = useState(0);
   const [page, setPage] = useState(1);
@@ -47,8 +46,6 @@ const Face = () => {
   const handlePage = (page) => {
     setPage(page);
   };
-
-  console.log("face", face);
 
   return (
     <Layout title={"MakeOver- Face"}>

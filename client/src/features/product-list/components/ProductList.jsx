@@ -62,7 +62,6 @@ export default function ProductList() {
   const categories = useSelector(selectCategories);
   const brands = useSelector(selectBrands);
   const searchTerm = useSelector(selectSearchTerm);
-  console.log(searchTerm);
 
   const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
 

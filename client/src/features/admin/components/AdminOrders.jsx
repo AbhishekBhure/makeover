@@ -20,7 +20,6 @@ const AdminOrders = () => {
 
   //selectors
   const orders = useSelector(selectOrders);
-  console.log(orders);
   const totalOrders = useSelector(selectTotalOrders);
   const orderLoading = useSelector(selectOrderLoading);
 

@@ -14,7 +14,6 @@ const UserOrders = () => {
 
   //selectors
   const orders = useSelector(selectUserOrders);
-  console.log("userOrders", orders);
   const { currentUser } = useSelector((state) => state.auth);
   const userId = currentUser.user._id;
   const userOrderLoading = useSelector(selectUserOrderLoading);

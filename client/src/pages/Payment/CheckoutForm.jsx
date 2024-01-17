@@ -28,25 +28,19 @@ export default function CheckoutForm() {
       return;
     }
 
-    console.log("test", clientSecret);
-
     stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
       switch (paymentIntent.status) {
         case "succeeded":
           setMessage("Payment succeeded!");
-          console.log("1");
           break;
         case "processing":
           setMessage("Your payment is processing.");
-          console.log("2");
           break;
         case "requires_payment_method":
           setMessage("Your payment was not successful, please try again.");
-          console.log("3");
           break;
         default:
           setMessage("Something went wrong.");
-          console.log("4");
           break;
       }
     });
@@ -70,7 +64,6 @@ export default function CheckoutForm() {
         return_url: `http://localhost:5173/order-success/${currentOrder.id}`,
       },
     });
-    console.log("err", error);
 
     // This point will only be reached if there is an immediate error when
     // confirming the payment. Otherwise, your customer will be redirected to

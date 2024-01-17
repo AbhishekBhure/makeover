@@ -16,7 +16,6 @@ const Eyes = () => {
   const dispatch = useDispatch();
 
   const products = useSelector(selectAllProduct);
-  console.log(products);
   const productLoading = useSelector(selectProductLoading);
 
   const [totalEyes, setTotalEyes] = useState(0);

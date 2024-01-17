@@ -121,7 +121,6 @@ const SignIn = () => {
               </div>
             </form>
           </div>
-          <div className="md:flex bg-black flex-1 hidden">hi</div>
         </div>
       </div>
     </Layout>
