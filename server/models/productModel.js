@@ -26,6 +26,7 @@ const productSchema = new Schema({
   discountPercentage: {
     type: Number,
     trim: true,
+    required: [true, "Please enter product discountPercentage"],
     maxLength: [99, "Discount Percentage cannot exceed more than 99"],
     minLength: [1, "Discount Percentage should have more than 1"],
     default: 0,

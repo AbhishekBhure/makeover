@@ -48,11 +48,9 @@ export const getAllProducts = async (req, res) => {
 export const createProduct = async (req, res) => {
   try {
     const product = new Product(req.body);
-    if (product.discountPercentage) {
-      product.discountPrice = Math.round(
-        product.price * (1 - product.discountPercentage / 100)
-      );
-    }
+    product.discountPrice = Math.round(
+      product.price * (1 - product.discountPercentage / 100)
+    );
     const data = await product.save();
     res.status(201).json(data);
   } catch (error) {
