@@ -26,7 +26,7 @@ const app = express();
 //webhook
 const endpointSecret = process.env.ENDPOINT_SECRET;
 app.post(
-  "/webhook",
+  "https://make-overr.netlify.app/webhook",
   express.raw({ type: "application/json" }),
   async (request, response) => {
     const sig = request.headers["stripe-signature"];
