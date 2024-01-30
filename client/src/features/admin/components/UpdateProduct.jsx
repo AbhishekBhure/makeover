@@ -255,7 +255,7 @@ const UpdateProduct = () => {
                 type="number"
                 placeholder="Price"
                 min={20}
-                max={1000}
+                max={10000}
                 required
                 onChange={handleChange}
                 value={productDetails.price}
