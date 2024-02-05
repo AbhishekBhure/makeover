@@ -1,5 +1,13 @@
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { LuShoppingBag, LuSearch, LuText } from "../icons";
+import {
+  LuShoppingBag,
+  LuSearch,
+  LuText,
+  face,
+  eye,
+  lips,
+  nails,
+} from "../icons";
 import { useState } from "react";
 import MobileNav from "./MobileNav";
 import { useDispatch, useSelector } from "react-redux";
@@ -46,7 +54,10 @@ const Navbar = () => {
                   isActive ? " font-bold text-pink-500" : ""
                 }
               >
-                <li>Face</li>
+                <li className="inline-flex gap-1 items-center">
+                  <img className="w-[22px] h-[22px]" src={face} alt="face" />
+                  Face
+                </li>
               </NavLink>
               <NavLink
                 to="/eyes"
@@ -54,7 +65,9 @@ const Navbar = () => {
                   isActive ? " font-bold text-pink-500" : ""
                 }
               >
-                <li>Eyes</li>
+                <li className="inline-flex gap-1 items-center">
+                  <img className="w-[22px] h-[22px]" src={eye} alt="eye" /> Eyes
+                </li>
               </NavLink>
               <NavLink
                 to="/lips"
@@ -62,7 +75,10 @@ const Navbar = () => {
                   isActive ? " font-bold text-pink-500" : ""
                 }
               >
-                <li>Lips</li>
+                <li className="inline-flex gap-1 items-center">
+                  <img className="w-[22px] h-[22px]" src={lips} alt="eye" />
+                  Lips
+                </li>
               </NavLink>
               <NavLink
                 to="/nails"
@@ -70,7 +86,10 @@ const Navbar = () => {
                   isActive ? " font-bold text-pink-500" : ""
                 }
               >
-                <li>Nails</li>
+                <li className="inline-flex gap-1 items-center">
+                  <img className="w-[22px] h-[22px]" src={nails} alt="nails" />
+                  Nails
+                </li>
               </NavLink>
               <NavLink
                 to="/product-listing"

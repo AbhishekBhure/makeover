@@ -1,4 +1,14 @@
-import { LuX, LuSearch, LuLogOut, LuListOrdered, LuPlus } from "../icons";
+import {
+  LuX,
+  LuSearch,
+  LuLogOut,
+  LuListOrdered,
+  LuPlus,
+  nails,
+  lips,
+  eye,
+  face,
+} from "../icons";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProductsByFiltersAsync } from "../features/product-list/productListSlice";
@@ -136,7 +146,14 @@ const MobileNav = ({ isMobileMenuOpen, toggleMobileMenu }) => {
                           isActive ? " font-bold text-pink-500" : ""
                         }
                       >
-                        <li>Face</li>
+                        <li className="inline-flex gap-1 items-center">
+                          <img
+                            className="w-[22px] h-[22px]"
+                            src={face}
+                            alt="face"
+                          />
+                          Face
+                        </li>
                       </NavLink>
                       <NavLink
                         to="/eyes"
@@ -144,7 +161,14 @@ const MobileNav = ({ isMobileMenuOpen, toggleMobileMenu }) => {
                           isActive ? " font-bold text-pink-500" : ""
                         }
                       >
-                        <li>Eyes</li>
+                        <li className="inline-flex gap-1 items-center">
+                          <img
+                            className="w-[22px] h-[22px]"
+                            src={eye}
+                            alt="eye"
+                          />
+                          Eyes
+                        </li>
                       </NavLink>
                       <NavLink
                         to="/lips"
@@ -152,7 +176,14 @@ const MobileNav = ({ isMobileMenuOpen, toggleMobileMenu }) => {
                           isActive ? " font-bold text-pink-500" : ""
                         }
                       >
-                        <li>Lips</li>
+                        <li className="inline-flex gap-1 items-center">
+                          <img
+                            className="w-[22px] h-[22px]"
+                            src={lips}
+                            alt="eye"
+                          />
+                          Lips
+                        </li>
                       </NavLink>
                       <NavLink
                         to="/nails"
@@ -160,7 +191,14 @@ const MobileNav = ({ isMobileMenuOpen, toggleMobileMenu }) => {
                           isActive ? " font-bold text-pink-500" : ""
                         }
                       >
-                        <li>Nails</li>
+                        <li className="inline-flex gap-1 items-center">
+                          <img
+                            className="w-[22px] h-[22px]"
+                            src={nails}
+                            alt="nails"
+                          />
+                          Nails
+                        </li>
                       </NavLink>
                       <NavLink
                         to="/product-listing"

@@ -5,14 +5,19 @@ import "swiper/css/pagination";
 import { FreeMode, Pagination } from "swiper/modules";
 import Loader from "./Loader";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { fetchProductsByFiltersAsync } from "../features/product-list/productListSlice";
+import {
+  fetchProductsByFiltersAsync,
+  selectProductLoading,
+} from "../features/product-list/productListSlice";
 
 const ProductSwiper = () => {
   const [faceCategory, setFaceCategory] = useState([]);
 
   const dispatch = useDispatch();
+
+  const productLoading = useSelector(selectProductLoading);
 
   useEffect(() => {
     // Fetch face category products
@@ -53,7 +58,7 @@ const ProductSwiper = () => {
         modules={[FreeMode, Pagination]}
         className="mySwiper h-[420px]"
       >
-        {faceCategory.length === 0 ? (
+        {productLoading ? (
           <Loader />
         ) : (
           faceCategory &&

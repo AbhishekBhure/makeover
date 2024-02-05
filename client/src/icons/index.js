@@ -34,6 +34,10 @@ import sugarFound2 from "./suagr-found-2.png";
 import sugarFound3 from "./sugar-found-3.png";
 import noResult from "./no-result.png";
 import { HiHeart } from "react-icons/hi";
+import face from "./face.png";
+import eye from "./eye.png";
+import lips from "./lips.png";
+import nails from "./nails.png";
 
 export {
   LuAlertTriangle,
@@ -70,4 +74,8 @@ export {
   sugarFound3,
   noResult,
   HiHeart,
+  face,
+  eye,
+  lips,
+  nails,
 };
